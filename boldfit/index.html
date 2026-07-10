@@ -121,6 +121,12 @@
   ul.check li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:13px;color:var(--ink2);}
   ul.check li::before{content:"✓";font-weight:700;color:var(--accent-ink);border:1.5px solid var(--baseline);border-radius:4px;width:16px;height:16px;font-size:10px;display:grid;place-items:center;margin-top:1px;}
   ul.check.flags li::before{content:"✕";color:var(--crit);}
+  ul.todo li::before{content:none;}
+  ul.todo li{cursor:pointer;user-select:none;}
+  ul.todo li .box{width:16px;height:16px;border:1.5px solid var(--baseline);border-radius:4px;display:grid;place-items:center;font-size:10px;font-weight:700;color:transparent;margin-top:1px;background:var(--card);}
+  ul.todo li.done .box{background:var(--accent);border-color:var(--accent);color:#fff;}
+  ul.todo li.done{opacity:.7;}
+  ul.todo li.done .txt{text-decoration:line-through;}
   .funnel{display:grid;grid-template-columns:minmax(0,540px) 1fr;gap:8px 22px;margin-top:16px;align-items:center;}
   .fband{position:relative;color:#fff;text-align:center;padding:14px 10px 12px;transition:transform .18s ease, filter .18s ease;}
   .fband:hover{transform:scale(1.02);filter:brightness(1.12);}
@@ -595,7 +601,7 @@
     <div class="cardhead"><h2>The build order</h2><span class="kicker">Click any step to see what gets done</span></div>
 
     <details class="step" id="step-1"><summary><span class="num">1</span><span class="t">Stop the leaks</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>Clean the send list. A third of paid sends never arrive.</li>
         <li>Cap the product page nudge. It causes 93 unsubscribes a week.</li>
         <li>Fix the 1 message per day cap that throws users out of flows midway.</li>
@@ -604,7 +610,7 @@
     </div></details>
 
     <details class="step" id="step-2"><summary><span class="num">2</span><span class="t">A/B testing program, from day one</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>One structured test per week on WhatsApp, in campaigns and in automations. Winner rolls out, next test starts.</li>
         <li>Offer tests: flat coupon vs percent off vs free shipping vs bundle price.</li>
         <li>Content tests: short punch copy vs detailed copy, image card vs plain text, hype voice vs coach voice.</li>
@@ -616,7 +622,7 @@
     </div></details>
 
     <details class="step" id="step-3"><summary><span class="num">3</span><span class="t">Segment the base</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>Customers and prospects. Verified live: customer count 1,58,652.</li>
         <li>Kwikpass identified vs rest of base, to track capture quality monthly.</li>
         <li>Lapsed 90, 120 and 180 days (Last order date field).</li>
@@ -626,7 +632,7 @@
     </div></details>
 
     <details class="step" id="step-4"><summary><span class="num">4</span><span class="t">Welcome flow on Kwikpass join</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>First hello the moment a phone number is captured.</li>
         <li>Brand introduction, first order offer, best seller proof.</li>
         <li>Measure: share of new signups that place a first order.</li>
@@ -634,7 +640,7 @@
     </div></details>
 
     <details class="step" id="step-5"><summary><span class="num">5</span><span class="t">Deeper checkout recovery</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>3 step sequence: 15 minutes, 3 hours, 24 hours.</li>
         <li>Separate versions for top seller collections.</li>
         <li>Target: from 4.3% to 8%+, about ₹10 lakh a month more.</li>
@@ -642,7 +648,7 @@
     </div></details>
 
     <details class="step" id="step-6"><summary><span class="num">6</span><span class="t">Win back and 90 day cross sell</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>Win back flow for the 58,226 worth saving, sleeping and lost buyers, plus 1,335 high spenders gone quiet.</li>
         <li>Subtle cross sell inside order confirmed, shipped and delivered messages. They already get 31 to 39% click rates and earn nothing today.</li>
         <li>Cross sell ladder after delivery: equipment buyers get the matching accessory.</li>
@@ -651,7 +657,7 @@
     </div></details>
 
     <details class="step" id="step-7"><summary><span class="num">7</span><span class="t">Email warm up</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>Set up a branded sending domain.</li>
         <li>30 send warm up on the cleanest, most engaged segments.</li>
         <li>Then scale to the 12.66 lakh address base.</li>
@@ -659,7 +665,7 @@
     </div></details>
 
     <details class="step" id="step-8"><summary><span class="num">8</span><span class="t">Campaigns restart</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>4 to 6 WhatsApp sends a month, segmented only. Never full list blasts.</li>
         <li>8 to 12 emails a month once warm up completes.</li>
         <li>Five buckets: education, cross sell, prospect conversion, offer tests, message tests.</li>
@@ -669,7 +675,7 @@
     </div></details>
 
     <details class="step" id="step-9"><summary><span class="num">9</span><span class="t">VIP, reviews and AOV program</span><span class="car">›</span></summary><div class="body">
-      <ul class="check">
+      <ul class="check todo">
         <li>VIP flow for the top 2,186 customers.</li>
         <li>Review ask after every delivery.</li>
         <li>AOV messaging tiers: under ₹500 gets bundles, ₹500 to 1000 gets a gift threshold, above ₹1000 gets early access.</li>
@@ -680,7 +686,7 @@
   <div class="months">
     <section class="card">
       <h3>Month 1: Foundation</h3>
-      <ul class="check">
+      <ul class="check todo">
         <li>Leaks fixed: list, caps, broken flows</li>
         <li>8 working segments live</li>
         <li>Welcome and win back flows on</li>
@@ -692,7 +698,7 @@
     </section>
     <section class="card">
       <h3>Month 2: Email live</h3>
-      <ul class="check">
+      <ul class="check todo">
         <li>Email campaigns begin after warm up</li>
         <li>WhatsApp narrows to high intent and order updates</li>
         <li>1st to 2nd and 2nd to 3rd order ladders on</li>
@@ -702,7 +708,7 @@
     </section>
     <section class="card">
       <h3>Month 3: Omnichannel</h3>
-      <ul class="check">
+      <ul class="check todo">
         <li>Full email structure done</li>
         <li>SMS live, RCS onboarding</li>
         <li>WhatsApp dependence reduced by design</li>
@@ -793,5 +799,17 @@
     w.style.cursor='pointer';
     w.addEventListener('click', go);
     w.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+  });
+  document.querySelectorAll('ul.todo li').forEach(function(li){
+    var key='bf-todo-'+li.textContent.trim().slice(0,60);
+    var box=document.createElement('span'); box.className='box'; box.textContent='✓';
+    var txt=document.createElement('span'); txt.className='txt';
+    while(li.firstChild){ txt.appendChild(li.firstChild); }
+    li.appendChild(box); li.appendChild(txt);
+    try{ if(localStorage.getItem(key)==='1') li.classList.add('done'); }catch(e){}
+    li.addEventListener('click', function(){
+      li.classList.toggle('done');
+      try{ localStorage.setItem(key, li.classList.contains('done')?'1':'0'); }catch(e){}
+    });
   });
 </script>
