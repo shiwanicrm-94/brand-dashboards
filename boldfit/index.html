@@ -121,13 +121,15 @@
   ul.check li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:13px;color:var(--ink2);}
   ul.check li::before{content:"✓";font-weight:700;color:var(--accent-ink);border:1.5px solid var(--baseline);border-radius:4px;width:16px;height:16px;font-size:10px;display:grid;place-items:center;margin-top:1px;}
   ul.check.flags li::before{content:"✕";color:var(--crit);}
-  .funnel{display:grid;gap:0;margin-top:16px;max-width:720px;margin-left:auto;margin-right:auto;}
-  .fband{position:relative;margin:0 auto;color:#fff;text-align:center;padding:14px 10px 12px;transition:transform .18s ease, filter .18s ease;}
+  .funnel{display:grid;grid-template-columns:minmax(0,540px) 1fr;gap:8px 22px;margin-top:16px;align-items:center;}
+  .fband{position:relative;color:#fff;text-align:center;padding:14px 10px 12px;transition:transform .18s ease, filter .18s ease;}
   .fband:hover{transform:scale(1.02);filter:brightness(1.12);}
   .fband .fn{font-family:'PorcSerif',Georgia,serif;font-size:22px;font-weight:700;line-height:1;}
   .fband .fl2{font-size:11.5px;opacity:.85;margin-top:3px;}
-  .fgap{display:flex;justify-content:center;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--accent-ink);padding:6px 0;}
-  .fgap .miss{color:var(--crit);font-weight:700;}
+  .fbandwrap{display:flex;justify-content:center;}
+  .fgap{font-size:11.5px;font-weight:700;color:var(--accent-ink);line-height:1.5;border-left:3px solid var(--accent);padding-left:10px;}
+  .fgap .miss{color:var(--crit);font-weight:700;display:block;}
+  @media (max-width:680px){ .funnel{grid-template-columns:1fr;} .fgap{border-left:0;padding-left:0;text-align:center;} }
   .oldfunnel{display:grid;gap:6px;margin-top:12px;}
   .fstep{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;}
   .fstep .fl{font-size:12.5px;color:var(--ink2);text-align:right;}
@@ -245,11 +247,12 @@
   <section class="card">
     <div class="cardhead"><h2>Subscriber funnel</h2><span class="kicker">Counted live from the platform, 10 July 2026</span></div>
     <div class="funnel">
-      <div class="fband" style="width:100%;background:#7f5fc4;border-radius:10px 10px 0 0" data-tt="Everyone the systems have identified: registered users plus Kwikpass identified visitors."><span class="fn">12,66,934</span><div class="fl2">Subscribers captured</div></div>
-      <div class="fgap">only 12.5% ever bought · <span class="miss">no welcome flow works this gap</span></div>
-      <div class="fband" style="width:56%;background:#5b3f96" data-tt="Placed at least one order, lifetime. Measured with a live segment count."><span class="fn">1,58,652</span><div class="fl2">Customers (bought at least once)</div></div>
-      <div class="fgap">16% still buying · <span class="miss">no post purchase or win back flow works this gap</span></div>
-      <div class="fband" style="width:30%;background:#3a2e42;border-radius:0 0 10px 10px" data-tt="Champions, potential champions, new and promising buyers per the RFM scoring."><span class="fn">25,509</span><div class="fl2">Active buyers today</div></div>
+      <div class="fbandwrap"><div class="fband" style="width:100%;background:#7f5fc4;border-radius:10px 10px 0 0" data-tt="Everyone the systems have identified: registered users plus Kwikpass identified visitors."><span class="fn">12,66,934</span><div class="fl2">Subscribers captured</div></div></div>
+      <div></div>
+      <div class="fbandwrap"><div class="fband" style="width:56%;background:#5b3f96" data-tt="Placed at least one order, lifetime. Measured with a live segment count."><span class="fn">1,58,652</span><div class="fl2">Customers (bought at least once)</div></div></div>
+      <div class="fgap">only 12.5% ever bought<span class="miss">no welcome flow works this gap</span></div>
+      <div class="fbandwrap"><div class="fband" style="width:30%;background:#3a2e42;border-radius:0 0 10px 10px" data-tt="Champions, potential champions, new and promising buyers per the RFM scoring."><span class="fn">25,509</span><div class="fl2">Active buyers today</div></div></div>
+      <div class="fgap">16% of customers still buying<span class="miss">no post purchase or win back flow works this gap</span></div>
     </div>
     <h3 style="margin-top:18px">Where subscribers come from, and how each source converts</h3>
     <div class="bars" style="margin-top:10px">
@@ -267,23 +270,25 @@
     <div class="cardhead"><h2>The journey funnel, stage by stage</h2><span class="kicker">Top to bottom: acquire, capture, convert, deliver, repeat. Green is live. Amber is weak. Red is missing.</span></div>
     <div class="jmap">
       <div class="jphase">
-        <div class="ph">Acquire</div>
+        <div class="ph">Acquire · everyone you pay to bring in</div>
         <div class="jnodes">
           <div class="jnode neutral"><b>Traffic</b>Meta ads · Google · influencers · cricket and IPL · Amazon spillover<span class="st">Money in</span></div>
           <span class="jarr">→</span>
           <div class="jnode neutral"><b>boldfit.com</b>Shopify storefront<span class="st">The landing</span></div>
         </div>
       </div>
+      <div class="jchev">&#9660;</div>
       <div class="jphase">
-        <div class="ph">Capture</div>
+        <div class="ph">Capture · 12,66,934 identified</div>
         <div class="jnodes">
           <div class="jnode live"><b>Kwikpass phone capture</b>7.84L identified<span class="st">✓ Live</span></div>
           <span class="jarr">→</span>
           <div class="jnode miss"><b>Welcome flow</b>Introduce the brand, give a first offer<span class="st">✕ Missing</span></div>
         </div>
       </div>
+      <div class="jchev">&#9660;</div>
       <div class="jphase">
-        <div class="ph">Convert</div>
+        <div class="ph">Convert · 1,58,652 have bought</div>
         <div class="jnodes">
           <div class="jnode weak"><b>Site abandonment</b>Exists, has never fired<span class="st">◐ Broken</span></div>
           <span class="jarr">→</span>
@@ -296,8 +301,9 @@
           <div class="jnode live"><b>Abandoned checkout</b>4.3% recovery on ₹63L a week<span class="st">✓ Live</span></div>
         </div>
       </div>
+      <div class="jchev">&#9660;</div>
       <div class="jphase">
-        <div class="ph">Deliver</div>
+        <div class="ph">Deliver · every order’s journey</div>
         <div class="jnodes">
           <div class="jnode live"><b>Order confirmed</b><span class="st">✓ Live</span></div>
           <span class="jarr">→</span>
@@ -308,8 +314,9 @@
           <div class="jnode miss"><b>Review ask</b><span class="st">✕ Missing</span></div>
         </div>
       </div>
+      <div class="jchev">&#9660;</div>
       <div class="jphase">
-        <div class="ph">Repeat</div>
+        <div class="ph">Repeat · only 25,509 still active</div>
         <div class="jnodes">
           <div class="jnode miss"><b>Cross sell in the first 90 days</b>The 1st to 2nd order window<span class="st">✕ Missing</span></div>
           <span class="jarr">→</span>
