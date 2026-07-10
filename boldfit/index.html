@@ -121,6 +121,15 @@
   .win .head{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;line-height:1.25;margin:6px 0 6px;color:#fff;}
   .win p{margin:0;font-size:12.5px;line-height:1.55;color:#d8cfe6;}
   .win .how{display:inline-block;margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#ffb59d;}
+  .win .big{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:44px;line-height:1;color:#f2643b;margin:8px 0 2px;}
+  .win .biglab{font-size:12.5px;color:#e8e0f2;font-weight:600;}
+  .meter{margin-top:12px;}
+  .meter .mrow{display:grid;grid-template-columns:52px 1fr 52px;gap:8px;align-items:center;font-size:11px;color:#c3b9d1;margin-top:6px;}
+  .meter .mtrack{height:10px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;}
+  .meter .mfill{height:10px;border-radius:99px;width:0;background:#f2643b;}
+  .meter .mfill.lav{background:#b9a3f0;}
+  .meter .mval{text-align:right;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;}
+  @media (prefers-reduced-motion: no-preference){ .meter .mfill{transition:width 1s cubic-bezier(.2,.7,.2,1);} }
   .jmap{display:grid;gap:10px;margin-top:14px;}
   .jphase{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;padding:12px 0;border-top:1px dashed var(--baseline);}
   .jphase:first-child{border-top:0;}
@@ -161,33 +170,8 @@
 <!-- ============================ VIEW 1 ============================ -->
 <div class="view active" id="v1" role="tabpanel">
   <p class="eyebrow">View 1 · What is actually there</p>
-  <h1>A healthy engine, running with no driver</h1>
-  <p class="lede">BoldFit's WhatsApp account is technically excellent — top-tier sender rating, an enormous audience, automations quietly attributing ₹11–13&nbsp;lakh a month. But the retention program around it is missing: one channel carries everything (SMS and RCS sit connected but unused), campaigns have stopped, and the customer journey ends the day the order is delivered.</p>
-
-  <section class="exec">
-    <h2>Executive summary — the three wins</h2>
-    <p class="sub">The headline for the call. Everything below it is the proof, one tab at a time.</p>
-    <div class="wins">
-      <div class="win">
-        <span class="n">Win 1 ✦ New channel</span>
-        <div class="head">Switch on email — 12.66 lakh addresses, zero emails ever sent</div>
-        <p>A second revenue channel already sits captured in the account. Domain warm-up starts week 1; campaigns from month 2. WhatsApp stops being the single point of failure.</p>
-        <span class="how">How → View 3, steps 6–7</span>
-      </div>
-      <div class="win">
-        <span class="n">Win 2 ✦ Plug the leak</span>
-        <div class="head">Recover more of ₹63 lakh/week abandoned at checkout</div>
-        <p>Only 4.33% is recovered today. Every +1 point ≈ ₹2.7 lakh/month — proper 3-step recovery sequences take this toward 8%+.</p>
-        <span class="how">How → View 2 goldmine · View 3, step 4</span>
-      </div>
-      <div class="win">
-        <span class="n">Win 3 ✦ Repeat engine</span>
-        <div class="head">Turn one-time buyers into repeat customers</div>
-        <p>68% of scored buyers get no message after their order. Welcome, win-back and first-90-days cross-sell ladders lift repeat revenue share from 11–18% toward 30%.</p>
-        <span class="how">How → View 2 RFM & cohorts · View 3, steps 3 & 5</span>
-      </div>
-    </div>
-  </section>
+  <h1>Current state of the account</h1>
+  <p class="lede">The WhatsApp account is technically strong — top sender rating, a very large audience, automations attributing ₹11–13&nbsp;lakh a month. What's missing is the retention program around it: one channel carries everything (SMS and RCS sit connected but unused), campaigns have stopped, and the customer journey ends at delivery.</p>
 
   <div class="tiles">
     <div class="tile"><div class="v">12,66,306</div><div class="l">Identified database: 4.83L registered + 7.84L Kwikpass-identified — phone <b>and</b> email on file</div></div>
@@ -361,7 +345,7 @@
   </section>
 
   <div class="callout">
-    <div class="big">The red flags, in one line</div>
+    <div class="big">The red flags</div>
     <p class="lede" style="margin-top:6px">No email to 12.66L addresses · no RCS/SMS while the costliest channel underdelivers · broadcasts switched off · zero nurturing after delivery · cohorts decaying with no win-back — every one of these is fixable with assets the account already owns.</p>
   </div>
 </div>
@@ -369,7 +353,7 @@
 <!-- ============================ VIEW 2 ============================ -->
 <div class="view" id="v2" role="tabpanel">
   <p class="eyebrow">View 2 · Repeat-purchase deep analysis</p>
-  <h1>Where the money leaks — and hides</h1>
+  <h1>Repeat-purchase analysis</h1>
   <p class="lede">Everything below is read from the brand's own account data. The pattern is consistent: high-intent, well-timed messages earn outsized returns; untargeted volume loses money and burns the list; and the customer base decays because nothing exists to catch a buyer after their first order.</p>
 
   <section class="card">
@@ -454,8 +438,49 @@
 <!-- ============================ VIEW 3 ============================ -->
 <div class="view" id="v3" role="tabpanel">
   <p class="eyebrow">View 3 · The program</p>
-  <h1>What we will do — in priority order</h1>
+  <h1>The plan</h1>
   <p class="lede">Sequenced by revenue impact and dependency. The principle throughout: fix the leaks first, then capture demand the brand already pays for, then build the lifecycle that turns one-time buyers into repeat customers — while email is warmed up in parallel so the whole program stops depending on a single channel.</p>
+
+  <section class="exec">
+    <h2>The three wins</h2>
+    <p class="sub">What this plan delivers. The proof sits in the tabs, one view at a time.</p>
+    <div class="wins">
+      <div class="win">
+        <span class="n">Win 1 ✦ Switch on email</span>
+        <div class="big">12.66L</div>
+        <div class="biglab">emails captured · 0 ever sent</div>
+        <div class="meter">
+          <div class="mrow"><span>WhatsApp</span><div class="mtrack"><div class="mfill lav" data-w="100%"></div></div><span class="mval">100%</span></div>
+          <div class="mrow"><span>Email</span><div class="mtrack"><div class="mfill" data-w="2%"></div></div><span class="mval">0%</span></div>
+        </div>
+        <p style="margin-top:10px">All retention rides one channel. Email is the second engine — already captured, near-zero cost.</p>
+        <span class="how">How → steps 6–7 below</span>
+      </div>
+      <div class="win">
+        <span class="n">Win 2 ✦ Recover checkouts</span>
+        <div class="big">₹63L</div>
+        <div class="biglab">abandoned at checkout, every week</div>
+        <div class="meter">
+          <div class="mrow"><span>Today</span><div class="mtrack"><div class="mfill lav" data-w="36%"></div></div><span class="mval">4.3%</span></div>
+          <div class="mrow"><span>Target</span><div class="mtrack"><div class="mfill" data-w="67%"></div></div><span class="mval">8%+</span></div>
+        </div>
+        <p style="margin-top:10px">Every +1 point of recovery ≈ ₹2.7L/month.</p>
+        <span class="how">How → step 4 below · proof in View 2</span>
+      </div>
+      <div class="win">
+        <span class="n">Win 3 ✦ Repeat customers</span>
+        <div class="big">68%</div>
+        <div class="biglab">of buyers never hear from the brand again</div>
+        <div class="meter">
+          <div class="mrow"><span>Today</span><div class="mtrack"><div class="mfill lav" data-w="18%"></div></div><span class="mval">11–18%</span></div>
+          <div class="mrow"><span>Target</span><div class="mtrack"><div class="mfill" data-w="45%"></div></div><span class="mval">30%</span></div>
+        </div>
+        <p style="margin-top:10px">Welcome, win-back and 90-day cross-sell ladders lift repeat share of revenue.</p>
+        <span class="how">How → steps 3 &amp; 5 below · proof in View 2</span>
+      </div>
+    </div>
+  </section>
+
 
   <section class="card">
     <div class="cardhead"><h2>The build order</h2></div>
@@ -550,6 +575,9 @@
       document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
       document.getElementById(t.dataset.view).classList.add('active');
       window.scrollTo({top:0});
+      if(t.dataset.view==='v3'){ setTimeout(function(){
+        document.querySelectorAll('.meter .mfill').forEach(function(m){ m.style.width=m.dataset.w; });
+      }, 80); }
     });
   });
   // Cohort heat fills: sequential blue by share of M0
@@ -587,4 +615,5 @@
     el.addEventListener('mousemove',moveTT);
     el.addEventListener('mouseleave',hideTT);
   });
+  setTimeout(function(){ document.querySelectorAll('.meter .mfill').forEach(function(m){ if(!m.style.width) m.style.width=m.dataset.w; }); }, 1200);
 </script>
