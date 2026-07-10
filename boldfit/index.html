@@ -182,11 +182,11 @@
   .heat td.c:hover{transform:scale(1.12);}
   .exec .sub, .kicker{transition:color .15s;}
   @media (prefers-reduced-motion: reduce){ .tldr li:hover, ul.check li:hover, .tile:hover, .barrow:hover, .jnode:hover, .win:hover, .fband:hover, .heat td.c:hover{transform:none;} }
-  .jmap{display:grid;gap:10px;margin-top:14px;}
-  .jphase{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;padding:12px 0;border-top:1px dashed var(--baseline);}
-  .jphase:first-child{border-top:0;}
-  .jphase .ph{font-family:'PorcSerif',Georgia,'Times New Roman',serif;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:8px;}
-  .jnodes{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .jmap{display:grid;gap:4px;margin-top:14px;justify-items:center;}
+  .jphase{padding:12px 18px 14px;border-radius:12px;width:100%;}
+  .jphase.p1{width:100%;background:rgba(127,95,196,.13);} .jphase.p2{width:92%;background:rgba(127,95,196,.20);} .jphase.p3{width:84%;background:rgba(91,63,150,.24);} .jphase.p4{width:72%;background:rgba(91,63,150,.32);} .jphase.p5{width:60%;background:rgba(58,46,66,.40);}
+  .jphase .ph{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px;text-align:center;}
+  .jnodes{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;}
   .jnode{border:1.5px solid var(--baseline);border-radius:8px;padding:7px 11px;font-size:12.5px;line-height:1.35;background:var(--card);min-width:130px;}
   .jnode b{display:block;font-size:12.5px;}
   .jnode .st{display:inline-block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:99px;}
@@ -198,6 +198,8 @@
   .jnode.miss .st{background:var(--chip-crit-bg);color:var(--crit);}
   .jnode.neutral{border-color:var(--baseline);}
   .jnode.neutral .st{background:var(--grid);color:var(--ink2);}
+  .jchev{color:var(--muted);font-size:13px;line-height:1;}
+  @media (max-width:680px){ .jmap > .jphase{width:100% !important;} }
   .jarr{color:var(--muted);font-size:15px;}
   @media (max-width:640px){ .jphase{grid-template-columns:1fr;gap:6px;} }
   .pending{border:1px dashed var(--baseline);border-radius:10px;padding:16px 18px;margin-top:18px;color:var(--ink2);font-size:13.5px;}
@@ -255,10 +257,13 @@
       <div class="fgap">16% of customers still buying<span class="miss">no post purchase or win back flow works this gap</span></div>
     </div>
     <h3 style="margin-top:18px">Where subscribers come from, and how each source converts</h3>
-    <div class="bars" style="margin-top:10px">
-      <div class="barrow" data-tt="9,59,093 people identified through Kwikpass browsing. 1,02,779 of them ever bought."><span class="lab">Kwikpass identified pool</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">9.6L · 10.7%</span></div>
-      <div class="barrow" data-tt="3,07,841 people in the base without Kwikpass browsing, mostly registered and imported buyers. 55,873 of them bought."><span class="lab">Rest of the base</span><div class="track"><div class="fill" style="width:32%"></div></div><span class="val">3.1L · 18.2%</span></div>
-    </div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Source</th><th class="num">Subscribers</th><th class="num">Became customers</th><th class="num">Conversion</th></tr></thead>
+      <tbody>
+        <tr data-tt="People identified by Kwikpass while browsing: OTP logins and checkout identity across the GoKwik network."><td><b>Came through Kwikpass</b></td><td class="num">9,59,093</td><td class="num">1,02,779</td><td class="num" style="color:var(--crit)"><b>10.7%</b></td></tr>
+        <tr data-tt="Everyone else in the base: people who registered themselves or came in through order imports."><td><b>Rest of the base</b> (registered and imported)</td><td class="num">3,07,841</td><td class="num">55,873</td><td class="num" style="color:var(--good-text)"><b>18.2%</b></td></tr>
+      </tbody>
+    </table></div>
     <ul class="check">
       <li>Kwikpass fills 3 of every 4 database spots but converts at nearly half the rate of the rest.</li>
       <li>The list needs churning, and capture needs a real opt in tool (an Alia style popup) instead of depending on Kwikpass alone.</li>
@@ -269,7 +274,7 @@
   <section class="card">
     <div class="cardhead"><h2>The journey funnel, stage by stage</h2><span class="kicker">Top to bottom: acquire, capture, convert, deliver, repeat. Green is live. Amber is weak. Red is missing.</span></div>
     <div class="jmap">
-      <div class="jphase">
+      <div class="jphase p1">
         <div class="ph">Acquire · everyone you pay to bring in</div>
         <div class="jnodes">
           <div class="jnode neutral"><b>Traffic</b>Meta ads · Google · influencers · cricket and IPL · Amazon spillover<span class="st">Money in</span></div>
@@ -278,7 +283,7 @@
         </div>
       </div>
       <div class="jchev">&#9660;</div>
-      <div class="jphase">
+      <div class="jphase p2">
         <div class="ph">Capture · 12,66,934 identified</div>
         <div class="jnodes">
           <div class="jnode live"><b>Kwikpass phone capture</b>7.84L identified<span class="st">✓ Live</span></div>
@@ -287,7 +292,7 @@
         </div>
       </div>
       <div class="jchev">&#9660;</div>
-      <div class="jphase">
+      <div class="jphase p3">
         <div class="ph">Convert · 1,58,652 have bought</div>
         <div class="jnodes">
           <div class="jnode weak"><b>Site abandonment</b>Exists, has never fired<span class="st">◐ Broken</span></div>
@@ -302,7 +307,7 @@
         </div>
       </div>
       <div class="jchev">&#9660;</div>
-      <div class="jphase">
+      <div class="jphase p4">
         <div class="ph">Deliver · every order’s journey</div>
         <div class="jnodes">
           <div class="jnode live"><b>Order confirmed</b><span class="st">✓ Live</span></div>
@@ -315,7 +320,7 @@
         </div>
       </div>
       <div class="jchev">&#9660;</div>
-      <div class="jphase">
+      <div class="jphase p5">
         <div class="ph">Repeat · only 25,509 still active</div>
         <div class="jnodes">
           <div class="jnode miss"><b>Cross sell in the first 90 days</b>The 1st to 2nd order window<span class="st">✕ Missing</span></div>
