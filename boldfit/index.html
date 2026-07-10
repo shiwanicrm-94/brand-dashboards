@@ -94,6 +94,7 @@
   .barrow .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;}
   .track{height:14px;border-radius:4px;background:transparent;position:relative;}
   .fill{height:14px;border-radius:0 4px 4px 0;background:var(--s1);min-width:2px;}
+  .rib{transition:opacity .15s;} .rib:hover{opacity:.95 !important;}
   svg text{font:11px 'Poppins',system-ui,sans-serif;fill:var(--muted);}
   svg .vlab{fill:var(--ink2);font-weight:600;}
   .heat td{text-align:right;font-weight:600;}
@@ -235,7 +236,7 @@
   <div class="tldr">
     <span class="tag">TL;DR</span>
     <ul>
-      <li>12.67 lakh people captured. Only 1,58,652 ever bought (12.5%). About 11.1 lakh are prospects taking up space.</li>
+      <li>12.67 lakh people captured. Only 1,54,985 ever bought (12.2%, full Shopify history). About 11.1 lakh are prospects taking up space.</li>
       <li>The Kwikpass browsing pool (9.6L people) converts at 10.7%. The rest of the base converts at 18.2%. Capture quality is the problem.</li>
       <li>All retention revenue comes from WhatsApp automations. Email, SMS and RCS sit unused. Campaigns stopped on 19 June.</li>
       <li>The journey stops at delivery. No welcome, no review ask, no cross sell, no win back.</li>
@@ -245,7 +246,7 @@
 
   <div class="tiles">
     <div class="tile"><div class="v">12.67L</div><div class="l">Total subscribers captured in the database</div></div>
-    <div class="tile"><div class="v">1,58,652</div><div class="l">Customers: bought at least once (12.5% of the base)</div></div>
+    <div class="tile"><div class="v">1,54,985</div><div class="l">Customers, full Shopify history (12.2% of the base). The platform estimate of 1.59L cross checks within 2%</div></div>
     <div class="tile hot"><div class="v">~11.1L</div><div class="l">Prospects: captured but never bought (87.5%)</div></div>
     <div class="tile"><div class="v">₹60.0L</div><div class="l">WhatsApp attributed sales, 1 Feb to 30 Jun (5 full months, 4,059 orders)</div></div>
     <div class="tile hot"><div class="v">0</div><div class="l">Emails ever sent, to 12.66L captured addresses</div></div>
@@ -257,8 +258,8 @@
     <div class="funnel">
       <div class="fbandwrap"><div class="fband" style="width:100%;background:#7f5fc4;border-radius:10px 10px 0 0" data-tt="Everyone the systems have identified: registered users plus Kwikpass identified visitors."><span class="fn">12,66,934</span><div class="fl2">Subscribers captured</div></div></div>
       <div></div>
-      <div class="fbandwrap"><div class="fband" style="width:56%;background:#5b3f96" data-tt="Placed at least one order, lifetime. Measured with a live segment count."><span class="fn">1,58,652</span><div class="fl2">Customers (bought at least once)</div></div></div>
-      <div class="fgap">only 12.5% ever bought<span class="miss">no welcome flow works this gap</span></div>
+      <div class="fbandwrap"><div class="fband" style="width:56%;background:#5b3f96" data-tt="Placed at least one order. Shopify lifetime history; the platform segment estimate of 1,58,652 confirms it within 2%."><span class="fn">1,54,985</span><div class="fl2">Customers (bought at least once)</div></div></div>
+      <div class="fgap">only 12.2% ever bought<span class="miss">no welcome flow works this gap</span></div>
       <div class="fbandwrap"><div class="fband" style="width:30%;background:#3a2e42;border-radius:0 0 10px 10px" data-tt="Champions, potential champions, new and promising buyers per the RFM scoring."><span class="fn">25,509</span><div class="fl2">Active buyers today</div></div></div>
       <div class="fgap">16% of customers still buying<span class="miss">no post purchase or win back flow works this gap</span></div>
     </div>
@@ -299,7 +300,7 @@
       </div>
       <div class="jchev">&#9660;</div>
       <div class="jphase p3">
-        <div class="ph">Convert · 1,58,652 have bought</div>
+        <div class="ph">Convert · 1,54,985 have bought</div>
         <div class="jnodes">
           <div class="jnode weak"><b>Site abandonment</b>Exists, has never fired<span class="st">◐ Broken</span></div>
           <span class="jarr">→</span>
@@ -424,7 +425,8 @@
   <div class="tldr">
     <span class="tag">TL;DR</span>
     <ul>
-      <li>Buyers stop repeating after month 1. Every cohort loses 50 to 60% of its buyers immediately, and no flow catches them.</li>
+      <li>Lifetime repeat rate is 10.45%: 9 of 10 customers never buy twice. LTV is just 1.14 orders per customer.</li>
+      <li>Half of all second orders come within 12 days. The repeat window is two weeks, not months.</li>
       <li>₹63 lakh is abandoned at checkout every week. Only 4.3% is recovered. The benchmark is 8 to 12%.</li>
       <li>High intent flows earn 18x to 75x. Broad blasts lose money.</li>
       <li>68% of scored buyers are drifting or gone. There is no win back flow.</li>
@@ -535,9 +537,77 @@
     </ul>
   </section>
 
-  <div class="pending">
-    <b>Coming with the Shopify order export:</b> lifetime value, repeat rate by product, AOV by product, time between orders, and the product to product cross sell map (Sankey). These views then use complete order history.
-  </div>
+  <section class="card">
+    <div class="cardhead"><h2>Lifetime order analysis (full Shopify history)</h2><span class="kicker">1,84,231 orders from Aug 2019 to 10 Jul 2026, 1,54,985 customers, ₹23.75 crore</span></div>
+    <div class="tiles" style="margin-top:0">
+      <div class="tile hot"><div class="v">10.45%</div><div class="l">Lifetime repeat rate: only 16,195 of 1,54,985 customers ever bought twice</div></div>
+      <div class="tile hot"><div class="v">1.14</div><div class="l">Orders per customer: LTV ₹1,533 vs AOV ₹1,347. Almost no second purchase value today</div></div>
+      <div class="tile"><div class="v">12 days</div><div class="l">Median time to the 2nd order. 75% of repeats happen within 45 days</div></div>
+      <div class="tile"><div class="v">9.4%</div><div class="l">Repeat within 90 days of the first order</div></div>
+    </div>
+    <h3 style="margin-top:16px">How many times customers buy</h3>
+    <div class="bars">
+      <div class="barrow" data-tt="1,38,790 customers bought once and never again. This is the pool the repeat engine works on."><span class="lab">Bought once</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">1,38,790 · 89.6%</span></div>
+      <div class="barrow" data-tt="13,413 customers bought twice."><span class="lab">Bought twice</span><div class="track"><div class="fill" style="width:9.7%"></div></div><span class="val">13,413 · 8.7%</span></div>
+      <div class="barrow" data-tt="1,874 customers bought three times."><span class="lab">Bought 3 times</span><div class="track"><div class="fill" style="width:1.4%"></div></div><span class="val">1,874 · 1.2%</span></div>
+      <div class="barrow" data-tt="908 customers bought four or more times. These are the VIPs."><span class="lab">Bought 4+ times (VIPs)</span><div class="track"><div class="fill" style="width:0.7%"></div></div><span class="val">908 · 0.6%</span></div>
+    </div>
+    <ul class="check">
+      <li>The repeat window is short: half of all second orders come within 12 days, three quarters within 45 days.</li>
+      <li>So the cross sell and 1st to 2nd order ladder must fire in the first two weeks, and win back starts around day 45, not day 90.</li>
+      <li>Lapsed pools ready for win back: 1.15L beyond 90 days, 96K beyond 120, 70K beyond 180.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="cardhead"><h2>The D2C store is scaling fast, retention is not keeping up</h2><span class="kicker">Store revenue by year, ₹ crore</span></div>
+    <div class="bars">
+      <div class="barrow" data-tt="2024: 13,773 orders, ₹1.30 crore"><span class="lab">2024</span><div class="track"><div class="fill" style="width:9%"></div></div><span class="val">₹1.3 Cr</span></div>
+      <div class="barrow" data-tt="2025: 47,551 orders, ₹5.97 crore"><span class="lab">2025</span><div class="track"><div class="fill" style="width:40%"></div></div><span class="val">₹6.0 Cr</span></div>
+      <div class="barrow" data-tt="2026 first half only: 97,241 orders, ₹14.78 crore. May alone did ₹3.28 crore."><span class="lab">2026 (Jan to 10 Jul)</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">₹14.8 Cr</span></div>
+    </div>
+    <ul class="check">
+      <li>The store grew 10x in two years and May 2026 alone did ₹3.28 crore.</li>
+      <li>Retention messages attribute roughly 5% of store revenue today. Every point of repeat rate is now worth crores, not lakhs.</li>
+      <li>June dipped to ₹2.11 crore from May. A repeat engine cushions exactly these dips.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="cardhead"><h2>What people buy first, and whether they come back</h2><span class="kicker">First order category, number of customers, and how many of them ever bought again</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First purchase</th><th class="num">Customers start here</th><th class="num">Ever buy again</th></tr></thead>
+      <tbody>
+        <tr><td><b>Shoes and sneakers</b></td><td class="num">35,734</td><td class="num">13.5%</td></tr>
+        <tr><td><b>Pull-up bars</b></td><td class="num">34,690</td><td class="num" style="color:var(--crit)"><b>4.8%</b></td></tr>
+        <tr><td><b>Bottles and shakers</b></td><td class="num">27,403</td><td class="num">10.6%</td></tr>
+        <tr><td><b>Gym gear</b></td><td class="num">18,056</td><td class="num">10.6%</td></tr>
+        <tr><td><b>Resistance and bands</b></td><td class="num">12,813</td><td class="num">8.5%</td></tr>
+        <tr><td><b>Apparel</b></td><td class="num">11,744</td><td class="num" style="color:var(--good-text)"><b>16.1%</b></td></tr>
+        <tr><td><b>Supplements and nutrition</b></td><td class="num">3,625</td><td class="num" style="color:var(--good-text)"><b>24.3%</b></td></tr>
+      </tbody>
+    </table></div>
+    <ul class="check">
+      <li>Supplements repeat at 24.3%, the best in the catalog, and they are barely sold on the store. The consumable engine is missing.</li>
+      <li>Pull-up bars bring in the second biggest customer pool and keep almost none of it: 4.8%. Every bar buyer needs a bands, gear or apparel follow up.</li>
+      <li>Apparel and shoes are the natural repeat categories: people buy a second pair and a second tee.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="cardhead"><h2>The cross sell map</h2><span class="kicker">What customers who came back actually bought next. Purple ribbons: same category again. Coral ribbons: crossed into a new category. Hover any ribbon.</span></div>
+    <div class="tblwrap"><svg viewBox="0 0 980 590" width="100%" role="img" aria-label="What customers buy first and what they buy next">
+<text x="150" y="582" text-anchor="start">FIRST PURCHASE</text>
+<text x="830" y="582" text-anchor="end">NEXT PURCHASE</text>
+<path d="M162,8.0 C490.0,8.0 490.0,8.0 818,8.0 L818,169.1 C490.0,169.1 490.0,169.1 162,169.1 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Shoes first, then Shoes: 4,249 customers (bought the same category again)"/><path d="M162,169.1 C490.0,169.1 490.0,288.5 818,288.5 L818,300.1 C490.0,300.1 490.0,180.7 162,180.7 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Shoes first, then Apparel: 306 customers"/><path d="M162,188.7 C490.0,188.7 490.0,199.7 818,199.7 L818,280.5 C490.0,280.5 490.0,269.5 162,269.5 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Bottles first, then Bottles: 2,130 customers (bought the same category again)"/><path d="M162,269.5 C490.0,269.5 490.0,358.4 818,358.4 L818,365.2 C490.0,365.2 490.0,276.2 162,276.2 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Bottles first, then Gym gear: 179 customers"/><path d="M162,284.2 C490.0,284.2 490.0,169.1 818,169.1 L818,179.0 C490.0,179.0 490.0,294.1 162,294.1 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Apparel first, then Shoes: 260 customers"/><path d="M162,294.1 C490.0,294.1 490.0,300.1 818,300.1 L818,350.4 C490.0,350.4 490.0,344.4 162,344.4 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Apparel first, then Apparel: 1,326 customers (bought the same category again)"/><path d="M162,352.4 C490.0,352.4 490.0,179.0 818,179.0 L818,185.9 C490.0,185.9 490.0,359.3 162,359.3 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Pull-up bars first, then Shoes: 182 customers"/><path d="M162,359.3 C490.0,359.3 490.0,421.5 818,421.5 L818,458.2 C490.0,458.2 490.0,396.0 162,396.0 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Pull-up bars first, then Pull-up bars: 968 customers (bought the same category again)"/><path d="M162,396.0 C490.0,396.0 490.0,506.9 818,506.9 L818,515.2 C490.0,515.2 490.0,404.3 162,404.3 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Pull-up bars first, then Bands: 219 customers"/><path d="M162,412.3 C490.0,412.3 490.0,185.9 818,185.9 L818,191.7 C490.0,191.7 490.0,418.2 162,418.2 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Gym gear first, then Shoes: 155 customers"/><path d="M162,418.2 C490.0,418.2 490.0,365.2 818,365.2 L818,407.7 C490.0,407.7 490.0,460.7 162,460.7 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Gym gear first, then Gym gear: 1,123 customers (bought the same category again)"/><path d="M162,468.7 C490.0,468.7 490.0,407.7 818,407.7 L818,413.5 C490.0,413.5 490.0,474.5 162,474.5 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Bands first, then Gym gear: 151 customers"/><path d="M162,474.5 C490.0,474.5 490.0,458.2 818,458.2 L818,465.1 C490.0,465.1 490.0,481.4 162,481.4 Z" fill="var(--accent)" opacity="0.62" class="rib" data-tt="Bands first, then Pull-up bars: 182 customers"/><path d="M162,481.4 C490.0,481.4 490.0,515.2 818,515.2 L818,532.8 C490.0,532.8 490.0,498.9 162,498.9 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Bands first, then Bands: 463 customers (bought the same category again)"/><path d="M162,506.9 C490.0,506.9 490.0,473.1 818,473.1 L818,498.9 C490.0,498.9 490.0,532.8 162,532.8 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Supplements first, then Supplements: 682 customers (bought the same category again)"/><path d="M162,540.8 C490.0,540.8 490.0,540.8 818,540.8 L818,552.0 C490.0,552.0 490.0,552.0 162,552.0 Z" fill="var(--seq400)" opacity="0.45" class="rib" data-tt="Cricket first, then Cricket: 296 customers (bought the same category again)"/>
+<rect x="150" y="8.0" width="12" height="172.7" rx="3" fill="var(--s1)"/><text x="142" y="98.4" text-anchor="end" class="vlab">Shoes · 4,555</text><rect x="150" y="188.7" width="12" height="87.5" rx="3" fill="var(--s1)"/><text x="142" y="236.5" text-anchor="end" class="vlab">Bottles · 2,309</text><rect x="150" y="284.2" width="12" height="60.1" rx="3" fill="var(--s1)"/><text x="142" y="318.3" text-anchor="end" class="vlab">Apparel · 1,586</text><rect x="150" y="352.4" width="12" height="51.9" rx="3" fill="var(--s1)"/><text x="142" y="382.3" text-anchor="end" class="vlab">Pull-up bars · 1,369</text><rect x="150" y="412.3" width="12" height="48.5" rx="3" fill="var(--s1)"/><text x="142" y="440.5" text-anchor="end" class="vlab">Gym gear · 1,278</text><rect x="150" y="468.7" width="12" height="30.2" rx="3" fill="var(--s1)"/><text x="142" y="487.8" text-anchor="end" class="vlab">Bands · 796</text><rect x="150" y="506.9" width="12" height="25.9" rx="3" fill="var(--s1)"/><text x="142" y="523.8" text-anchor="end" class="vlab">Supplements · 682</text><rect x="150" y="540.8" width="12" height="11.2" rx="3" fill="var(--s1)"/><text x="142" y="550.4" text-anchor="end" class="vlab">Cricket · 296</text><rect x="818" y="8.0" width="12" height="183.7" rx="3" fill="var(--s1)"/><text x="838" y="103.9" class="vlab">Shoes · 4,846</text><rect x="818" y="199.7" width="12" height="80.8" rx="3" fill="var(--s1)"/><text x="838" y="244.1" class="vlab">Bottles · 2,130</text><rect x="818" y="288.5" width="12" height="61.9" rx="3" fill="var(--s1)"/><text x="838" y="323.4" class="vlab">Apparel · 1,632</text><rect x="818" y="358.4" width="12" height="55.1" rx="3" fill="var(--s1)"/><text x="838" y="389.9" class="vlab">Gym gear · 1,453</text><rect x="818" y="421.5" width="12" height="43.6" rx="3" fill="var(--s1)"/><text x="838" y="447.3" class="vlab">Pull-up bars · 1,150</text><rect x="818" y="473.1" width="12" height="25.9" rx="3" fill="var(--s1)"/><text x="838" y="490.0" class="vlab">Supplements · 682</text><rect x="818" y="506.9" width="12" height="25.9" rx="3" fill="var(--s1)"/><text x="838" y="523.8" class="vlab">Bands · 682</text><rect x="818" y="540.8" width="12" height="11.2" rx="3" fill="var(--s1)"/><text x="838" y="550.4" class="vlab">Cricket · 296</text>
+</svg></div>
+    <ul class="check">
+      <li>Most repeats today are the same category again: another pair of shoes, another bottle. That happens without any push.</li>
+      <li>The proven cross paths to automate: pull-up bar to bands (219), shoes to apparel (306), apparel to shoes (260), bottles to gym gear (179).</li>
+      <li>Their best campaign ever (bar to tubes, 15 orders) sits exactly on the biggest cross path. The data says scale it as an automation.</li>
+    </ul>
+  </section>
 </div>
 
 <!-- ============================ VIEW 3 ============================ -->
@@ -583,7 +653,7 @@
       <div class="win" data-steps="5,7" role="button" tabindex="0">
         <span class="n">Win 3 ✦ Repeat customers</span>
         <div class="big">68%</div>
-        <div class="biglab">of buyers never hear from the brand again</div>
+        <div class="biglab">never hear from the brand again · lifetime repeat rate just 10.45%</div>
         <div class="meter">
           <div class="mrow"><span>Today</span><div class="mtrack"><div class="mfill lav" data-w="18%"></div></div><span class="mval">11-18%</span></div>
           <div class="mrow"><span>Target</span><div class="mtrack"><div class="mfill" data-w="40%"></div></div><span class="mval">25%+</span></div>
@@ -654,9 +724,10 @@
 
     <details class="step" id="step-7"><summary><span class="num">7</span><span class="t">Win back and 90 day cross sell</span><span class="car">›</span></summary><div class="body">
       <ul class="check todo">
-        <li>Win back flow for the 58,226 worth saving, sleeping and lost buyers, plus 1,335 high spenders gone quiet.</li>
+        <li>Win back starts day 45, not day 90: three quarters of all second orders happen within 45 days. Pools ready: 1.15L beyond 90 days, 70K beyond 180.</li>
+        <li>Win back flow also covers the 58,226 worth saving, sleeping and lost buyers scored by the platform.</li>
         <li>Subtle cross sell inside order confirmed, shipped and delivered messages. They already get 31 to 39% click rates and earn nothing today.</li>
-        <li>Cross sell ladder after delivery: equipment buyers get the matching accessory.</li>
+        <li>Cross sell ladder fires in the first two weeks after delivery, on the proven paths: bar to bands, shoes to apparel, bottles to gym gear.</li>
         <li>1st to 2nd order ladder inside the first 90 days, then 2nd to 3rd.</li>
       </ul>
     </div></details>
@@ -683,7 +754,7 @@
       <ul class="check todo">
         <li>VIP flow for the top 2,186 customers.</li>
         <li>Review ask after every delivery.</li>
-        <li>AOV messaging tiers: under ₹500 gets bundles, ₹500 to 1000 gets a gift threshold, above ₹1000 gets early access.</li>
+        <li>AOV messaging tiers from the real curve: 74% of orders are already above ₹1,000, so tiers anchor at ₹1,000 and ₹2,000. Under ₹1,000 gets bundle ups, ₹1,000 to 2,000 gets gift thresholds, above ₹2,000 gets early access.</li>
       </ul>
     </div></details>
   </section>
@@ -727,7 +798,8 @@
     <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">Every target starts from today's real number</span></div>
     <div class="tiles" style="margin-top:0">
       <div class="tile"><div class="v">4.3% → 8%</div><div class="l">Checkout recovery rate</div></div>
-      <div class="tile"><div class="v">11-18% → 25%+</div><div class="l">Repeat buyer share of revenue</div></div>
+      <div class="tile"><div class="v">11-18% → 25%+</div><div class="l">Repeat buyer share of attributed revenue</div></div>
+      <div class="tile"><div class="v">10.45% → 14%+</div><div class="l">Customer repeat rate, moved by the 14 day cross sell window and day 45 win back</div></div>
       <div class="tile"><div class="v">~50% → 55%+</div><div class="l">Buyers still active one month after first purchase. Moved by the 1st to 2nd order ladder, a few points at a time</div></div>
       <div class="tile"><div class="v">0 → 10+</div><div class="l">Campaigns per month across channels, segmented only</div></div>
       <div class="tile"><div class="v">1 → 4</div><div class="l">Revenue channels: email, SMS and RCS join WhatsApp</div></div>
