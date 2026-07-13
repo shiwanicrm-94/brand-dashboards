@@ -62,6 +62,23 @@
   .note{font-size:12.5px;color:var(--muted);margin-top:20px;max-width:82ch;border-top:1px solid var(--ring);padding-top:16px;}
   .note b{color:var(--ink2);}
   .fullbtn{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;border-radius:99px;padding:11px 22px;}
+
+  /* ratio visual */
+  .ratio{margin:4px 0 10px;display:grid;gap:5px;max-width:360px;}
+  .rrow{display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center;}
+  .rlab{font-size:11px;font-weight:700;color:var(--ink2);text-align:right;}
+  .rbar{display:flex;height:22px;border-radius:5px;overflow:hidden;background:var(--ring);font-size:10.5px;font-weight:700;}
+  .rfill{display:flex;align-items:center;justify-content:center;color:#fff;white-space:nowrap;min-width:34px;}
+  .rfill.you{background:var(--accent);}
+  .rfill.good{background:var(--good-text);}
+  .rrest{flex:1;display:flex;align-items:center;padding-left:8px;color:var(--muted);}
+
+  /* two-part list */
+  .parts{counter-reset:pt;margin:6px 0 8px;padding:0;list-style:none;display:grid;gap:6px;}
+  .parts li{font-size:12.5px;color:var(--ink2);padding-left:22px;position:relative;line-height:1.5;}
+  .parts li b{color:var(--ink);}
+  .parts li::before{content:counter(pt);counter-increment:pt;position:absolute;left:0;top:1px;font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:11px;color:#fff;background:var(--accent-ink);border-radius:99px;width:16px;height:16px;display:grid;place-items:center;}
+
   @media(max-width:660px){
     .hero{grid-template-columns:1fr;gap:14px;}
     .hero .arrow{transform:rotate(90deg);}
@@ -100,7 +117,7 @@
   </div>
   <p class="herohow"><b>How:</b> June retention revenue was ₹10.8L of the store's ₹2.11 Cr (5.1%). Lifting it 2.5–3× = ₹27–32L a month, or ₹3.2–3.9 Cr a year (a conservative 2× floor is still ₹2.6 Cr). Cart recovery alone (+₹15.7L/mo) nearly doubles it; the rest of the levers push past 3×. Source: Shopify sales + Kwik Engage attributed revenue, June.</p>
 
-  <h2 class="sechead">The six levers that get us there</h2>
+  <h2 class="sechead">The seven levers that get us there</h2>
   <p class="secsub">Each is the brand's own data. Click any lever to jump to the detail that proves it.</p>
 
   <div class="levers">
@@ -119,16 +136,35 @@
     <div class="lever">
       <span class="lvn">2</span>
       <div class="lvbody">
-        <h3>List health</h3>
-        <p>You have captured <b>12.7 lakh</b> subscribers, but only <b>1.55 lakh</b> — about <b>12%</b> — have ever bought. The other ~11 lakh have never placed a single order. A large list is not a healthy list until it converts.</p>
-        <p class="why"><b>How:</b> 1,54,985 customers ÷ 12,66,306 subscribers = <b>12.2%</b>. Source: Kwik Engage contact base (live) + Shopify lifetime order history.</p>
+        <h3>List health — the ratio is upside down</h3>
+        <p>KwikPass silently captures every window-shopper, which is how the list ballooned to <b>12.7 lakh</b> — yet only <b>1.55 lakh</b> have ever bought. Your customer-to-prospect ratio is about <b>12 : 88</b>. A healthy brand runs closer to <b>60 : 40</b>.</p>
+        <div class="ratio">
+          <div class="rrow"><span class="rlab">You now</span><div class="rbar"><span class="rfill you" style="width:12%">12%</span><span class="rrest">88% prospects (never bought)</span></div></div>
+          <div class="rrow"><span class="rlab">Healthy</span><div class="rbar"><span class="rfill good" style="width:60%">60% customers</span><span class="rrest">40%</span></div></div>
+        </div>
+        <p class="why"><b>How:</b> 1,54,985 customers vs 11,24,096 prospects = <b>12 : 88</b> (healthy ≈ 60 : 40). KwikPass auto-captures browsers, inflating the prospect side. Source: Kwik Engage contact base (live) + Shopify order history.</p>
         <a class="cta" href="index.html#v1">See the subscriber funnel →</a>
       </div>
-      <div class="lvgain"><span class="lvg-num">only 12%</span><span class="lvg-lab">of 12.7L subscribers are customers</span></div>
+      <div class="lvgain"><span class="lvg-num">12 : 88</span><span class="lvg-lab">customers : prospects (healthy is 60:40)</span></div>
     </div>
 
     <div class="lever">
       <span class="lvn">3</span>
+      <div class="lvbody">
+        <h3>Intentional lead capture</h3>
+        <p>KwikPass grabs everyone who window-shops, so you pay to message a list that's <b>88% never-buyers</b>. Intentional capture fixes the ratio — fill the list with <b>intent, not noise</b>. Two parts:</p>
+        <ol class="parts">
+          <li><b>On the website</b> — an Alia opt-in popup captures real leads who raise their hand for a reason (offer + consent), instead of KwikPass silently tagging every visitor.</li>
+          <li><b>From the marketplaces</b> — give existing Amazon / Flipkart buyers an incentive to come to the website and buy again, turning rented marketplace buyers into owned D2C customers.</li>
+        </ol>
+        <p class="why"><b>Why it matters:</b> a smaller, higher-intent list means fewer wasted ₹0.87 marketing sends and better conversion per send — <b>lower cost, higher ROI, healthier ratio</b>. The panel already holds an "Amazon Purchase Data" list of 3,931 as proof the marketplace bridge works. Source: audit recommendation + Kwik Engage.</p>
+        <a class="cta" href="index.html#v1">See the subscriber funnel →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">→ 60 : 40</span><span class="lvg-lab">rebuild toward a healthy ratio</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">4</span>
       <div class="lvbody">
         <h3>Omnichannel, not WhatsApp-only</h3>
         <p><b>100%</b> of retention runs on WhatsApp while <b>12.7 lakh</b> customer emails sit unused. Email costs about <b>30× less</b> per message — more reach, lower cost, and no single-channel risk.</p>
@@ -139,7 +175,7 @@
     </div>
 
     <div class="lever">
-      <span class="lvn">4</span>
+      <span class="lvn">5</span>
       <div class="lvbody">
         <h3>Repeat customers</h3>
         <p>You have about <b>1.5 lakh</b> customers — and nearly <b>9 in 10 bought once and never came back</b>. Only ~16,000 have ever reordered. The reason is simple: nothing reaches them after they buy. Start communicating, and a large share become repeat buyers.</p>
@@ -150,7 +186,7 @@
     </div>
 
     <div class="lever">
-      <span class="lvn">5</span>
+      <span class="lvn">6</span>
       <div class="lvbody">
         <h3>Win back the customers who went quiet</h3>
         <p>About <b>58,000</b> of your past buyers are scored <b>"worth saving," sleeping or lost</b> — and not a single win-back message reaches them today. These are people who already bought once; a simple "come back" flow reactivates a chunk of them.</p>
@@ -161,7 +197,7 @@
     </div>
 
     <div class="lever">
-      <span class="lvn">6</span>
+      <span class="lvn">7</span>
       <div class="lvbody">
         <h3>Restart the broadcast calendar</h3>
         <p>In the whole history of the account, only <b>13 promotional broadcasts</b> have ever been sent — and <b>none since 19 June</b>. A 12.7 lakh-person base gets almost no proactive campaigns. A simple <b>4–8 a month</b> to the right segments is recurring revenue the account isn't touching.</p>
@@ -173,7 +209,7 @@
 
   </div>
 
-  <p class="note"><b>How the levers add up:</b> the headline is the goal; these six are the means. You don't add each lever's number on top of the headline — together they move retention revenue from ₹10.8L to ₹27–32L a month. Cart recovery is the single biggest, quantified slice; win-back, repeat, broadcasts and email do the rest.</p>
+  <p class="note"><b>How the levers add up:</b> the headline is the goal; these seven are the means. You don't add each lever's number on top of the headline — together they move retention revenue from ₹10.8L to ₹27–32L a month. Cart recovery is the single biggest quantified slice; list health and intentional capture make every other lever cheaper and higher-converting.</p>
 
   <a class="fullbtn" href="index.html">Open the full dashboard →</a>
 </main>
