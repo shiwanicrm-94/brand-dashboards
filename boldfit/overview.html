@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BoldFit · Retention Overview</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c;
+    --good-text:#006300; --seq700:#3a2e42;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+      --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; }
+  }
+  :root[data-theme="dark"]{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+    --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; }
+  :root[data-theme="light"]{ --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good-text:#006300; --seq700:#3a2e42; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:18px 24px;}
+  header .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  header .brandmark em{font-style:normal;color:var(--accent);}
+  header .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 60px;}
+  .eyebrow{display:inline-block;font-family:'Poppins',system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#3a2e42;padding:4px 12px;border-radius:99px;margin:32px 0 10px;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:29px;line-height:1.2;margin:0 0 12px;letter-spacing:-.01em;}
+  .lead{color:var(--ink2);max-width:72ch;font-size:15px;margin:0 0 8px;}
+  .lead b{color:var(--ink);}
+  .levers{display:grid;gap:12px;margin-top:26px;}
+  .lever{background:var(--card);border:1px solid var(--ring);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr minmax(140px,auto);gap:16px;align-items:center;}
+  .lvn{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;color:#fff;background:var(--accent);border-radius:99px;width:38px;height:38px;display:grid;place-items:center;}
+  .lvbody h3{margin:0 0 4px;font-size:16px;}
+  .lvbody p{margin:0 0 8px;font-size:13px;color:var(--ink2);line-height:1.55;}
+  .lvbody p b{color:var(--ink);}
+  .cta{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--accent-ink);text-decoration:none;border:1px solid var(--ring);border-radius:99px;padding:5px 12px;transition:background .15s;}
+  .cta:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .lvgain{text-align:right;}
+  .lvg-num{display:block;font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:22px;color:var(--good-text);white-space:nowrap;}
+  .lvg-lab{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:20px;max-width:80ch;border-top:1px solid var(--ring);padding-top:16px;}
+  .fullbtn{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;border-radius:99px;padding:11px 22px;}
+  @media(max-width:640px){
+    .lever{grid-template-columns:34px 1fr;}
+    .lvgain{grid-column:2;text-align:left;margin-top:2px;}
+    h1{font-size:24px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Overview</div>
+  <div class="subtitle">BoldFit · Prepared by Shiwani Agrawal · The five levers, in the brand's own numbers · July 2026</div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">Executive overview</p>
+  <h1>Five levers that move retention — and the money in each</h1>
+  <p class="lead">BoldFit's store is scaling fast: <b>₹14.8 crore</b> in the first half of 2026. But almost all of it is new customers — retention drives only about <b>5%</b> of sales, and just <b>1 in 10</b> customers ever comes back. These are the five places the recoverable revenue sits, each backed by the brand's own data. <b>Click any lever to jump to the detail that proves it.</b></p>
+
+  <div class="levers">
+
+    <div class="lever">
+      <span class="lvn">1</span>
+      <div class="lvbody">
+        <h3>Browse &amp; cart recovery</h3>
+        <p>In June, <b>₹2.22 crore</b> of checkouts were abandoned and only <b>₹6.5 lakh</b> was won back — a <b>3.45%</b> recovery rate, when it should be <b>10–15%</b>. Nearly half the recovery messages are never even delivered.</p>
+        <a class="cta" href="index.html#v2">See the abandoned-checkout numbers →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">+₹15.7L</span><span class="lvg-lab">in June alone, at 10% recovery</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">2</span>
+      <div class="lvbody">
+        <h3>Retention share of sales</h3>
+        <p>Retention drives only <b>~5%</b> of store sales today. A brand this size running email, WhatsApp and proper flows does <b>15–20%</b> — closing that gap on the volume you already have.</p>
+        <a class="cta" href="index.html#v1">See store vs retention, month by month →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">+₹21–31L</span><span class="lvg-lab">every month · ₹3–4.5 Cr a year</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">3</span>
+      <div class="lvbody">
+        <h3>List health</h3>
+        <p>You have captured <b>12.7 lakh</b> subscribers, but only <b>1.55 lakh</b> — about <b>12%</b> — have ever bought. The other ~11 lakh have never placed a single order. A large list is not a healthy list until it converts.</p>
+        <a class="cta" href="index.html#v1">See the subscriber funnel →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">only 12%</span><span class="lvg-lab">of 12.7L subscribers are customers</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">4</span>
+      <div class="lvbody">
+        <h3>Omnichannel, not WhatsApp-only</h3>
+        <p><b>100%</b> of retention runs on WhatsApp while <b>12.7 lakh</b> customer emails sit unused. Email costs about <b>30× less</b> per message — more reach, lower cost, and no single-channel risk.</p>
+        <a class="cta" href="index.html#v3">See the plan to add email →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">~30× cheaper</span><span class="lvg-lab">email vs WhatsApp reach</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">5</span>
+      <div class="lvbody">
+        <h3>Repeat customers</h3>
+        <p>Only <b>10.45%</b> of customers ever buy again (on Amazon it is nearly <b>40%</b>), and there is no flow after delivery today. Lifting repeat to <b>15–20%</b> is roughly <b>7,000–14,800</b> more repeat buyers.</p>
+        <a class="cta" href="index.html#v2">See the repeat &amp; cohort analysis →</a>
+      </div>
+      <div class="lvgain"><span class="lvg-num">+₹2 Cr</span><span class="lvg-lab">from the existing customer base</span></div>
+    </div>
+
+  </div>
+
+  <p class="note">A note for the room: these levers overlap — cart recovery, win-back and repeat are <em>how</em> you close the retention-share gap in lever 2, not separate losses to add on top. The honest headline is <b>₹21–31 lakh a month</b>, with cart recovery the largest quantified slice of it.</p>
+
+  <a class="fullbtn" href="index.html">Open the full dashboard →</a>
+</main>
+</body>
+</html>
