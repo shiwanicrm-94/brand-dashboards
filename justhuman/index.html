@@ -86,6 +86,18 @@
 <section class="view active" id="v2" data-g="g1">
   <h1>Executive summary</h1>
   <p class="kicker">The state of retention, and the handful of things that move it. Internal audit — Klaviyo API (live) · Bik exports · Shopify orders (full history) · Alia analytics. Every figure cross-checked against a second source.</p>
+  <div class="hero" style="grid-template-columns:1fr 1fr">
+    <div class="col today">
+      <div class="lab">Lifetime target 1 · Retention share</div>
+      <div class="amt">18.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">25%</span></div>
+      <div class="sub">of Shopify revenue from retention (16%→20% Jan→Jun; the chain in The Plan closes the rest)</div>
+    </div>
+    <div class="col to">
+      <div class="lab">Lifetime target 2 · Repeat rate</div>
+      <div class="amt">19.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">30%</span></div>
+      <div class="sub">lifetime repeat is LOW for a skincare brand — the category supports 30%</div>
+    </div>
+  </div>
   <div class="card">
     <p class="lede"><b>JustHuman's retention is genuinely strong and improving.</b> In June 2026 retention drove <b>20.0%</b> of Shopify revenue (up from 16% in January), split roughly <b>58% WhatsApp / 42% email</b>. Repeat behaviour is climbing cohort-over-cohort. The opportunities are not "build the basics" — they exist — they are <b>fix the leaks and steer acquisition into products that retain</b>.</p>
   </div>
@@ -179,7 +191,7 @@
   <p class="kicker">Entire order history (36,059 orders, 2021→2026; voided excluded). Customer key = email.</p>
   <div class="tiles">
     <div class="tile"><div class="v">24,203</div><div class="l">customers (lifetime)</div></div>
-    <div class="tile good"><div class="v">19.7%</div><div class="l">repeat rate (2+ orders)</div></div>
+    <div class="tile warn"><div class="v">19.7%</div><div class="l">repeat rate (2+ orders) — LOW for skincare; target 30%</div></div>
     <div class="tile"><div class="v">74 days</div><div class="l">median time to 2nd order</div></div>
     <div class="tile"><div class="v">₹4.81 Cr</div><div class="l">2025 revenue → ₹4.14 Cr in H1 2026 alone</div></div>
   </div>
@@ -522,6 +534,7 @@
     <ul class="pts">
       <li><b>1 · Sign-up rate (the multiplier).</b> 7 steps, no skip anywhere, mandatory age, email before phone — and the rate fell 19.3% → 4.33% while views grew to ~57–71k/month. Rebuild: gift → <b>phone/WhatsApp first</b> → email (skippable) → one high-signal question (skippable) → reveal code <b>with expiry</b>. At ~60k views, recovering to ~8% ≈ <b>5,700 signups/month vs ~3,000</b> — feeding the best-converting cohort in the account.</li>
       <li><b>2 · Automation messaging (bestseller-led).</b> Alia's own attribution: <b>Microshots = ~65% of popup-signup orders (1,776)</b>. The welcome must sell the bestseller explicitly — product story, clinical proof, reviews — not generic brand copy. Carry the <b>dynamic coupon + its expiry</b> in every message (today: zero mentions across all 4 emails).</li>
+      <li><b>2b · The offer expires in 30 MINUTES — and no message ever says so.</b> The urgency exists but is invisible; and 30 minutes is shorter than the consideration cycle of a ₹5,000-AOV product ("finished while they crawl through the page"). <b>Two tests:</b> (A) keep the dynamic coupon, lengthen the expiry to match the AOV's decision time; (B) keep 30 minutes but fire welcome email #1 + WhatsApp #1 <b>the instant they sign up</b> (non-buyers only), carrying the code + the literal expiry time — so the urgency is real and usable, not already dead.</li>
       <li><b>3 · Collection introduction — missing entirely.</b> No email in the welcome (or any automation) walks the signup through the collections — bestsellers, anti-aging, hair, body. Add a collection-introduction email (bestsellers-first, quiz-answer-matched) so new signups discover the catalogue beyond the one product they saw.</li>
       <li><b>4 · Branch by quiz answer.</b> The answers predict AOV and conversion (Sensitive = highest AOV; Key-Ingredients 30.9% CVR vs Simplified-Routine 9.9%); the segments already exist in Klaviyo — the flow just doesn't use them.</li>
     </ul>
@@ -573,7 +586,19 @@
 <!-- ========== 9 THE PLAN ========== -->
 <section class="view" id="v9" data-g="g3">
   <h1>The plan</h1>
-  <p class="kicker">Retention is 18–20% of revenue today. The chain below moves it to 25–30%.</p>
+  <p class="kicker">Everything below serves the two lifetime targets.</p>
+  <div class="hero" style="grid-template-columns:1fr 1fr">
+    <div class="col today">
+      <div class="lab">Lifetime target 1 · Retention share</div>
+      <div class="amt">18.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">25%</span></div>
+      <div class="sub">of Shopify revenue from retention</div>
+    </div>
+    <div class="col to">
+      <div class="lab">Lifetime target 2 · Repeat rate</div>
+      <div class="amt">19.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">30%</span></div>
+      <div class="sub">low for skincare today — the category supports 30%</div>
+    </div>
+  </div>
   <div class="card">
     <div class="cardhead"><h2>The improvement chain — how 18–20% becomes 25–30%</h2><span class="kicker">each step feeds the next; this is the order of operations</span></div>
     <div class="tblwrap"><table>
@@ -641,7 +666,7 @@
     <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">every target starts from today's verified number</span></div>
     <div class="tiles">
       <div class="tile"><div class="v">18.7% → 25%</div><div class="l">retention share of Shopify revenue</div></div>
-      <div class="tile"><div class="v">19.7% → 25%</div><div class="l">lifetime repeat rate (2+ orders)</div></div>
+      <div class="tile"><div class="v">19.7% → 30%</div><div class="l">lifetime repeat rate — low for skincare today</div></div>
       <div class="tile"><div class="v">13% → 20%</div><div class="l">Foot-Facial buyer repeat (via activation + cross-sell)</div></div>
       <div class="tile"><div class="v">0.76% → 1.2%+</div><div class="l">email campaign click rate</div></div>
       <div class="tile"><div class="v">42–80% → &lt;10%</div><div class="l">WA flow triggers lost to capping</div></div>
