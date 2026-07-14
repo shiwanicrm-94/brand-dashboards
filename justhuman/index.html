@@ -82,6 +82,8 @@
   <button class="tab" role="tab" aria-selected="false" data-view="v5">5 · Email</button>
   <button class="tab" role="tab" aria-selected="false" data-view="v6">6 · WhatsApp</button>
   <button class="tab" role="tab" aria-selected="false" data-view="v7">7 · Alia</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v8">8 · Omnichannel</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v9">9 · The Plan</button>
 </nav>
 
 <main class="wrap">
@@ -338,6 +340,29 @@
     </div>
   </details>
   <div class="card">
+    <div class="cardhead"><h2>Campaign pattern — what's being sent, to whom, how often</h2><span class="kicker">53 email campaigns Jan–Jun 2026, from the Klaviyo API</span></div>
+    <ul class="pts">
+      <li><b>Cadence is 2.0/week</b> (Jan 7 · Feb 13 · Mar 8 · Apr 8 · May 7 · Jun 10). At ~₹85L/month store revenue, the Max frequency ladder says <b>3–4/week</b> — there is headroom for ~1–2 more sends/week <i>if variety improves</i> (Nicolas: "sending the same type burns lists, not frequency").</li>
+      <li><b>Targeting is tight and disciplined:</b> almost every campaign goes to <b>"engaged_45 days"</b> + product-intent segments (ATC Cleansing Balm L30, ATC Microshots L45, product viewers) — typically 2,000–3,000 recipients. That discipline is why delivery is 99.6% and opens run 66–78%.</li>
+      <li><b>The cost of that discipline: reach.</b> ~2.5k recipients per send from a 40k+ engaged-capable list, and <b>click rate is just 0.76%</b> (benchmark >1.2%) — the list is opening but not clicking. Fix is creative/CTA (Max: hero + one CTA above the fold), not more segmentation.</li>
+      <li><b>Theme mix skews product-push.</b> Same pattern as WhatsApp: product/launch angles dominate; education, social-proof and use-case angles — which win in their own A/B tests — are under-used.</li>
+    </ul>
+    <div class="cardhead" style="margin-top:14px"><h2>Best email campaigns (H1 2026)</h2><span class="kicker">Klaviyo-attributed; total email campaign revenue ₹16.4L</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Campaign</th><th>Date</th><th class="num">Recipients</th><th class="num">Open</th><th class="num">Click</th><th class="num">Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>Daily Angle | Cleansing Balm</td><td>26 May</td><td class="num">2,692</td><td class="num">74.9%</td><td class="num">0.22%</td><td class="num good-text">₹90,818</td></tr>
+        <tr><td>DSC Alarming Fact Check</td><td>18 May</td><td class="num">2,645</td><td class="num">75.7%</td><td class="num">0.53%</td><td class="num good-text">₹87,236</td></tr>
+        <tr><td>Melting Balm Minimal</td><td>5 Jun</td><td class="num">2,820</td><td class="num">73.3%</td><td class="num">0.36%</td><td class="num">₹73,668</td></tr>
+        <tr><td>Soiree (event)</td><td>25 Apr</td><td class="num">2,296</td><td class="num">75.0%</td><td class="num">0.57%</td><td class="num">₹71,739</td></tr>
+        <tr><td>Body Soother Usecase</td><td>17 Jun</td><td class="num">3,026</td><td class="num">78.2%</td><td class="num">0.56%</td><td class="num">₹58,241</td></tr>
+        <tr><td>Microshot Testimonial</td><td>22 May</td><td class="num">2,547</td><td class="num">75.0%</td><td class="num">0.32%</td><td class="num">₹57,763</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>Double down on:</b> education/fact-check angles (DSC Alarming Fact ₹87k — also the WhatsApp winner at ₹114k), use-case storytelling (Body Soother), and event/exclusivity (Soiree). These already out-earn plain product pushes on both channels — make them the calendar's spine, not the exception.</div>
+  </div>
+
+  <div class="card">
     <div class="cardhead"><h2>A/B test learnings — what messaging actually wins</h2><span class="kicker">6 subject-line / CTA tests from the internal tracker</span></div>
     <div class="tblwrap"><table>
       <thead><tr><th>Test</th><th>Winning line</th><th class="num">Rev (win)</th><th>Learning</th></tr></thead>
@@ -414,6 +439,31 @@
     </table></div>
     <p class="note">60 campaigns · 99,914 messages · ₹30.4L revenue · ₹1.1L cost · <b>27.8× blended ROI</b>. Winners are offer-led + tightly segmented (Membership, DSC, Microshot Users). Prune ₹0 sends.</p>
   </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Delivery &amp; campaign pattern</h2><span class="kicker">from the Bik exports, Jan–Jun 2026</span></div>
+    <div class="tiles">
+      <div class="tile good"><div class="v">97.5%</div><div class="l">campaign delivery (99,914 sent) · 72.2% read</div></div>
+      <div class="tile good"><div class="v">98.1%</div><div class="l">flow delivery (23,885 sent) · 60.1% read</div></div>
+      <div class="tile"><div class="v">2.3/wk</div><div class="l">campaign cadence (60 over 26 weeks)</div></div>
+      <div class="tile warn"><div class="v">58%</div><div class="l">of campaigns are plain product pushes</div></div>
+    </div>
+    <ul class="pts" style="margin-top:12px">
+      <li><b>Delivery is excellent</b> — 97–98% on both campaigns and flows with 0.10% opt-out. The WhatsApp problem is <b>not</b> deliverability; it is trigger-capping (flows) and theme monotony (campaigns).</li>
+      <li><b>Theme economics say rebalance:</b> Product/Launch 35 campaigns at ₹46k avg — while <b>Restock/OOS averages ₹69k</b> (only 7 sent), <b>Social-proof/Event ₹68k</b> (6), Membership ₹52k, Education ₹51k. The formats used least earn the most per send.</li>
+    </ul>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Theme (H1 2026)</th><th class="num">Campaigns</th><th class="num">Revenue</th><th class="num">Avg / campaign</th></tr></thead>
+      <tbody>
+        <tr><td>Product / launch push</td><td class="num">35</td><td class="num">₹16.1L</td><td class="num warn">₹45,975</td></tr>
+        <tr><td>Restock / OOS</td><td class="num">7</td><td class="num">₹4.8L</td><td class="num good-text">₹68,893</td></tr>
+        <tr><td>Social proof / event</td><td class="num">6</td><td class="num">₹4.1L</td><td class="num good-text">₹67,640</td></tr>
+        <tr><td>Membership</td><td class="num">6</td><td class="num">₹3.1L</td><td class="num">₹52,343</td></tr>
+        <tr><td>Education / use-case</td><td class="num">4</td><td class="num">₹2.0L</td><td class="num">₹50,558</td></tr>
+        <tr><td>NPS / review</td><td class="num">2</td><td class="num">₹0.3L</td><td class="num">₹14,746</td></tr>
+      </tbody>
+    </table></div>
+  </div>
 </section>
 
 <!-- ========== 7 ALIA ========== -->
@@ -469,6 +519,113 @@
     <div class="flag win"><b>Actionable:</b> the popup isn't just capture — the <b>answers signal intent</b>. "Key Ingredients", "Clean Beauty" and "Faster Results" people convert 2.5–3× better than "Simplified Routine". Same for concern ("Dry Skin", "Wrinkles" convert highest). <b>Tailor the Welcome-ALIA sequence to each answer</b> instead of one generic flow — the highest-leverage next move on the best-performing channel.</div>
   </div>
   <div class="flag win"><b>Verdict:</b> Alia is the healthiest part of the retention stack — a high-converting capture engine feeding the #1 email flow, with rich zero-party data (skin type, priorities, concern) that predicts purchase. Protect it, watch the sign-up-rate softening, and segment the welcome flow by quiz answer.</div>
+</section>
+
+<!-- ========== 8 OMNICHANNEL ========== -->
+<section class="view" id="v8">
+  <h1>Omnichannel</h1>
+  <p class="kicker">Which channels exist, which are dark, and how every surface delivers. H1 2026.</p>
+  <div class="card">
+    <div class="cardhead"><h2>Channel scoreboard</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Channel</th><th>Status</th><th class="num">H1 revenue</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><b>WhatsApp (Bik)</b></td><td class="good-text">✅ live</td><td class="num">₹48.1L</td><td>58% of retention; excellent delivery; theme mix + trigger-capping are the fixes</td></tr>
+        <tr><td><b>Email (Klaviyo)</b></td><td class="good-text">✅ live</td><td class="num">₹34.7L</td><td>42%; disciplined segments, weak clicks (0.76%), missing retention-half flows</td></tr>
+        <tr><td><b>SMS</b></td><td class="crit">✕ dark — 0 campaigns ever</td><td class="num crit">₹0</td><td><b>~33,000 customers already gave SMS consent</b> (56.7% of the file) and have never received one message. Klaviyo SMS is right there.</td></tr>
+        <tr><td><b>RCS</b></td><td class="crit">✕ not used</td><td class="num crit">₹0</td><td>No RCS retargeting; evaluate after SMS is live (same audience, richer format)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The omnichannel gap in one line:</b> two strong channels, zero channel <b>handoff</b>. When WhatsApp frequency-capping kills 42–80% of flow triggers, nothing falls back to email or SMS; email non-clickers are never retargeted on WhatsApp; 33k SMS-consented buyers get nothing. Every channel runs solo.</div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Delivery scoreboard — every surface</h2><span class="kicker">the delivery-% question, answered per surface</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Surface</th><th class="num">Sent</th><th class="num">Delivery</th><th class="num">Open / Read</th><th class="num">Click</th></tr></thead>
+      <tbody>
+        <tr><td>Email campaigns</td><td class="num">~130k</td><td class="num good-text">99.6%</td><td class="num good-text">66.7% avg (up to 78%)</td><td class="num crit">0.76% (bench &gt;1.2%)</td></tr>
+        <tr><td>Email flows</td><td class="num">~50k</td><td class="num good-text">~99%</td><td class="num">~30% (full-funnel incl. cold)</td><td class="num">~0.5%</td></tr>
+        <tr><td>WhatsApp campaigns</td><td class="num">99,914</td><td class="num good-text">97.5%</td><td class="num good-text">72.2% read</td><td class="num">4.4% CTR · 0.10% opt-out</td></tr>
+        <tr><td>WhatsApp flows</td><td class="num">23,885</td><td class="num good-text">98.1%</td><td class="num">60.1% read</td><td class="num">varies by flow</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Contrast with BoldFit (60% delivery): JustHuman's pipes are clean. The leaks are upstream (capped triggers never sent) and downstream (opens that don't click) — not in delivery.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The SMS &amp; retargeting build</h2></div>
+    <ul class="pts">
+      <li><b>Turn on Klaviyo SMS for the 33k consented</b> — start where SMS provably prints: 1 SMS inside abandoned-checkout (Nicolas), shipping/delivery utility, and win-back re-permission. Keep to key moments (the mentors' rule: selective, offer-led — not frequent generic sends).</li>
+      <li><b>Channel fallback logic:</b> WhatsApp trigger capped → send the email version instead (the 42–80% capped triggers become reachable instead of lost). Email non-opener in 48h on a high-intent flow → one WhatsApp nudge.</li>
+      <li><b>Retargeting loops:</b> engaged-non-buyers (opens, no click) get the next angle on the other channel; Alia quiz answer decides which product story each channel tells.</li>
+      <li><b>RCS:</b> pilot only after SMS earns — same numbers, richer cards; India costs have fallen, but prove the audience on SMS first.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 9 THE PLAN ========== -->
+<section class="view" id="v9">
+  <h1>The plan</h1>
+  <p class="kicker">What we learned, the three wins, the build order, and the calendar we should be running.</p>
+  <div class="card">
+    <div class="cardhead"><h2>What we learned (the audit in 7 lines)</h2></div>
+    <ul class="pts">
+      <li>Retention is <b>strong and rising</b> (18.7% of revenue, 16→20% Jan→Jun) — the machine works; it's incomplete, not broken.</li>
+      <li><b>5 mandatory flows are missing on both channels</b>: activation-per-SKU, cross-sell, win-back, collection-abandon, order-delivered.</li>
+      <li>The <b>acquisition hero doesn't retain</b> (Foot Facial: most buyers, 13% repeat) and the proven fix path exists in the data (FF→Microshots: 547 customers).</li>
+      <li><b>Zero-party data is collected but unused</b> — 51k quiz answers that predict conversion (Key Ingredients 30.9% CVR vs Simplified Routine 9.9%) feed a generic welcome.</li>
+      <li><b>WhatsApp flows lose 42–80% of triggers</b> to frequency-capping; two flows earn ₹0 while still costing money.</li>
+      <li><b>Both calendars over-send product pushes</b>; education/social-proof/restock formats out-earn them per send on both channels.</li>
+      <li><b>SMS is dark with 33k consented</b>; no channel handoff or retargeting exists anywhere.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The three wins</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Win</th><th>What it is</th><th>Why it's first-order</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 · The activation &amp; second-order engine</b></td><td>Per-SKU activation flows on delivery (usage → results window → cross-sell), FF→Microshots cross-sell, win-back at day 90+, welcome split by quiz answer</td><td>Order 1→2 is the cliff (19.7% repeat; FF 13%). Nicolas: post-purchase education is the most-skipped, highest-LTV move (+22% 60-day LTV). The audience and the paths are already proven in the data.</td></tr>
+        <tr><td><b>2 · Fix the leaks</b></td><td>Loosen WA frequency caps on high-intent flows (+email fallback), kill/rebuild the two ₹0 flows, build order-confirmed email + order-delivered both channels, retime replenishment to ~day 55 (74-day median reorder)</td><td>Recoverable revenue with zero new audience: the capped 56% of Welcome triggers alone is ~1,900 people/half not receiving a 149×-ROI flow.</td></tr>
+        <tr><td><b>3 · The calendar &amp; omnichannel rebuild</b></td><td>Email 2→3-4/wk with the Max 75/20/5 mix, WA rebalanced to the themes that earn (restock, social-proof, education), Jeffrey's launch trilogy, SMS live on key moments</td><td>Same lists, better mix: the under-used formats already average ₹68–69k vs ₹46k for product pushes. Clicks (0.76%) are the email bottleneck — creative, not targeting.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Build order</h2><span class="kicker">Month 1 = leaks &amp; quick wins · Month 2 = the missing flows · Month 3 = calendar &amp; channels</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th>Build</th></tr></thead>
+      <tbody>
+        <tr><td><b>Month 1</b></td><td>Loosen WA frequency caps on Welcome / Checkout / Replenishment (+ email fallback for capped) · kill or rebuild "Abandon-cart FF-old" and "Replenishment Cleansing Balm" (₹0) · build Order-Confirmed email (the ~90%-open message) + Order-Delivered on both channels · retime replenishment to ~day 55 · split Welcome-ALIA into 3 quiz-answer branches</td></tr>
+        <tr><td><b>Month 2</b></td><td>Activation flow per hero SKU (Foot Facial · Microshots · Hair), triggered on delivery: how-to-use → what-to-expect → results check-in → data-proven cross-sell (FF→MS 547; MS→Sensation Cream 232) · win-back flow email+WA (day 90 / 120, value-first then offer) · SMS live: abandoned-checkout step, delivery utility, win-back re-permission</td></tr>
+        <tr><td><b>Month 3</b></td><td>Email to 3–4/wk on the 75/20/5 mix · WA calendar rebalanced (≥1 restock + 1 social-proof + 1 education per month) · Jeffrey trilogy on every launch (teaser → launch → reminder → post) · collection-abandonment both channels · continue the A/B program (subject-line learnings are already compounding) · evaluate RCS pilot</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The content calendar — current vs prescribed</h2><span class="kicker">per Max (The Inbox), Nicolas (Beyond The Inbox) and Jeffrey's idea-generation system</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th>Doing now</th><th>Should be doing</th></tr></thead>
+      <tbody>
+        <tr><td><b>Email frequency</b></td><td>2.0/week</td><td>3–4/week (Max ladder for this revenue band), scaled one added send at a time, judged on revenue-per-send</td></tr>
+        <tr><td><b>WhatsApp frequency</b></td><td>2.3/week</td><td>Keep 2–3/week; rebalance themes rather than add volume (0.10% opt-out = room, but variety first)</td></tr>
+        <tr><td><b>Format mix</b></td><td>~58–66% product push</td><td>Max 75/20/5: 75% designed showcases · 20% plain-text pattern-interrupts (founder notes — currently zero) · 5% scroll-stoppers</td></tr>
+        <tr><td><b>Monthly spine</b></td><td>ad-hoc themes</td><td>Nicolas's 5 evergreens every month: social proof · us-vs-them · one USP · bestsellers · objection-buster/FAQ — then launches on top</td></tr>
+        <tr><td><b>Launches</b></td><td>single launch blast</td><td>Jeffrey's trilogy: teaser → launch → reminder → post-story; 4–8 evergreen sends/month around them; one idea per email</td></tr>
+        <tr><td><b>Offers</b></td><td>discount-led promos</td><td>80/20 value-to-promo; exclusivity/membership framing (their own A/B: "This isn't for everyone" won); ₹-off over %-off at this AOV (Max)</td></tr>
+        <tr><td><b>Segments</b></td><td>engaged_45 + product-intent (good)</td><td>Keep; add quiz-answer segments (skin type / concern / priority) as campaign audiences — the data shows they convert 2.5–3× differently</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">every target starts from today's verified number</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">18.7% → 25%</div><div class="l">retention share of Shopify revenue</div></div>
+      <div class="tile"><div class="v">19.7% → 25%</div><div class="l">lifetime repeat rate (2+ orders)</div></div>
+      <div class="tile"><div class="v">13% → 20%</div><div class="l">Foot-Facial buyer repeat (via activation + cross-sell)</div></div>
+      <div class="tile"><div class="v">0.76% → 1.2%+</div><div class="l">email campaign click rate</div></div>
+      <div class="tile"><div class="v">42–80% → &lt;10%</div><div class="l">WA flow triggers lost to capping</div></div>
+      <div class="tile"><div class="v">₹0 → live</div><div class="l">SMS on 33k consented (checkout, delivery, win-back)</div></div>
+    </div>
+  </div>
 </section>
 
 </main>
