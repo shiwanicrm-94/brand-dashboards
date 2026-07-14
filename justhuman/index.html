@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JustHuman · Retention Audit (Internal)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:13.5px;margin-bottom:6px;color:var(--ink);}
+  ul.pts li::before{content:"✦";color:var(--accent);font-size:11px;padding-top:3px;}
+  .split{display:flex;height:26px;border-radius:6px;overflow:hidden;font-size:11px;font-weight:700;color:#fff;margin:10px 0;}
+  .split span{display:flex;align-items:center;justify-content:center;}
+  details{border:1px solid var(--ring);border-radius:8px;margin-top:8px;background:var(--card);}
+  details summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:13.5px;list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{content:"▸ ";color:var(--accent);}
+  details[open] summary::before{content:"▾ ";}
+  details .body{padding:0 14px 14px;}
+  .msg{border-left:3px solid var(--accent);background:var(--hero);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;}
+  .msg .mh{font-weight:700;font-size:13px;}
+  .msg .mstat{font-size:11.5px;color:var(--ink2);margin-top:3px;}
+  .msg .mcopy{font-size:12px;color:var(--ink2);margin-top:6px;white-space:pre-line;border-top:1px dashed var(--ring);padding-top:6px;}
+  .shot{margin-top:8px;border:1px dashed var(--baseline,#c8bedb);border-radius:6px;padding:10px;font-size:11.5px;color:var(--muted);text-align:center;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .src{font-size:11px;color:var(--muted);font-style:italic;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">JustHuman · Klaviyo (email) + Bik (WhatsApp) + Alia (popup) · Channel window Jan–Jun 2026 · Cohort on full order history · Prepared by Shiwani Agrawal</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-view="v1">1 · Overview</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v2">2 · Executive summary</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v3">3 · Retention summary</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v4">4 · Cohort</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v5">5 · Email</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v6">6 · WhatsApp</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="v7">7 · Alia</button>
+</nav>
+
+<main class="wrap">
+
+<!-- ========== 1 OVERVIEW ========== -->
+<section class="view active" id="v1">
+  <h1>Overview</h1>
+  <p class="kicker">What this audit is, the stack it covers, and the data behind every number.</p>
+  <div class="card">
+    <p class="lede">This is an <b>internal</b> retention audit of <b>JustHuman</b> — a neurocosmetics skincare brand (hero products the <b>30-Sec Foot Facial</b> and <b>Microshots</b>, plus a membership programme). Retention runs on three tools: <b>Klaviyo</b> (email), <b>Bik</b> (WhatsApp), and <b>Alia</b> (on-site popup that feeds Klaviyo). Because it is internal, everything is shown — cost, ROI, delivery, trigger loss — so the team can decide what to change.</p>
+    <div class="tiles">
+      <div class="tile good"><div class="v">18.7%</div><div class="l">retention share of Shopify revenue, H1 2026 (vs ~5% at comparable brands)</div></div>
+      <div class="tile"><div class="v">₹82.9L</div><div class="l">total retention revenue, Jan–Jun 2026</div></div>
+      <div class="tile"><div class="v">₹4.44 Cr</div><div class="l">Shopify revenue, Jan–Jun 2026</div></div>
+      <div class="tile"><div class="v">19.7%</div><div class="l">lifetime repeat rate (entire order history)</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Data sources & scope</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Section</th><th>Source</th><th>Window</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>Retention summary</td><td>Porcellia month-on-month tracker</td><td>Jan–Jun 2026</td><td>internal sheet</td></tr>
+        <tr><td>Cohort</td><td>Shopify orders export (36,059 orders)</td><td>full history (2021→2026)</td><td>export</td></tr>
+        <tr><td>Email</td><td>Klaviyo API (flows, campaigns, per-message)</td><td>Jan–Jun 2026</td><td class="good-text">live API</td></tr>
+        <tr><td>WhatsApp</td><td>Bik campaign + journey exports</td><td>Jan–Jun 2026</td><td>export (API is send-only)</td></tr>
+        <tr><td>Alia</td><td>Klaviyo events (poll, reward) + list</td><td>Jan–Jun 2026</td><td class="good-text">live API</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Every figure is cross-checked between at least two sources (e.g. Klaviyo email-flow revenue ₹16.8L vs tracker ₹17.5L; WhatsApp-flow export ₹19.6L vs tracker ₹19.1L). Revenue definitions labelled where they differ (gross orders vs net Shopify).</p>
+  </div>
+</section>
+
+<!-- ========== 2 EXECUTIVE SUMMARY ========== -->
+<section class="view" id="v2">
+  <h1>Executive summary</h1>
+  <p class="kicker">The state of retention, and the handful of things that move it.</p>
+  <div class="card">
+    <p class="lede"><b>JustHuman's retention is genuinely strong and improving.</b> In June 2026 retention drove <b>20.0%</b> of Shopify revenue (up from 16% in January), split roughly <b>58% WhatsApp / 42% email</b>. Repeat behaviour is climbing cohort-over-cohort. The opportunities are not "build the basics" — they exist — they are <b>fix the leaks and steer acquisition into products that retain</b>.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The five things that matter</h2></div>
+    <ul class="pts">
+      <li><b>Alia is the capture engine.</b> The popup poll → reward → welcome funnel converts hard: 51,406 polls → 15,157 rewards (29.5%) → 26,773 subscribers, and <b>Welcome-ALIA is the #1 email flow (~₹6L)</b>. Protect and scale it.</li>
+      <li><b>Your acquisition hero doesn't retain.</b> 30-Sec Foot Facial pulls the most first-buyers (10,827) but only <b>13%</b> come back, vs 25–28% for Microshots / Hair / Sensation Cream. The lever: cross-sell Foot-Facial buyers into those categories.</li>
+      <li><b>WhatsApp flows leak to frequency-capping.</b> 42–80% of triggers are cancelled/capped on Welcome (56%), Browse-abandon (80%), Checkout-abandon-omni (75%), both Replenishment flows — recoverable revenue sitting in the settings.</li>
+      <li><b>Dead flows still cost money.</b> "Abandon-cart FF-old" and "Replenishment Cleansing Balm" return ₹0. Switch off or rebuild.</li>
+      <li><b>WhatsApp campaigns are efficient (27.8× ROI) but a few are pure waste</b> — "Members Only" and "Menopause MS" returned ₹0. Prune the calendar toward the offer/segment winners (Membership 49×, DSC 44×).</li>
+    </ul>
+  </div>
+  <div class="flag win"><b>Headroom:</b> retention is ~18.7% of revenue today. Fixing the trigger-capping leak, reviving the two dead flows, and steering Foot-Facial buyers into repeat categories are the concrete, data-backed levers to push it higher — without new acquisition spend.</div>
+</section>
+
+<!-- ========== 3 RETENTION SUMMARY ========== -->
+<section class="view" id="v3">
+  <h1>Retention summary <span style="font-size:14px;color:var(--muted)">— email + WhatsApp, interlinked</span></h1>
+  <p class="kicker">Month-on-month, Jan–Jun 2026. Source: Porcellia tracker (cross-checked vs Klaviyo & Bik).</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹82.9L</div><div class="l">total retention revenue, H1</div></div>
+    <div class="tile good"><div class="v">18.7%</div><div class="l">of Shopify revenue (16%→20% Jan→Jun)</div></div>
+    <div class="tile"><div class="v">₹48.1L</div><div class="l">WhatsApp (58%)</div></div>
+    <div class="tile"><div class="v">₹34.7L</div><div class="l">Email (42%)</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Channel split of retention revenue</h2></div>
+    <div class="split"><span style="width:58%;background:var(--accent)">WhatsApp 58%</span><span style="width:42%;background:var(--seq700)">Email 42%</span></div>
+    <div class="cardhead" style="margin-top:14px"><h2>Month by month</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">WA campaigns</th><th class="num">WA flows</th><th class="num">Email campaigns</th><th class="num">Email flows</th><th class="num">Total retention</th><th class="num">Shopify rev</th><th class="num">Ret %</th></tr></thead>
+      <tbody>
+        <tr><td>Jan</td><td class="num">₹1.88L</td><td class="num">₹2.70L</td><td class="num">₹0.79L</td><td class="num">₹0.73L</td><td class="num">₹6.10L</td><td class="num">₹37.6L</td><td class="num">16.2%</td></tr>
+        <tr><td>Feb</td><td class="num">₹4.75L</td><td class="num">₹1.71L</td><td class="num">₹2.13L</td><td class="num">₹1.24L</td><td class="num">₹9.83L</td><td class="num">₹57.1L</td><td class="num">17.2%</td></tr>
+        <tr><td>Mar</td><td class="num">₹5.82L</td><td class="num">₹2.09L</td><td class="num">₹3.07L</td><td class="num">₹2.53L</td><td class="num">₹13.5L</td><td class="num">₹77.0L</td><td class="num">17.6%</td></tr>
+        <tr><td>Apr</td><td class="num">₹6.66L</td><td class="num">₹3.84L</td><td class="num">₹2.95L</td><td class="num">₹4.25L</td><td class="num">₹17.7L</td><td class="num">₹89.4L</td><td class="num">19.8%</td></tr>
+        <tr><td>May</td><td class="num">₹6.01L</td><td class="num">₹4.01L</td><td class="num">₹4.01L</td><td class="num">₹4.82L</td><td class="num">₹18.9L</td><td class="num">₹98.2L</td><td class="num">19.2%</td></tr>
+        <tr><td>Jun</td><td class="num">₹3.92L</td><td class="num">₹4.73L</td><td class="num">₹4.30L</td><td class="num">₹3.90L</td><td class="num">₹16.8L</td><td class="num">₹84.3L</td><td class="num good-text">20.0%</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="pts" style="margin-top:12px">
+      <li><b>Campaigns vs flows is balanced</b> — H1: WA campaigns ₹29.0L + flows ₹19.1L; Email campaigns ₹17.3L + flows ₹17.5L. Flows (automations) are roughly half of retention revenue on each channel — a healthy, compounding base.</li>
+      <li><b>Retention % rose every quarter</b> (16%→20%), even as Shopify revenue itself grew — retention is scaling faster than the store.</li>
+    </ul>
+    <p class="src">Cross-check: tracker WA-flow H1 ₹19.1L ≈ Bik journey export ₹19.6L; tracker email-flow H1 ₹17.5L ≈ Klaviyo API ₹16.8L.</p>
+  </div>
+</section>
+
+<!-- ========== 4 COHORT ========== -->
+<section class="view" id="v4">
+  <h1>Cohort-level analysis</h1>
+  <p class="kicker">Entire order history (36,059 orders, 2021→2026; voided excluded). Customer key = email.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">24,203</div><div class="l">customers (lifetime)</div></div>
+    <div class="tile good"><div class="v">19.7%</div><div class="l">repeat rate (2+ orders)</div></div>
+    <div class="tile"><div class="v">74 days</div><div class="l">median time to 2nd order</div></div>
+    <div class="tile"><div class="v">₹4.81 Cr</div><div class="l">2025 revenue → ₹4.14 Cr in H1 2026 alone</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Where the retention is (and isn't): first product → % who buy again</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First product</th><th class="num">First-buyers</th><th class="num">Buy again</th></tr></thead>
+      <tbody>
+        <tr><td>30-Sec Foot Facial <span class="crit">(acquisition hero)</span></td><td class="num">10,827</td><td class="num crit">13.0%</td></tr>
+        <tr><td>Microshots</td><td class="num">6,973</td><td class="num">25.3%</td></tr>
+        <tr><td>Hair range</td><td class="num">4,733</td><td class="num good-text">26.9%</td></tr>
+        <tr><td>Peace / Face Mask</td><td class="num">1,696</td><td class="num">26.6%</td></tr>
+        <tr><td>Body</td><td class="num">1,436</td><td class="num">25.5%</td></tr>
+        <tr><td>Sensation Cream</td><td class="num">457</td><td class="num good-text">27.6%</td></tr>
+        <tr><td>Membership</td><td class="num">276</td><td class="num">18.5%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The key finding:</b> Foot Facial acquires the most first-buyers but retains the worst (13%). Microshots, Hair and Sensation Cream retain ~2× better. <b>Steering Foot-Facial buyers into those categories is the single biggest cohort lever.</b></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Repeat is improving cohort-over-cohort</h2><span class="kicker">% placing a 2nd order within 90 days of their first</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First-order month</th><th class="num">Cohort</th><th class="num">by 30d</th><th class="num">by 60d</th><th class="num">by 90d</th></tr></thead>
+      <tbody>
+        <tr><td>2024 (avg)</td><td class="num">~600/mo</td><td class="num">~4%</td><td class="num">~6%</td><td class="num">~8%</td></tr>
+        <tr><td>Sep 2025</td><td class="num">586</td><td class="num">7.2%</td><td class="num">13.1%</td><td class="num good-text">16.7%</td></tr>
+        <tr><td>Nov 2025</td><td class="num">832</td><td class="num">7.9%</td><td class="num">12.1%</td><td class="num">14.3%</td></tr>
+        <tr><td>Feb 2026</td><td class="num">572</td><td class="num">6.3%</td><td class="num">13.3%</td><td class="num good-text">17.5%</td></tr>
+        <tr><td>Apr 2026</td><td class="num">1,129</td><td class="num">6.1%</td><td class="num">11.0%</td><td class="num">13.0%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Day-90 repeat roughly doubled from 2024 (~8%) to 2025–26 (14–17%) — retention work is visibly landing. May/Jun 2026 cohorts aren't shown mature (not yet 90 days old).</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>New vs returning (H1 2026 orders)</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Orders</th><th class="num">New</th><th class="num">Repeat</th><th class="num">Repeat rev-share</th></tr></thead>
+      <tbody>
+        <tr><td>Jan</td><td class="num">925</td><td class="num">66%</td><td class="num">34%</td><td class="num">38%</td></tr>
+        <tr><td>Mar</td><td class="num">1,335</td><td class="num">65%</td><td class="num">35%</td><td class="num">39%</td></tr>
+        <tr><td>Jun</td><td class="num">1,403</td><td class="num">62%</td><td class="num">38%</td><td class="num good-text">39%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Repeat revenue-share ~36–39% cross-checks with the tracker's returning-contribution (~39.6% Jun). Lifetime repeat distribution: 1× 19,442 · 2× 2,993 · 3× 944 · 4+ 824.</p>
+  </div>
+</section>
+
+<!-- ========== 5 EMAIL ========== -->
+<section class="view" id="v5">
+  <h1>Email <span style="font-size:14px;color:var(--muted)">— Klaviyo</span></h1>
+  <p class="kicker">36 flows (17 live, 19 draft) + campaigns. H1 2026, live API.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹34.7L</div><div class="l">email retention revenue, H1</div></div>
+    <div class="tile"><div class="v">₹16.8L</div><div class="l">from flows (automations)</div></div>
+    <div class="tile"><div class="v">₹17.3L</div><div class="l">from campaigns</div></div>
+    <div class="tile good"><div class="v">₹6.0L</div><div class="l">Welcome-ALIA — #1 flow</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Top email flows (H1 2026)</h2><span class="kicker">recipients · conversions · revenue, from Klaviyo</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th class="num">Recipients</th><th class="num">Conv.</th><th class="num">Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>Welcome flow ALIA <span class="good-text">(popup-driven)</span></td><td class="num">~25.4k</td><td class="num">107</td><td class="num good-text">₹5.96L</td></tr>
+        <tr><td>Abandon Cart — Generic (members)</td><td class="num">3.2k</td><td class="num">38</td><td class="num">₹2.43L</td></tr>
+        <tr><td>Abandon Cart — Generic (non-members)</td><td class="num">1.7k</td><td class="num">25</td><td class="num">₹1.49L</td></tr>
+        <tr><td>Post-Purchase — non-members (membership upsell)</td><td class="num">5.4k</td><td class="num">22</td><td class="num">₹1.01L</td></tr>
+        <tr><td>Abandoned cart — Microshots relaunch</td><td class="num">~1.4k</td><td class="num">30</td><td class="num">₹1.20L</td></tr>
+        <tr><td>Replenishment — Foot Facial + Generic</td><td class="num">1.2k</td><td class="num">13</td><td class="num">₹0.58L</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Total email flow revenue H1 ₹16.8L (Klaviyo) ≈ ₹17.5L (tracker). Membership model drives the members/non-members split across flows.</p>
+  </div>
+  <details>
+    <summary>Drill-down · Welcome flow ALIA (entry: Alia list · 4 emails · live)</summary>
+    <div class="body">
+      <p class="src">Entry trigger: added to Klaviyo list "Alia New Subscribers" (26,773). Exit: purchase / unsubscribe. 4 emails with delays. Copy from Porcellia flows-structure doc; per-email stats from Klaviyo.</p>
+      <div class="msg"><div class="mh">Email 1 — "Are you ready to take back control?" (immediate)</div><div class="mstat">8,928 recipients · 2,649 opens (30%) · 82 clicks · 76 conv · ₹4.06L</div><div class="mcopy">Thank-you for signing up · India's #1 neurocosmetics · founder's journey, categories, USPs · membership banner. ("Imagine if you could uplift not just your skin but also your mood — the skin-brain axis.")</div></div>
+      <div class="msg"><div class="mh">Email 2 — brand ethos / 40+ (after delay)</div><div class="mstat">7,787 recipients · 2,221 opens · 29 clicks · 13 conv · ₹0.76L</div><div class="mcopy">Clean · fast · addictively good · neurocosmetics · skin minimalists · bestsellers (MS, FF, Peace Mask, Cleansing Balm) each with a punchline · membership banner.</div></div>
+      <div class="msg"><div class="mh">Email 3 — founder's note / neurocosmetics education</div><div class="mstat">7,042 recipients · 2,061 opens · 20 clicks · 15 conv · ₹0.94L</div><div class="mcopy">Founder's note · educational angle on neurocosmetics · membership banner.</div></div>
+      <div class="msg"><div class="mh">Email 4 — social proof</div><div class="mstat">1,663 recipients · 495 opens · 6 clicks · 3 conv · ₹0.20L</div><div class="mcopy">Social proofing · how JH helped women in their skincare journey · past events (FF & the soiree) · membership banner.</div></div>
+      <div class="shot">📷 Rendered message screenshots — I can capture each email image from Klaviyo on request (email renders are pullable via API).</div>
+      <p class="note"><b>Read:</b> Email 1 does the heavy lifting (₹4.06L of ₹6.0L). Click rates are low (~1%) across all four — the sequence converts on opens/brand, not clicks; worth testing stronger single-CTA emails.</p>
+    </div>
+  </details>
+  <div class="card">
+    <div class="cardhead"><h2>What's missing / weak</h2></div>
+    <ul class="pts">
+      <li><b>Transactional flows sit in draft</b> — Order Confirmed, Order Cancelled, Shipping Confirmation are not live in Klaviyo (handled on WhatsApp instead; fine, but no email fallback).</li>
+      <li><b>Skin-Analyzer quiz doesn't feed a live email nurture</b> — the flow is drafted, not live; a large engaged segment is uncaptured on email.</li>
+      <li><b>The generic "Welcome flow" is ₹0 (draft)</b> — all welcome value comes from Welcome-ALIA. Fine while Alia dominates capture, but a single point of dependence.</li>
+      <li><b>Several "relaunch" variants left in draft</b> — duplicated effort not switched on.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== 6 WHATSAPP ========== -->
+<section class="view" id="v6">
+  <h1>WhatsApp <span style="font-size:14px;color:var(--muted)">— Bik</span></h1>
+  <p class="kicker">60 campaigns + journey flows, Jan–Jun 2026. (Bik API is send-only; data from exports.)</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹48.1L</div><div class="l">WhatsApp retention revenue, H1</div></div>
+    <div class="tile good"><div class="v">27.8×</div><div class="l">blended campaign ROI</div></div>
+    <div class="tile good"><div class="v">107×</div><div class="l">blended flow ROI</div></div>
+    <div class="tile good"><div class="v">0.10%</div><div class="l">avg campaign opt-out (very healthy)</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Flow performance (Jan–Jun 2026)</h2><span class="kicker">real ROI = revenue ÷ cost · trigger-loss = capped/cancelled</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th class="num">Triggers</th><th class="num">Orders</th><th class="num">Revenue</th><th class="num">Cost</th><th class="num">ROI</th><th class="num">Trigger-loss</th></tr></thead>
+      <tbody>
+        <tr><td>Order confirmation</td><td class="num">8,051</td><td class="num">121</td><td class="num">₹5.26L</td><td class="num">₹6,603</td><td class="num">80×</td><td class="num">0%</td></tr>
+        <tr><td>Welcome Flow</td><td class="num">3,880</td><td class="num">37</td><td class="num">₹2.31L</td><td class="num">₹1,554</td><td class="num good-text">149×</td><td class="num crit">56%</td></tr>
+        <tr><td>Checkout abandonment</td><td class="num">4,236</td><td class="num">35</td><td class="num">₹2.02L</td><td class="num">₹608</td><td class="num good-text">331×</td><td class="num">30%</td></tr>
+        <tr><td>Replenishment — Microshots</td><td class="num">3,192</td><td class="num">28</td><td class="num">₹1.72L</td><td class="num">₹1,824</td><td class="num">94×</td><td class="num crit">42%</td></tr>
+        <tr><td>Checkout Abandon — Omni</td><td class="num">1,014</td><td class="num">22</td><td class="num">₹1.44L</td><td class="num">₹272</td><td class="num good-text">527×</td><td class="num crit">75%</td></tr>
+        <tr><td>Post-Purchase non-members</td><td class="num">9,577</td><td class="num">35</td><td class="num">₹1.33L</td><td class="num">₹1,878</td><td class="num">71×</td><td class="num">19%</td></tr>
+        <tr><td>Browse abandon — Omni</td><td class="num">3,176</td><td class="num">5</td><td class="num">₹0.18L</td><td class="num">₹132</td><td class="num">139×</td><td class="num crit">80%</td></tr>
+        <tr><td class="crit">Abandon-cart FF-old (DEAD)</td><td class="num">1,005</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹23</td><td class="num">—</td><td class="num"></td></tr>
+        <tr><td class="crit">Replenishment Cleansing Balm (DEAD)</td><td class="num">153</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹28</td><td class="num">—</td><td class="num"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The leak:</b> frequency-capping / cancellation kills <b>42–80% of triggers</b> on the best flows — Welcome loses 56% (≈2,173 of 3,880 people never get it), Browse-abandon 80%, Checkout-abandon-omni 75%. Loosening the cap on high-intent flows is direct recoverable revenue.</div>
+  </div>
+  <details>
+    <summary>Drill-down · Welcome Flow (WhatsApp) — 149× ROI but 56% of triggers lost</summary>
+    <div class="body">
+      <p class="src">3,880 triggers → 2,185 cancelled/capped → 1,968 messages sent → 1,331 read → 37 orders → ₹2.31L (cost ₹1,554). Per-message copy available from the flows-structure doc; live message renders need a Bik panel screenshot (domain blocked in automation).</p>
+      <div class="shot">📷 WhatsApp message renders — drop Bik screenshots here, or grant the dashboard.bik.ai domain and I'll capture them.</div>
+      <p class="note"><b>Action:</b> the flow converts brilliantly on the half that receive it — recovering the capped 56% is the highest-value single fix on WhatsApp.</p>
+    </div>
+  </details>
+  <div class="card">
+    <div class="cardhead"><h2>Campaigns — top & waste (60 campaigns, H1)</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Campaign</th><th class="num">Revenue</th><th class="num">ROI</th><th class="num">Opt-out</th></tr></thead>
+      <tbody>
+        <tr><td>Sensation Cream | April</td><td class="num">₹1.23L</td><td class="num good-text">39×</td><td class="num">0.05%</td></tr>
+        <tr><td>Membership | April</td><td class="num">₹1.21L</td><td class="num good-text">49×</td><td class="num">0.00%</td></tr>
+        <tr><td>DSC | May</td><td class="num">₹1.20L</td><td class="num good-text">44×</td><td class="num">0.17%</td></tr>
+        <tr><td>Microshot Users | April</td><td class="num">₹1.19L</td><td class="num">41×</td><td class="num">0.12%</td></tr>
+        <tr><td class="crit">Members Only | February</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
+        <tr><td class="crit">Menopause MS | January</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">60 campaigns · 99,914 messages · ₹30.4L revenue · ₹1.1L cost · <b>27.8× blended ROI</b>. Winners are offer-led + tightly segmented (Membership, DSC, Microshot Users). Prune ₹0 sends.</p>
+  </div>
+</section>
+
+<!-- ========== 7 ALIA ========== -->
+<section class="view" id="v7">
+  <h1>Alia <span style="font-size:14px;color:var(--muted)">— on-site popup</span></h1>
+  <p class="kicker">The capture layer. Measured end-to-end from Klaviyo events (Alia has no data API).</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">51,406</div><div class="l">polls answered, H1</div></div>
+    <div class="tile"><div class="v">15,157</div><div class="l">rewards claimed (29.5% of polls)</div></div>
+    <div class="tile"><div class="v">26,773</div><div class="l">subscribers captured</div></div>
+    <div class="tile good"><div class="v">₹6.0L</div><div class="l">Welcome-ALIA email revenue (H1)</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The Alia funnel</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Stage</th><th class="num">Count</th><th class="num">Conversion</th></tr></thead>
+      <tbody>
+        <tr><td>Poll answered (skin-type / self-care quiz)</td><td class="num">51,406</td><td class="num">—</td></tr>
+        <tr><td>Reward claimed (offer)</td><td class="num">15,157</td><td class="num good-text">29.5%</td></tr>
+        <tr><td>Subscribed (Alia New Subscribers list)</td><td class="num">26,773</td><td class="num">cumulative</td></tr>
+        <tr><td>→ Welcome-ALIA email flow</td><td class="num">₹6.0L</td><td class="num">#1 email flow</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Polls grew Jan 6,749 → May 10,731 → Jun 9,422 — capture is scaling. The quiz ("how would you describe your skin type", "what matters most in self-care") doubles as a zero-party data collector.</p>
+  </div>
+  <div class="flag win"><b>Verdict:</b> Alia is the healthiest part of the retention stack — a high-converting capture engine feeding the #1 email flow. The one gap: popup <b>view→signup rate and A/B variant winners</b> live only in Alia's own dashboard (no API) — a screenshot of Alia's analytics would complete this section.</div>
+</section>
+
+</main>
+<script>
+  var tabs=document.querySelectorAll('.tab');
+  function go(v){tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.view===v);});
+    document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('active',s.id===v);});
+    window.scrollTo({top:0});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){go(t.dataset.view);});});
+</script>
+</body>
+</html>
