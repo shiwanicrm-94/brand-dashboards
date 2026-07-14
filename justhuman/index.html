@@ -260,6 +260,21 @@
     </div>
   </details>
   <div class="card">
+    <div class="cardhead"><h2>A/B test learnings — what messaging actually wins</h2><span class="kicker">6 subject-line / CTA tests from the internal tracker</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Test</th><th>Winning line</th><th class="num">Rev (win)</th><th>Learning</th></tr></thead>
+      <tbody>
+        <tr><td>Body Soother (Apr)</td><td>"Your dry skin has been patient long enough"</td><td class="num good-text">₹33.0K</td><td>Problem-aware emotional tension &gt;&gt; educational framing (vs ₹14K)</td></tr>
+        <tr><td>Body Soother (Jun)</td><td>"One jar. Four versions of later"</td><td class="num good-text">₹36.3K</td><td>Concrete product line &gt; abstract/metaphorical (vs ₹22K)</td></tr>
+        <tr><td>User Letter (Jun)</td><td>CTA "Find the Fix"</td><td class="num good-text">₹18.0K</td><td>Solution-oriented CTA &gt; "Buy Now" (vs ₹11K)</td></tr>
+        <tr><td>Membership (May)</td><td>"This isn't for everyone"</td><td class="num">↑ open + click</td><td>Exclusivity framing wins for membership/insider offers</td></tr>
+        <tr><td>Melting Balm (Apr)</td><td>"That tight feeling after cleansing?"</td><td class="num good-text">₹14.1K</td><td>Relatable concern &gt; clever wordplay for revenue (vs ₹8.6K)</td></tr>
+        <tr><td>Soiree (Mar)</td><td>"You should've been in that room…"</td><td class="num">₹9.7K</td><td>Curiosity/exclusivity &gt; descriptive emotional for events</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The messaging playbook (proven on JustHuman's own list):</b> lead with the reader's <b>problem/feeling</b>, not the product's benefit · use <b>concrete</b> over metaphorical · <b>exclusivity</b> sells membership · replace "Buy Now" with <b>solution-oriented CTAs</b> ("Find the Fix").</div>
+  </div>
+  <div class="card">
     <div class="cardhead"><h2>What's missing / weak</h2></div>
     <ul class="pts">
       <li><b>Transactional flows sit in draft</b> — Order Confirmed, Order Cancelled, Shipping Confirmation are not live in Klaviyo (handled on WhatsApp instead; fine, but no email fallback).</li>
@@ -346,7 +361,36 @@
     </table></div>
     <p class="note">Polls grew Jan 6,749 → May 10,731 → Jun 9,422 — capture is scaling. The quiz ("how would you describe your skin type", "what matters most in self-care") doubles as a zero-party data collector.</p>
   </div>
-  <div class="flag win"><b>Verdict:</b> Alia is the healthiest part of the retention stack — a high-converting capture engine feeding the #1 email flow. The one gap: popup <b>view→signup rate and A/B variant winners</b> live only in Alia's own dashboard (no API) — a screenshot of Alia's analytics would complete this section.</div>
+  <div class="card">
+    <div class="cardhead"><h2>Full popup funnel</h2><span class="kicker">from the internal tracker (p18) — views → sign-up → 30-day conversion</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Stage</th><th>Recent monthly range (H1 2026)</th></tr></thead>
+      <tbody>
+        <tr><td>Popup views</td><td>~35k–57k / month</td></tr>
+        <tr><td>Email sign-ups</td><td>2,224 → 3,520 / month (rate ~4.3–7.6%)</td></tr>
+        <tr><td>SMS sign-ups</td><td>2,026 → 3,225 / month</td></tr>
+        <tr><td>Orders within 30 days of signing up</td><td>361 → 644 / month</td></tr>
+        <tr><td>Sales within 30 days</td><td>₹20.6L → ₹33.6L / month</td></tr>
+        <tr><td>CVR attributed</td><td>~13–21% (via Alia discount code)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Sign-up <b>rate</b> has softened from ~19% (Apr 2025) to ~4–7% recently — worth investigating (popup fatigue / traffic mix). Absolute captures are up because traffic grew.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The quiz answers predict buyers — segment the welcome flow by them</h2><span class="kicker">poll response → order conversion (Nov 2025 shown; pattern holds across H1 2026)</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>"What matters most in self-care?"</th><th class="num">Responses</th><th class="num">CVR</th></tr></thead>
+      <tbody>
+        <tr><td>Key Ingredients</td><td class="num">259</td><td class="num good-text">30.9%</td></tr>
+        <tr><td>Clean Beauty</td><td class="num">367</td><td class="num good-text">25.3%</td></tr>
+        <tr><td>Faster Results</td><td class="num">501</td><td class="num">24.9%</td></tr>
+        <tr><td>Dermat Recommendations</td><td class="num">343</td><td class="num">21.0%</td></tr>
+        <tr><td>Simplified Routine (highest volume)</td><td class="num">273</td><td class="num warn">9.9%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>Actionable:</b> the popup isn't just capture — the <b>answers signal intent</b>. "Key Ingredients", "Clean Beauty" and "Faster Results" people convert 2.5–3× better than "Simplified Routine". Same for concern ("Dry Skin", "Wrinkles" convert highest). <b>Tailor the Welcome-ALIA sequence to each answer</b> instead of one generic flow — the highest-leverage next move on the best-performing channel.</div>
+  </div>
+  <div class="flag win"><b>Verdict:</b> Alia is the healthiest part of the retention stack — a high-converting capture engine feeding the #1 email flow, with rich zero-party data (skin type, priorities, concern) that predicts purchase. Protect it, watch the sign-up-rate softening, and segment the welcome flow by quiz answer.</div>
 </section>
 
 </main>
