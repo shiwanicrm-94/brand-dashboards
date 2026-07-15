@@ -65,7 +65,14 @@
   .flag.win{border-left-color:var(--good);}
   .note{font-size:12px;color:var(--muted);margin-top:12px;}
   .src{font-size:11px;color:var(--muted);font-style:italic;}
-  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}}
+  .targets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 6px;}
+  .tgt{background:var(--hero);border:1px solid var(--ring);border-radius:12px;padding:20px 22px;text-align:center;}
+  .tgt .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .tgt .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:34px;line-height:1.1;margin:8px 0 4px;}
+  .tgt .amt .arr{color:var(--accent);font-size:26px;padding:0 6px;}
+  .tgt .amt .to{color:var(--good-text);}
+  .tgt .sub{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}.targets{grid-template-columns:1fr;}.tgt .amt{font-size:28px;}}
 </style>
 </head>
 <body>
@@ -89,20 +96,20 @@
 <section class="view active" id="v2" data-g="g1">
   <h1>Executive summary</h1>
   <p class="kicker">The state of retention, and the handful of things that move it. Internal audit — Klaviyo API (live) · Bik exports · Shopify orders (full history) · Alia analytics. Every figure cross-checked against a second source.</p>
-  <div class="hero" style="grid-template-columns:1fr 1fr">
-    <div class="col today">
+  <div class="targets">
+    <div class="tgt">
       <div class="lab">Lifetime target 1 · Retention share</div>
-      <div class="amt">18.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">25%</span></div>
-      <div class="sub">of Shopify revenue from retention (16%→20% Jan→Jun; the chain in The Plan closes the rest)</div>
+      <div class="amt">18.7<small>%</small><span class="arr">→</span><span class="to">25<small>%</small></span></div>
+      <div class="sub">of store revenue comes from retention. 16% in January, 20% in June.</div>
     </div>
-    <div class="col to">
+    <div class="tgt">
       <div class="lab">Lifetime target 2 · Repeat rate</div>
-      <div class="amt">19.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">30%</span></div>
-      <div class="sub">lifetime repeat is LOW for a skincare brand — the category supports 30%</div>
+      <div class="amt">19.7<small>%</small><span class="arr">→</span><span class="to">30<small>%</small></span></div>
+      <div class="sub">of customers buy again. Low for skincare, the category supports 30%.</div>
     </div>
   </div>
   <div class="card">
-    <p class="lede"><b>JustHuman's retention is genuinely strong and improving.</b> In June 2026 retention drove <b>20.0%</b> of Shopify revenue (up from 16% in January), split roughly <b>58% WhatsApp / 42% email</b>. Repeat behaviour is climbing cohort-over-cohort. The opportunities are not "build the basics" — they exist — they are <b>fix the leaks and steer acquisition into products that retain</b>.</p>
+    <p class="lede"><b>JustHuman's retention is genuinely strong and improving.</b> In June 2026 retention drove <b>20.0%</b> of Shopify revenue (up from 16% in January), split roughly <b>58% WhatsApp / 42% email</b>. Repeat behaviour is climbing cohort-over-cohort. The basics exist. The work is to <b>fix the leaks and steer acquisition into the products that retain</b>.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>The seven moves that hit the targets</h2><span class="kicker">from the flow-by-flow walkthrough of Klaviyo, Bik and Alia. Each is proven in the Deep Analysis view.</span></div>
@@ -341,16 +348,16 @@
 <section class="view" id="v9" data-g="g3">
   <h1>The plan</h1>
   <p class="kicker">Everything below serves the two lifetime targets.</p>
-  <div class="hero" style="grid-template-columns:1fr 1fr">
-    <div class="col today">
+  <div class="targets">
+    <div class="tgt">
       <div class="lab">Lifetime target 1 · Retention share</div>
-      <div class="amt">18.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">25%</span></div>
-      <div class="sub">of Shopify revenue from retention</div>
+      <div class="amt">18.7<small>%</small><span class="arr">→</span><span class="to">25<small>%</small></span></div>
+      <div class="sub">of store revenue comes from retention.</div>
     </div>
-    <div class="col to">
+    <div class="tgt">
       <div class="lab">Lifetime target 2 · Repeat rate</div>
-      <div class="amt">19.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">30%</span></div>
-      <div class="sub">low for skincare today, the category supports 30%</div>
+      <div class="amt">19.7<small>%</small><span class="arr">→</span><span class="to">30<small>%</small></span></div>
+      <div class="sub">of customers buy again. Every part of the plan serves these two numbers.</div>
     </div>
   </div>
 
