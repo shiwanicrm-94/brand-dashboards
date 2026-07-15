@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JustHuman · Retention Overview</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c;
+    --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+      --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  }
+  :root[data-theme="dark"]{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+    --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  :root[data-theme="light"]{ --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:18px 24px;}
+  header .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  header .brandmark em{font-style:normal;color:var(--accent);}
+  header .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 60px;}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 12px;border-radius:99px;margin:32px 0 10px;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:30px;line-height:1.18;margin:0 0 14px;letter-spacing:-.01em;}
+  .lead{color:var(--ink2);max-width:74ch;font-size:15px;margin:0 0 8px;}
+  .lead b{color:var(--ink);}
+  .hero{background:var(--hero);border:1px solid var(--ring);border-radius:14px;padding:24px;margin:8px 0 6px;display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;}
+  .hero .col{text-align:center;}
+  .hero .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .hero .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:34px;line-height:1.05;margin:8px 0 4px;}
+  .hero .col.to .amt{color:var(--good-text);}
+  .hero .sub{font-size:12.5px;color:var(--ink2);line-height:1.4;}
+  .hero .mid{text-align:center;}
+  .hero .mult{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:22px;color:var(--accent);}
+  .hero .arrow{font-size:26px;color:var(--accent);line-height:1;}
+  .herohow{font-size:12.5px;color:var(--ink2);margin:0 0 4px;padding-left:12px;border-left:3px solid var(--accent);line-height:1.55;}
+  .herohow b{color:var(--ink);}
+  .sechead{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;margin:30px 0 4px;}
+  .secsub{color:var(--ink2);font-size:13.5px;margin:0 0 16px;}
+  .levers{display:grid;gap:12px;}
+  .lever{background:var(--card);border:1px solid var(--ring);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr minmax(150px,auto);gap:16px;align-items:center;}
+  .lvn{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;color:#fff;background:var(--accent);border-radius:99px;width:38px;height:38px;display:grid;place-items:center;}
+  .lvbody h3{margin:0 0 4px;font-size:16px;}
+  .lvbody p{margin:0 0 8px;font-size:13px;color:var(--ink2);line-height:1.55;}
+  .lvbody p b{color:var(--ink);}
+  .why{font-size:11.5px;color:var(--muted);margin:0 0 4px;padding-left:10px;border-left:2px solid var(--ring);line-height:1.5;}
+  .why b{color:var(--ink2);font-weight:600;}
+  .lvgain{text-align:right;}
+  .lvg-num{display:block;font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:20px;color:var(--good-text);white-space:nowrap;}
+  .lvg-lab{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:20px;max-width:82ch;border-top:1px solid var(--ring);padding-top:16px;}
+  .note b{color:var(--ink2);}
+  .fullbtn{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;border-radius:99px;padding:11px 22px;}
+  @media(max-width:660px){
+    .hero{grid-template-columns:1fr;gap:14px;}
+    .hero .arrow{transform:rotate(90deg);}
+    .lever{grid-template-columns:34px 1fr;}
+    .lvgain{grid-column:2;text-align:left;margin-top:2px;}
+    h1{font-size:24px;} .hero .amt{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Overview</div>
+  <div class="subtitle">JustHuman · Prepared by Shiwani Agrawal · The goal, and how we get there · July 2026</div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">The goal</p>
+  <h1>Grow retention revenue 2.5 to 3x: from ₹1.7 crore a year to ₹4 crore and beyond</h1>
+  <p class="lead">Two lifetime targets sit behind this. Take retention from <b>18.7% to 25%</b> of store revenue. Take the repeat rate from <b>19.7% to 30%</b>, which is where a skincare brand should be. The store itself is growing 2.5x year on year, so hitting these two targets multiplies retention revenue 2.5 to 3x.</p>
+
+  <div class="hero">
+    <div class="col today">
+      <div class="lab">Today</div>
+      <div class="amt">₹16.8L<span style="font-size:15px;font-weight:600;color:var(--muted)">/mo</span></div>
+      <div class="sub">18.7% of store revenue<br>19.7% of customers ever repeat</div>
+    </div>
+    <div class="mid">
+      <div class="mult">2.5–3x</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="col to">
+      <div class="lab">Target</div>
+      <div class="amt">25% share</div>
+      <div class="sub">30% repeat rate<br>₹4 Cr+ retention revenue a year</div>
+    </div>
+  </div>
+  <p class="herohow"><b>How the math works:</b> June retention was ₹16.8L on a ₹84L store (20%). Share to 25% is 1.3x. Repeat rate to 30% is 1.5x more returning buyers. The store grew 2.5x over last year (₹1.8 Cr to ₹4.4 Cr in H1). Together that is 2.5 to 3x retention revenue. Source: internal tracker + Shopify orders + Klaviyo + Bik.</p>
+
+  <h2 class="sechead">The seven moves that get us there</h2>
+  <p class="secsub">Every one comes from a flow-by-flow walkthrough of the account. Each has its proof.</p>
+
+  <div class="levers">
+
+    <div class="lever">
+      <span class="lvn">1</span>
+      <div class="lvbody">
+        <h3>Fix the welcome engine</h3>
+        <p>The welcome offer dies in <b>30 minutes</b> and no message ever mentions it. The popup has 7 steps with no skip button. The WhatsApp welcome fires on first order, not on signup. People decide to buy inside the welcome flow but cannot claim the offer.</p>
+        <p class="why"><b>Do:</b> extend the offer window, put the code and expiry in every welcome message, add skip buttons, phone before email, fix the WhatsApp trigger.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">579 → 117</span><span class="lvg-lab">signups last week vs people who entered the welcome flow</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">2</span>
+      <div class="lvbody">
+        <h3>Rebuild recovery around the bestseller</h3>
+        <p>Alia signups buy <b>Microshots</b>. But browse abandonment does not exist on email, and on WhatsApp it targets haircare, which nobody bought in 30 days. Checkout abandonment has one generic email. Cart has two. The signup offer should follow the person through browse, cart and checkout until they order.</p>
+        <p class="why"><b>Do:</b> Microshots-first browse, cart and checkout flows on both channels, offer carried throughout.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">1,112/week</span><span class="lvg-lab">people view Microshots with no email follow-up</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">3</span>
+      <div class="lvbody">
+        <h3>Stop selling membership to everyone</h3>
+        <p>Only <b>600 of 24,000 customers</b> bought membership, yet every cart and checkout message pushes it. Prospects are told their "member advantage is included" when it is not relevant to them.</p>
+        <p class="why"><b>Do:</b> A/B a plain product message with a dynamic code against the membership line. Membership becomes a founder-led flow for 2-time buyers only.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">2.5%</span><span class="lvg-lab">of customers chose membership; the message assumes everyone wants it</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">4</span>
+      <div class="lvbody">
+        <h3>Treat the 21,000 prospects as their own audience</h3>
+        <p>Half the list has never bought, and prospects engage with email MORE than customers do. They need trust, not product pushes: the founder, the research lab, why the products are tested.</p>
+        <p class="why"><b>Do:</b> a reserved monthly slot for this cohort: founder letters, education, limited-time offers, new launches.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">21,000</span><span class="lvg-lab">prospects, half the audience, engaging but not converting</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">5</span>
+      <div class="lvbody">
+        <h3>Build the full Microshots framework</h3>
+        <p>The bestseller drives 65% of popup-attributed orders and has the best repeat behaviour, yet has no activation flow on either channel, a generic replenishment, and no catalogue introduction anywhere in the welcome.</p>
+        <p class="why"><b>Do:</b> activation (how to use, what to expect), reworked replenishment, cross-sell into Sensation Cream and masks, catalogue and founder introduction in the welcome.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">65%</span><span class="lvg-lab">of popup orders are Microshots; zero activation flow</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">6</span>
+      <div class="lvbody">
+        <h3>Use the data we already collect</h3>
+        <p>51,000 quiz answers, skin concerns, age, and a Skin Analyser with good submit rates are used nowhere. The analyser's product recommendations never reach the inbox. Opens are also inflated because Apple privacy opens are not excluded in Klaviyo.</p>
+        <p class="why"><b>Do:</b> analyser results email with recommended products, age-based recommendations in welcome and campaigns, quiz-answer branching, fix the tracking setting.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">51,406</span><span class="lvg-lab">quiz answers collected, not used in a single automation</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">7</span>
+      <div class="lvbody">
+        <h3>Win back by skin data</h3>
+        <p>Lapsed buyers already come back when nudged: October buyers who went quiet are placing orders again. There is no win-back flow. We know each person's skin type and concern, so the win-back can speak to it directly.</p>
+        <p class="why"><b>Do:</b> win-back at day 90 and day 365, personalised to the concern they shared.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">38.6%</span><span class="lvg-lab">of June orders were repeats and climbing; win-back adds the missing layer</span></div>
+    </div>
+
+  </div>
+
+  <p class="note"><b>How we execute:</b> five stages: Acquisition, Recovery, Activation, Replenishment with cross-sell and upsell, Win-back. Two phases: first send campaigns to each of these segments and measure, then automate whatever performs. The moves above are the means to the two targets, not separate goals to add up.</p>
+
+  <a class="fullbtn" href="index.html">Open the full audit →</a>
+</main>
+</body>
+</html>
