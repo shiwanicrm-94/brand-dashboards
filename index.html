@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Porcellia · Brand Dashboards</title>
+<link rel="stylesheet" href="justhuman/porc-fonts.css">
+<style>
+  :root{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--seq700:#3a2e42;}
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent-ink:#ff8a63;--seq700:#e4d4ff;}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:15px/1.6 'Poppins',system-ui,sans-serif;}
+  header{background:#3a2e42;color:#fff;padding:22px 26px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:24px;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:13px;margin-top:2px;}
+  main{max-width:760px;margin:0 auto;padding:30px 22px 60px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-size:20px;margin:26px 0 10px;}
+  .links{display:grid;gap:10px;}
+  a.card{display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--card);border:1px solid var(--ring);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;text-decoration:none;color:var(--ink);}
+  a.card:hover{border-color:var(--accent);}
+  a.card .t{font-weight:600;font-size:15px;}
+  a.card .d{font-size:12.5px;color:var(--ink2);margin-top:2px;}
+  a.card .go{color:var(--accent-ink);font-weight:700;white-space:nowrap;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:26px;border-top:1px solid var(--ring);padding-top:14px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="brandmark">Porcellia <em>✦</em> Brand Dashboards</div>
+  <div class="subtitle">Every audit and overview, one link. Prepared by Shiwani Agrawal.</div>
+</header>
+<main>
+  <h2>JustHuman</h2>
+  <div class="links">
+    <a class="card" href="justhuman/"><span><span class="t">Retention Audit (internal)</span><div class="d">One page, six tabs: current state, cohort, email, WhatsApp, Alia, the plan. With walkthrough screenshots.</div></span><span class="go">Open →</span></a>
+    <a class="card" href="justhuman/overview.html"><span><span class="t">Retention Overview</span><div class="d">The goal (2.5 to 3x retention revenue) and the seven moves. For top-level readers.</div></span><span class="go">Open →</span></a>
+  </div>
+  <h2>BoldFit</h2>
+  <div class="links">
+    <a class="card" href="boldfit/"><span><span class="t">Retention Audit &amp; Growth Plan</span><div class="d">Three views: current state, deep analysis, the plan. Full Shopify history and Kwik Engage data.</div></span><span class="go">Open →</span></a>
+    <a class="card" href="boldfit/overview.html"><span><span class="t">Retention Overview</span><div class="d">The goal (2.5 to 3x retention revenue) and the seven levers with proof.</div></span><span class="go">Open →</span></a>
+  </div>
+  <p class="note">New brand dashboards get added here as they ship. This page is the only link you need to save.</p>
+</main>
+</body>
+</html>
