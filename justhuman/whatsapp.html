@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JustHuman · WhatsApp (Bik)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{position:relative;padding-left:24px;font-size:13.5px;margin-bottom:8px;color:var(--ink);line-height:1.55;}
+  ul.pts li::before{content:"✦";position:absolute;left:2px;top:2px;color:var(--accent);font-size:11px;}
+  .split{display:flex;height:26px;border-radius:6px;overflow:hidden;font-size:11px;font-weight:700;color:#fff;margin:10px 0;}
+  .split span{display:flex;align-items:center;justify-content:center;}
+  details{border:1px solid var(--ring);border-radius:8px;margin-top:8px;background:var(--card);}
+  details summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:13.5px;list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{content:"▸ ";color:var(--accent);}
+  details[open] summary::before{content:"▾ ";}
+  details .body{padding:0 14px 14px;}
+  .msg{border-left:3px solid var(--accent);background:var(--hero);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;}
+  .msg .mh{font-weight:700;font-size:13px;}
+  .msg .mstat{font-size:11.5px;color:var(--ink2);margin-top:3px;}
+  .msg .mcopy{font-size:12px;color:var(--ink2);margin-top:6px;white-space:pre-line;border-top:1px dashed var(--ring);padding-top:6px;}
+  .shot{margin-top:8px;border:1px dashed var(--baseline,#c8bedb);border-radius:6px;padding:10px;font-size:11.5px;color:var(--muted);text-align:center;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .src{font-size:11px;color:var(--muted);font-style:italic;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">JustHuman · WhatsApp deep-dive (Bik) · Jan to Jun 2026 · Prepared by Shiwani Agrawal</div>
+</header>
+<nav class="tabs"><a class="tab" href="index.html" style="text-decoration:none">← Back to the audit</a><a class="tab" href="email.html" style="text-decoration:none">Email</a><a class="tab" href="whatsapp.html" style="text-decoration:none">WhatsApp</a><a class="tab" href="alia.html" style="text-decoration:none">Alia</a></nav>
+<main class="wrap">
+<section class="view active" id="v6">
+  <h1>WhatsApp <span style="font-size:14px;color:var(--muted)">— Bik</span></h1>
+  <p class="kicker">60 campaigns + journey flows, Jan–Jun 2026. (Bik API is send-only; data from exports.)</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹48.1L</div><div class="l">WhatsApp retention revenue, H1</div></div>
+    <div class="tile good"><div class="v">27.8×</div><div class="l">blended campaign ROI</div></div>
+    <div class="tile good"><div class="v">107×</div><div class="l">blended flow ROI</div></div>
+    <div class="tile good"><div class="v">0.10%</div><div class="l">avg campaign opt-out (very healthy)</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Flow-by-flow verdicts (from the Bik walkthrough)</h2><span class="kicker">wiring faults found inside the WhatsApp automations, and the fix</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome flow</b></td><td class="crit">Trigger is "customer created" = first order. Last week: 579 Alia signups, only 117 entered. We introduce the brand to people who already bought. Only the last message converts; the rest add spend.</td><td>Re-trigger on Alia signup. Offer-led message 1 with code and expiry. 3 messages max, non-buyers only.</td></tr>
+        <tr><td><b>Browse abandonment</b></td><td class="crit">Specialised for haircare (3 product IDs) which nobody bought in 30 days. 823 of 985 triggers stopped. The generic fallback branch converts best (85.63% CTR, ₹12.45K vs ₹1.55K).</td><td>Re-point the specialisation to Microshots and the products people actually buy from the popup. Loosen the stop conditions.</td></tr>
+        <tr><td><b>Abandoned checkout</b></td><td class="warn">Entry trigger reads "Abandoned A Product" with a hardcoded product name: recheck it is truly checkout abandonment. Only filter is order count over 0. One generic first message.</td><td>Verify the trigger, split prospect vs customer vs member, product-specific messages, offer-holder version with code and expiry.</td></tr>
+        <tr><td><b>Membership line to everyone</b></td><td class="crit">"Your 10% Limitless member advantage is already included" goes to prospects and non-members. It is not relevant to them.</td><td>Remove from non-member sends. A/B plain product + dynamic code messaging.</td></tr>
+        <tr><td><b>MS cart "new users" filter</b></td><td class="warn">Filter is "bought something (order count over 0)" which can include people who already bought Microshots. Same message hits existing MS buyers.</td><td>Exclude MS buyers from the new-user branch; give repeat buyers their own copy.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">WhatsApp works well for this brand. Rebuild it around cohort-level and interest-level messaging: who you are (prospect, customer, member) and what you showed interest in decides the message.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Flow performance (Jan–Jun 2026)</h2><span class="kicker">real ROI = revenue ÷ cost · trigger-loss = capped/cancelled</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th class="num">Triggers</th><th class="num">Orders</th><th class="num">Revenue</th><th class="num">Cost</th><th class="num">ROI</th><th class="num">Trigger-loss</th></tr></thead>
+      <tbody>
+        <tr><td>Order confirmation</td><td class="num">8,051</td><td class="num">121</td><td class="num">₹5.26L</td><td class="num">₹6,603</td><td class="num">80×</td><td class="num">0%</td></tr>
+        <tr><td>Welcome Flow</td><td class="num">3,880</td><td class="num">37</td><td class="num">₹2.31L</td><td class="num">₹1,554</td><td class="num good-text">149×</td><td class="num crit">56%</td></tr>
+        <tr><td>Checkout abandonment</td><td class="num">4,236</td><td class="num">35</td><td class="num">₹2.02L</td><td class="num">₹608</td><td class="num good-text">331×</td><td class="num">30%</td></tr>
+        <tr><td>Replenishment — Microshots</td><td class="num">3,192</td><td class="num">28</td><td class="num">₹1.72L</td><td class="num">₹1,824</td><td class="num">94×</td><td class="num crit">42%</td></tr>
+        <tr><td>Checkout Abandon — Omni</td><td class="num">1,014</td><td class="num">22</td><td class="num">₹1.44L</td><td class="num">₹272</td><td class="num good-text">527×</td><td class="num crit">75%</td></tr>
+        <tr><td>Post-Purchase non-members</td><td class="num">9,577</td><td class="num">35</td><td class="num">₹1.33L</td><td class="num">₹1,878</td><td class="num">71×</td><td class="num">19%</td></tr>
+        <tr><td>Browse abandon — Omni</td><td class="num">3,176</td><td class="num">5</td><td class="num">₹0.18L</td><td class="num">₹132</td><td class="num">139×</td><td class="num crit">80%</td></tr>
+        <tr><td class="crit">Abandon-cart FF-old (DEAD)</td><td class="num">1,005</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹23</td><td class="num">—</td><td class="num"></td></tr>
+        <tr><td class="crit">Replenishment Cleansing Balm (DEAD)</td><td class="num">153</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹28</td><td class="num">—</td><td class="num"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The leak:</b> frequency-capping / cancellation kills <b>42–80% of triggers</b> on the best flows — Welcome loses 56% (≈2,173 of 3,880 people never get it), Browse-abandon 80%, Checkout-abandon-omni 75%. Loosening the cap on high-intent flows is direct recoverable revenue.</div>
+  </div>
+  <details>
+    <summary>Drill-down · Welcome Flow (WhatsApp) — 149× ROI but 56% of triggers lost</summary>
+    <div class="body">
+      <p class="src">3,880 triggers → 2,185 cancelled/capped → 1,968 messages sent → 1,331 read → 37 orders → ₹2.31L (cost ₹1,554). Per-message copy available from the flows-structure doc; live message renders need a Bik panel screenshot (domain blocked in automation).</p>
+      <div class="shot">📷 WhatsApp message renders — drop Bik screenshots here, or grant the dashboard.bik.ai domain and I'll capture them.</div>
+      <p class="note"><b>Action:</b> the flow converts brilliantly on the half that receive it — recovering the capped 56% is the highest-value single fix on WhatsApp.</p>
+    </div>
+  </details>
+  <div class="card">
+    <div class="cardhead"><h2>Campaigns — top & waste (60 campaigns, H1)</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Campaign</th><th class="num">Revenue</th><th class="num">ROI</th><th class="num">Opt-out</th></tr></thead>
+      <tbody>
+        <tr><td>Sensation Cream | April</td><td class="num">₹1.23L</td><td class="num good-text">39×</td><td class="num">0.05%</td></tr>
+        <tr><td>Membership | April</td><td class="num">₹1.21L</td><td class="num good-text">49×</td><td class="num">0.00%</td></tr>
+        <tr><td>DSC | May</td><td class="num">₹1.20L</td><td class="num good-text">44×</td><td class="num">0.17%</td></tr>
+        <tr><td>Microshot Users | April</td><td class="num">₹1.19L</td><td class="num">41×</td><td class="num">0.12%</td></tr>
+        <tr><td class="crit">Members Only | February</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
+        <tr><td class="crit">Menopause MS | January</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">60 campaigns · 99,914 messages · ₹30.4L revenue · ₹1.1L cost · <b>27.8× blended ROI</b>. Winners are offer-led + tightly segmented (Membership, DSC, Microshot Users). Prune ₹0 sends.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Delivery &amp; campaign pattern</h2><span class="kicker">from the Bik exports, Jan–Jun 2026</span></div>
+    <div class="tiles">
+      <div class="tile good"><div class="v">97.5%</div><div class="l">campaign delivery (99,914 sent) · 72.2% read</div></div>
+      <div class="tile good"><div class="v">98.1%</div><div class="l">flow delivery (23,885 sent) · 60.1% read</div></div>
+      <div class="tile"><div class="v">2.3/wk</div><div class="l">campaign cadence (60 over 26 weeks)</div></div>
+      <div class="tile warn"><div class="v">58%</div><div class="l">of campaigns are plain product pushes</div></div>
+    </div>
+    <ul class="pts" style="margin-top:12px">
+      <li><b>Delivery is excellent</b> — 97–98% on both campaigns and flows with 0.10% opt-out. The WhatsApp problem is <b>not</b> deliverability; it is trigger-capping (flows) and theme monotony (campaigns).</li>
+      <li><b>Theme economics say rebalance:</b> Product/Launch 35 campaigns at ₹46k avg — while <b>Restock/OOS averages ₹69k</b> (only 7 sent), <b>Social-proof/Event ₹68k</b> (6), Membership ₹52k, Education ₹51k. The formats used least earn the most per send.</li>
+    </ul>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Theme (H1 2026)</th><th class="num">Campaigns</th><th class="num">Revenue</th><th class="num">Avg / campaign</th></tr></thead>
+      <tbody>
+        <tr><td>Product / launch push</td><td class="num">35</td><td class="num">₹16.1L</td><td class="num warn">₹45,975</td></tr>
+        <tr><td>Restock / OOS</td><td class="num">7</td><td class="num">₹4.8L</td><td class="num good-text">₹68,893</td></tr>
+        <tr><td>Social proof / event</td><td class="num">6</td><td class="num">₹4.1L</td><td class="num good-text">₹67,640</td></tr>
+        <tr><td>Membership</td><td class="num">6</td><td class="num">₹3.1L</td><td class="num">₹52,343</td></tr>
+        <tr><td>Education / use-case</td><td class="num">4</td><td class="num">₹2.0L</td><td class="num">₹50,558</td></tr>
+        <tr><td>NPS / review</td><td class="num">2</td><td class="num">₹0.3L</td><td class="num">₹14,746</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+</main>
+</body>
+</html>

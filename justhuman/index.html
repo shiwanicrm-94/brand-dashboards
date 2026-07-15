@@ -78,6 +78,9 @@
   <button class="tab" role="tab" aria-selected="true" data-view="g1">1 · Current State</button>
   <button class="tab" role="tab" aria-selected="false" data-view="g2">2 · Deep Analysis</button>
   <button class="tab" role="tab" aria-selected="false" data-view="g3">3 · The Plan</button>
+  <a class="tab" href="email.html" style="text-decoration:none">Email ↗</a>
+  <a class="tab" href="whatsapp.html" style="text-decoration:none">WhatsApp ↗</a>
+  <a class="tab" href="alia.html" style="text-decoration:none">Alia ↗</a>
 </nav>
 
 <main class="wrap">
@@ -192,7 +195,8 @@
   <h1>Cohort-level analysis</h1>
   <p class="kicker">Entire order history (36,059 orders, 2021→2026; voided excluded). Customer key = email.</p>
   <div class="tiles">
-    <div class="tile"><div class="v">24,203</div><div class="l">customers (lifetime)</div></div>
+    <div class="tile"><div class="v">25,764</div><div class="l">customers (bought at least once, customer file)</div></div>
+    <div class="tile hot"><div class="v">32,863</div><div class="l">prospects: never placed an order (56% of the 58,627 file)</div></div>
     <div class="tile warn"><div class="v">19.7%</div><div class="l">repeat rate (2+ orders) — LOW for skincare; target 30%</div></div>
     <div class="tile"><div class="v">74 days</div><div class="l">median time to 2nd order</div></div>
     <div class="tile"><div class="v">₹4.81 Cr</div><div class="l">2025 revenue → ₹4.14 Cr in H1 2026 alone</div></div>
@@ -306,283 +310,13 @@
 </section>
 
 <!-- ========== 5 EMAIL ========== -->
-<section class="view" id="v5" data-g="g2">
-  <h1>Email <span style="font-size:14px;color:var(--muted)">— Klaviyo</span></h1>
-  <p class="kicker">36 flows (17 live, 19 draft) + campaigns. H1 2026, live API.</p>
-  <div class="tiles">
-    <div class="tile"><div class="v">₹34.7L</div><div class="l">email retention revenue, H1</div></div>
-    <div class="tile"><div class="v">₹16.8L</div><div class="l">from flows (automations)</div></div>
-    <div class="tile"><div class="v">₹17.3L</div><div class="l">from campaigns</div></div>
-    <div class="tile good"><div class="v">₹6.0L</div><div class="l">Welcome-ALIA — #1 flow</div></div>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>Flow-by-flow verdicts (from the account walkthrough)</h2><span class="kicker">what is wrong inside each email automation, and the fix</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
-      <tbody>
-        <tr><td><b>Welcome (ALIA)</b></td><td>Generic brand copy. No offer, no expiry, no catalogue, no bestseller. The 30-minute code is never mentioned.</td><td>Code + expiry in every message, Microshots-led, catalogue and founder introduction, branch by quiz answer, non-buyer filter and purchase exit.</td></tr>
-        <tr><td><b>Browse abandonment</b></td><td class="crit">Does not exist on email.</td><td>Build it, productised to Microshots first (1,112 viewers a week), then CB and DSC. Viewed-product segments already perform in campaigns.</td></tr>
-        <tr><td><b>Abandoned checkout</b></td><td class="crit">The most important automation has ONE generic email.</td><td>Complete rework: 3 to 4 emails, product-specific, offer-holder version with code and expiry, beginner vs repeat versions.</td></tr>
-        <tr><td><b>Abandoned cart</b></td><td>Only 2 emails, generic, membership-led. MS cart flow performs well for new users with just 2 emails. FF relaunch earns ₹0.</td><td>Add emails to the MS flow, educational product-specific content, kill or rebuild FF relaunch, remove membership push.</td></tr>
-        <tr><td><b>Membership messaging</b></td><td>Every automation pushes the 10% member line. Only 600 of 24,000 customers are members.</td><td>Remove from all automations. A/B plain product message + dynamic code. New founder-led membership flow for 2-time buyers only.</td></tr>
-        <tr><td><b>Replenishment</b></td><td>Generic. MS replenishment gets good interaction but the copy is flat.</td><td>Rework around the founder angle: because you bought this, here is the best next step. Test 2 or 3 versions.</td></tr>
-        <tr><td><b>Skin Analyser</b></td><td class="crit">Good submit rates, used nowhere. Recommendations never reach the inbox.</td><td>Mandatory results email with the recommended products. Two CTA buttons in popup and welcome to take the analysis. Use collected age for recommendations.</td></tr>
-        <tr><td><b>Tracking</b></td><td class="warn">Apple privacy opens are NOT excluded. Open rates are inflated.</td><td>Tick the MPP exclusion in Klaviyo settings; re-baseline open benchmarks after.</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">Prospects engage with our emails more than customers do, yet campaigns are imagery-led product pushes. Curate prospect campaigns around the founder, the research lab and product testing: trust first, then the offer.</p>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>Top email flows (H1 2026)</h2><span class="kicker">recipients · conversions · revenue, from Klaviyo</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Flow</th><th class="num">Recipients</th><th class="num">Conv.</th><th class="num">Revenue</th></tr></thead>
-      <tbody>
-        <tr><td>Welcome flow ALIA <span class="good-text">(popup-driven)</span></td><td class="num">~25.4k</td><td class="num">107</td><td class="num good-text">₹5.96L</td></tr>
-        <tr><td>Abandon Cart — Generic (members)</td><td class="num">3.2k</td><td class="num">38</td><td class="num">₹2.43L</td></tr>
-        <tr><td>Abandon Cart — Generic (non-members)</td><td class="num">1.7k</td><td class="num">25</td><td class="num">₹1.49L</td></tr>
-        <tr><td>Post-Purchase — non-members (membership upsell)</td><td class="num">5.4k</td><td class="num">22</td><td class="num">₹1.01L</td></tr>
-        <tr><td>Abandoned cart — Microshots relaunch</td><td class="num">~1.4k</td><td class="num">30</td><td class="num">₹1.20L</td></tr>
-        <tr><td>Replenishment — Foot Facial + Generic</td><td class="num">1.2k</td><td class="num">13</td><td class="num">₹0.58L</td></tr>
-      </tbody>
-    </table></div>
-    <p class="src">Total email flow revenue H1 ₹16.8L (Klaviyo) ≈ ₹17.5L (tracker). Membership model drives the members/non-members split across flows.</p>
-  </div>
-  <details>
-    <summary>Drill-down · Welcome flow ALIA (entry: Alia list · 4 emails · live)</summary>
-    <div class="body">
-      <p class="src">Entry trigger: added to Klaviyo list "Alia New Subscribers" (26,773). Exit: purchase / unsubscribe. 4 emails with delays. Copy from Porcellia flows-structure doc; per-email stats from Klaviyo.</p>
-      <div class="msg"><div class="mh">Email 1 — "Are you ready to take back control?" (immediate)</div><div class="mstat">8,928 recipients · 2,649 opens (30%) · 82 clicks · 76 conv · ₹4.06L</div><div class="mcopy">Thank-you for signing up · India's #1 neurocosmetics · founder's journey, categories, USPs · membership banner. ("Imagine if you could uplift not just your skin but also your mood — the skin-brain axis.")</div></div>
-      <div class="msg"><div class="mh">Email 2 — brand ethos / 40+ (after delay)</div><div class="mstat">7,787 recipients · 2,221 opens · 29 clicks · 13 conv · ₹0.76L</div><div class="mcopy">Clean · fast · addictively good · neurocosmetics · skin minimalists · bestsellers (MS, FF, Peace Mask, Cleansing Balm) each with a punchline · membership banner.</div></div>
-      <div class="msg"><div class="mh">Email 3 — founder's note / neurocosmetics education</div><div class="mstat">7,042 recipients · 2,061 opens · 20 clicks · 15 conv · ₹0.94L</div><div class="mcopy">Founder's note · educational angle on neurocosmetics · membership banner.</div></div>
-      <div class="msg"><div class="mh">Email 4 — social proof</div><div class="mstat">1,663 recipients · 495 opens · 6 clicks · 3 conv · ₹0.20L</div><div class="mcopy">Social proofing · how JH helped women in their skincare journey · past events (FF & the soiree) · membership banner.</div></div>
-      <div class="shot">📷 Rendered message screenshots — I can capture each email image from Klaviyo on request (email renders are pullable via API).</div>
-      <p class="note"><b>Read:</b> Email 1 does the heavy lifting (₹4.06L of ₹6.0L). Click rates are low (~1%) across all four — the sequence converts on opens/brand, not clicks; worth testing stronger single-CTA emails.</p>
-    </div>
-  </details>
-  <div class="card">
-    <div class="cardhead"><h2>Campaign pattern — what's being sent, to whom, how often</h2><span class="kicker">53 email campaigns Jan–Jun 2026, from the Klaviyo API</span></div>
-    <ul class="pts">
-      <li><b>Cadence is 2.0/week</b> (Jan 7 · Feb 13 · Mar 8 · Apr 8 · May 7 · Jun 10). For this revenue band the proven ladder is <b>3–4/week</b> — headroom for ~1–2 more sends/week <i>if variety improves</i> (sending the same type burns lists, not frequency).</li>
-      <li><b>Targeting is tight and disciplined:</b> almost every campaign goes to <b>"engaged_45 days"</b> + product-intent segments (ATC Cleansing Balm L30, ATC Microshots L45, product viewers) — typically 2,000–3,000 recipients. That discipline is why delivery is 99.6% and opens run 66–78%.</li>
-      <li><b>The cost of that discipline: reach.</b> ~2.5k recipients per send from a 40k+ engaged-capable list, and <b>click rate is just 0.76%</b> (benchmark >1.2%) — the list is opening but not clicking. Fix is creative/CTA (hero + one CTA above the fold), not more segmentation.</li>
-      <li><b>Theme mix skews product-push.</b> Same pattern as WhatsApp: product/launch angles dominate; education, social-proof and use-case angles — which win in their own A/B tests — are under-used.</li>
-    </ul>
-    <div class="cardhead" style="margin-top:14px"><h2>Best email campaigns (H1 2026)</h2><span class="kicker">Klaviyo-attributed; total email campaign revenue ₹16.4L</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Campaign</th><th>Date</th><th class="num">Recipients</th><th class="num">Open</th><th class="num">Click</th><th class="num">Revenue</th></tr></thead>
-      <tbody>
-        <tr><td>Daily Angle | Cleansing Balm</td><td>26 May</td><td class="num">2,692</td><td class="num">74.9%</td><td class="num">0.22%</td><td class="num good-text">₹90,818</td></tr>
-        <tr><td>DSC Alarming Fact Check</td><td>18 May</td><td class="num">2,645</td><td class="num">75.7%</td><td class="num">0.53%</td><td class="num good-text">₹87,236</td></tr>
-        <tr><td>Melting Balm Minimal</td><td>5 Jun</td><td class="num">2,820</td><td class="num">73.3%</td><td class="num">0.36%</td><td class="num">₹73,668</td></tr>
-        <tr><td>Soiree (event)</td><td>25 Apr</td><td class="num">2,296</td><td class="num">75.0%</td><td class="num">0.57%</td><td class="num">₹71,739</td></tr>
-        <tr><td>Body Soother Usecase</td><td>17 Jun</td><td class="num">3,026</td><td class="num">78.2%</td><td class="num">0.56%</td><td class="num">₹58,241</td></tr>
-        <tr><td>Microshot Testimonial</td><td>22 May</td><td class="num">2,547</td><td class="num">75.0%</td><td class="num">0.32%</td><td class="num">₹57,763</td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag win"><b>Double down on:</b> education/fact-check angles (DSC Alarming Fact ₹87k — also the WhatsApp winner at ₹114k), use-case storytelling (Body Soother), and event/exclusivity (Soiree). These already out-earn plain product pushes on both channels — make them the calendar's spine, not the exception.</div>
-  </div>
 
-  <div class="card">
-    <div class="cardhead"><h2>Segment performance — target more, target less</h2><span class="kicker">every campaign's included audiences joined to its attributed revenue (53 campaigns, Klaviyo)</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Segment</th><th class="num">Times targeted</th><th class="num">Attributed rev</th><th class="num">Rev / send</th><th>Call</th></tr></thead>
-      <tbody>
-        <tr><td>Viewed Cleansing Balm in L5</td><td class="num">1</td><td class="num">₹90,818</td><td class="num good-text">₹90,818</td><td class="good-text">Target more</td></tr>
-        <tr><td>Viewed DSC Cream in L15 + opened</td><td class="num">1</td><td class="num">₹87,236</td><td class="num good-text">₹87,236</td><td class="good-text">Target more</td></tr>
-        <tr><td>ATC DSC Cream in the L30</td><td class="num">3</td><td class="num">₹1.57L</td><td class="num good-text">₹52,478</td><td class="good-text">Target more</td></tr>
-        <tr><td>ATC Cleansing Balm in the L30</td><td class="num">5</td><td class="num">₹2.56L</td><td class="num good-text">₹51,130</td><td class="good-text">Target more</td></tr>
-        <tr><td>Viewed MS in L45 + opened in L60</td><td class="num">3</td><td class="num">₹1.49L</td><td class="num">₹49,792</td><td class="good-text">Target more</td></tr>
-        <tr><td>Engaged_30</td><td class="num">7</td><td class="num">₹3.39L</td><td class="num">₹48,469</td><td>Keep</td></tr>
-        <tr><td>engaged_45 days (the workhorse)</td><td class="num">32</td><td class="num">₹12.1L</td><td class="num">₹37,871</td><td>Keep as base</td></tr>
-        <tr><td>Alia poll answered + no order</td><td class="num">4</td><td class="num">₹1.40L</td><td class="num">₹34,900</td><td class="good-text">Target more (barely used)</td></tr>
-        <tr><td>Opened atleast once in L45</td><td class="num">8</td><td class="num">₹0.71L</td><td class="num warn">₹8,847</td><td class="warn">Target less — 4× weaker than base</td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag win"><b>The pattern:</b> fresh product-intent segments (viewed/added-to-cart in the last 5–30 days) earn <b>2–10× per send</b> vs broad engagement blasts. Shift 1–2 sends/week from "opened in L45"-style audiences to product-intent + Alia-answer segments — same list, more revenue per send.</div>
-  </div>
-
-  <div class="card">
-    <div class="cardhead"><h2>A/B test learnings — what messaging actually wins</h2><span class="kicker">6 subject-line / CTA tests from the internal tracker</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Test</th><th>Winning line</th><th class="num">Rev (win)</th><th>Learning</th></tr></thead>
-      <tbody>
-        <tr><td>Body Soother (Apr)</td><td>"Your dry skin has been patient long enough"</td><td class="num good-text">₹33.0K</td><td>Problem-aware emotional tension &gt;&gt; educational framing (vs ₹14K)</td></tr>
-        <tr><td>Body Soother (Jun)</td><td>"One jar. Four versions of later"</td><td class="num good-text">₹36.3K</td><td>Concrete product line &gt; abstract/metaphorical (vs ₹22K)</td></tr>
-        <tr><td>User Letter (Jun)</td><td>CTA "Find the Fix"</td><td class="num good-text">₹18.0K</td><td>Solution-oriented CTA &gt; "Buy Now" (vs ₹11K)</td></tr>
-        <tr><td>Membership (May)</td><td>"This isn't for everyone"</td><td class="num">↑ open + click</td><td>Exclusivity framing wins for membership/insider offers</td></tr>
-        <tr><td>Melting Balm (Apr)</td><td>"That tight feeling after cleansing?"</td><td class="num good-text">₹14.1K</td><td>Relatable concern &gt; clever wordplay for revenue (vs ₹8.6K)</td></tr>
-        <tr><td>Soiree (Mar)</td><td>"You should've been in that room…"</td><td class="num">₹9.7K</td><td>Curiosity/exclusivity &gt; descriptive emotional for events</td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag win"><b>The messaging playbook (proven on JustHuman's own list):</b> lead with the reader's <b>problem/feeling</b>, not the product's benefit · use <b>concrete</b> over metaphorical · <b>exclusivity</b> sells membership · replace "Buy Now" with <b>solution-oriented CTAs</b> ("Find the Fix").</div>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>What's missing / weak</h2></div>
-    <ul class="pts">
-      <li><b>Transactional flows sit in draft</b> — Order Confirmed, Order Cancelled, Shipping Confirmation are not live in Klaviyo (handled on WhatsApp instead; fine, but no email fallback).</li>
-      <li><b>Skin-Analyzer quiz doesn't feed a live email nurture</b> — the flow is drafted, not live; a large engaged segment is uncaptured on email.</li>
-      <li><b>The generic "Welcome flow" is ₹0 (draft)</b> — all welcome value comes from Welcome-ALIA. Fine while Alia dominates capture, but a single point of dependence.</li>
-      <li><b>Several "relaunch" variants left in draft</b> — duplicated effort not switched on.</li>
-    </ul>
-  </div>
-</section>
 
 <!-- ========== 6 WHATSAPP ========== -->
-<section class="view" id="v6" data-g="g2">
-  <h1>WhatsApp <span style="font-size:14px;color:var(--muted)">— Bik</span></h1>
-  <p class="kicker">60 campaigns + journey flows, Jan–Jun 2026. (Bik API is send-only; data from exports.)</p>
-  <div class="tiles">
-    <div class="tile"><div class="v">₹48.1L</div><div class="l">WhatsApp retention revenue, H1</div></div>
-    <div class="tile good"><div class="v">27.8×</div><div class="l">blended campaign ROI</div></div>
-    <div class="tile good"><div class="v">107×</div><div class="l">blended flow ROI</div></div>
-    <div class="tile good"><div class="v">0.10%</div><div class="l">avg campaign opt-out (very healthy)</div></div>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>Flow-by-flow verdicts (from the Bik walkthrough)</h2><span class="kicker">wiring faults found inside the WhatsApp automations, and the fix</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
-      <tbody>
-        <tr><td><b>Welcome flow</b></td><td class="crit">Trigger is "customer created" = first order. Last week: 579 Alia signups, only 117 entered. We introduce the brand to people who already bought. Only the last message converts; the rest add spend.</td><td>Re-trigger on Alia signup. Offer-led message 1 with code and expiry. 3 messages max, non-buyers only.</td></tr>
-        <tr><td><b>Browse abandonment</b></td><td class="crit">Specialised for haircare (3 product IDs) which nobody bought in 30 days. 823 of 985 triggers stopped. The generic fallback branch converts best (85.63% CTR, ₹12.45K vs ₹1.55K).</td><td>Re-point the specialisation to Microshots and the products people actually buy from the popup. Loosen the stop conditions.</td></tr>
-        <tr><td><b>Abandoned checkout</b></td><td class="warn">Entry trigger reads "Abandoned A Product" with a hardcoded product name: recheck it is truly checkout abandonment. Only filter is order count over 0. One generic first message.</td><td>Verify the trigger, split prospect vs customer vs member, product-specific messages, offer-holder version with code and expiry.</td></tr>
-        <tr><td><b>Membership line to everyone</b></td><td class="crit">"Your 10% Limitless member advantage is already included" goes to prospects and non-members. It is not relevant to them.</td><td>Remove from non-member sends. A/B plain product + dynamic code messaging.</td></tr>
-        <tr><td><b>MS cart "new users" filter</b></td><td class="warn">Filter is "bought something (order count over 0)" which can include people who already bought Microshots. Same message hits existing MS buyers.</td><td>Exclude MS buyers from the new-user branch; give repeat buyers their own copy.</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">WhatsApp works well for this brand. Rebuild it around cohort-level and interest-level messaging: who you are (prospect, customer, member) and what you showed interest in decides the message.</p>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>Flow performance (Jan–Jun 2026)</h2><span class="kicker">real ROI = revenue ÷ cost · trigger-loss = capped/cancelled</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Flow</th><th class="num">Triggers</th><th class="num">Orders</th><th class="num">Revenue</th><th class="num">Cost</th><th class="num">ROI</th><th class="num">Trigger-loss</th></tr></thead>
-      <tbody>
-        <tr><td>Order confirmation</td><td class="num">8,051</td><td class="num">121</td><td class="num">₹5.26L</td><td class="num">₹6,603</td><td class="num">80×</td><td class="num">0%</td></tr>
-        <tr><td>Welcome Flow</td><td class="num">3,880</td><td class="num">37</td><td class="num">₹2.31L</td><td class="num">₹1,554</td><td class="num good-text">149×</td><td class="num crit">56%</td></tr>
-        <tr><td>Checkout abandonment</td><td class="num">4,236</td><td class="num">35</td><td class="num">₹2.02L</td><td class="num">₹608</td><td class="num good-text">331×</td><td class="num">30%</td></tr>
-        <tr><td>Replenishment — Microshots</td><td class="num">3,192</td><td class="num">28</td><td class="num">₹1.72L</td><td class="num">₹1,824</td><td class="num">94×</td><td class="num crit">42%</td></tr>
-        <tr><td>Checkout Abandon — Omni</td><td class="num">1,014</td><td class="num">22</td><td class="num">₹1.44L</td><td class="num">₹272</td><td class="num good-text">527×</td><td class="num crit">75%</td></tr>
-        <tr><td>Post-Purchase non-members</td><td class="num">9,577</td><td class="num">35</td><td class="num">₹1.33L</td><td class="num">₹1,878</td><td class="num">71×</td><td class="num">19%</td></tr>
-        <tr><td>Browse abandon — Omni</td><td class="num">3,176</td><td class="num">5</td><td class="num">₹0.18L</td><td class="num">₹132</td><td class="num">139×</td><td class="num crit">80%</td></tr>
-        <tr><td class="crit">Abandon-cart FF-old (DEAD)</td><td class="num">1,005</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹23</td><td class="num">—</td><td class="num"></td></tr>
-        <tr><td class="crit">Replenishment Cleansing Balm (DEAD)</td><td class="num">153</td><td class="num">0</td><td class="num crit">₹0</td><td class="num">₹28</td><td class="num">—</td><td class="num"></td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag"><b>The leak:</b> frequency-capping / cancellation kills <b>42–80% of triggers</b> on the best flows — Welcome loses 56% (≈2,173 of 3,880 people never get it), Browse-abandon 80%, Checkout-abandon-omni 75%. Loosening the cap on high-intent flows is direct recoverable revenue.</div>
-  </div>
-  <details>
-    <summary>Drill-down · Welcome Flow (WhatsApp) — 149× ROI but 56% of triggers lost</summary>
-    <div class="body">
-      <p class="src">3,880 triggers → 2,185 cancelled/capped → 1,968 messages sent → 1,331 read → 37 orders → ₹2.31L (cost ₹1,554). Per-message copy available from the flows-structure doc; live message renders need a Bik panel screenshot (domain blocked in automation).</p>
-      <div class="shot">📷 WhatsApp message renders — drop Bik screenshots here, or grant the dashboard.bik.ai domain and I'll capture them.</div>
-      <p class="note"><b>Action:</b> the flow converts brilliantly on the half that receive it — recovering the capped 56% is the highest-value single fix on WhatsApp.</p>
-    </div>
-  </details>
-  <div class="card">
-    <div class="cardhead"><h2>Campaigns — top & waste (60 campaigns, H1)</h2></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Campaign</th><th class="num">Revenue</th><th class="num">ROI</th><th class="num">Opt-out</th></tr></thead>
-      <tbody>
-        <tr><td>Sensation Cream | April</td><td class="num">₹1.23L</td><td class="num good-text">39×</td><td class="num">0.05%</td></tr>
-        <tr><td>Membership | April</td><td class="num">₹1.21L</td><td class="num good-text">49×</td><td class="num">0.00%</td></tr>
-        <tr><td>DSC | May</td><td class="num">₹1.20L</td><td class="num good-text">44×</td><td class="num">0.17%</td></tr>
-        <tr><td>Microshot Users | April</td><td class="num">₹1.19L</td><td class="num">41×</td><td class="num">0.12%</td></tr>
-        <tr><td class="crit">Members Only | February</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
-        <tr><td class="crit">Menopause MS | January</td><td class="num crit">₹0</td><td class="num">—</td><td class="num"></td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">60 campaigns · 99,914 messages · ₹30.4L revenue · ₹1.1L cost · <b>27.8× blended ROI</b>. Winners are offer-led + tightly segmented (Membership, DSC, Microshot Users). Prune ₹0 sends.</p>
-  </div>
 
-  <div class="card">
-    <div class="cardhead"><h2>Delivery &amp; campaign pattern</h2><span class="kicker">from the Bik exports, Jan–Jun 2026</span></div>
-    <div class="tiles">
-      <div class="tile good"><div class="v">97.5%</div><div class="l">campaign delivery (99,914 sent) · 72.2% read</div></div>
-      <div class="tile good"><div class="v">98.1%</div><div class="l">flow delivery (23,885 sent) · 60.1% read</div></div>
-      <div class="tile"><div class="v">2.3/wk</div><div class="l">campaign cadence (60 over 26 weeks)</div></div>
-      <div class="tile warn"><div class="v">58%</div><div class="l">of campaigns are plain product pushes</div></div>
-    </div>
-    <ul class="pts" style="margin-top:12px">
-      <li><b>Delivery is excellent</b> — 97–98% on both campaigns and flows with 0.10% opt-out. The WhatsApp problem is <b>not</b> deliverability; it is trigger-capping (flows) and theme monotony (campaigns).</li>
-      <li><b>Theme economics say rebalance:</b> Product/Launch 35 campaigns at ₹46k avg — while <b>Restock/OOS averages ₹69k</b> (only 7 sent), <b>Social-proof/Event ₹68k</b> (6), Membership ₹52k, Education ₹51k. The formats used least earn the most per send.</li>
-    </ul>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Theme (H1 2026)</th><th class="num">Campaigns</th><th class="num">Revenue</th><th class="num">Avg / campaign</th></tr></thead>
-      <tbody>
-        <tr><td>Product / launch push</td><td class="num">35</td><td class="num">₹16.1L</td><td class="num warn">₹45,975</td></tr>
-        <tr><td>Restock / OOS</td><td class="num">7</td><td class="num">₹4.8L</td><td class="num good-text">₹68,893</td></tr>
-        <tr><td>Social proof / event</td><td class="num">6</td><td class="num">₹4.1L</td><td class="num good-text">₹67,640</td></tr>
-        <tr><td>Membership</td><td class="num">6</td><td class="num">₹3.1L</td><td class="num">₹52,343</td></tr>
-        <tr><td>Education / use-case</td><td class="num">4</td><td class="num">₹2.0L</td><td class="num">₹50,558</td></tr>
-        <tr><td>NPS / review</td><td class="num">2</td><td class="num">₹0.3L</td><td class="num">₹14,746</td></tr>
-      </tbody>
-    </table></div>
-  </div>
-</section>
 
 <!-- ========== 7 ALIA ========== -->
-<section class="view" id="v7" data-g="g2">
-  <h1>Alia <span style="font-size:14px;color:var(--muted)">— the most important funnel</span></h1>
-  <p class="kicker">The capture layer. Measured end-to-end from Klaviyo events (Alia has no data API).</p>
-  <div class="tiles">
-    <div class="tile"><div class="v">51,406</div><div class="l">polls answered, H1</div></div>
-    <div class="tile"><div class="v">15,157</div><div class="l">rewards claimed (29.5% of polls)</div></div>
-    <div class="tile"><div class="v">26,773</div><div class="l">subscribers captured</div></div>
-    <div class="tile good"><div class="v">₹6.0L</div><div class="l">Welcome-ALIA email revenue (H1)</div></div>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>The Alia funnel</h2></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Stage</th><th class="num">Count</th><th class="num">Conversion</th></tr></thead>
-      <tbody>
-        <tr><td>Poll answered (skin-type / self-care quiz)</td><td class="num">51,406</td><td class="num">—</td></tr>
-        <tr><td>Reward claimed (offer)</td><td class="num">15,157</td><td class="num good-text">29.5%</td></tr>
-        <tr><td>Subscribed (Alia New Subscribers list)</td><td class="num">26,773</td><td class="num">cumulative</td></tr>
-        <tr><td>→ Welcome-ALIA email flow</td><td class="num">₹6.0L</td><td class="num">#1 email flow</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">Polls grew Jan 6,749 → May 10,731 → Jun 9,422 — capture is scaling. The quiz ("how would you describe your skin type", "what matters most in self-care") doubles as a zero-party data collector.</p>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>Full popup funnel</h2><span class="kicker">from the internal tracker (p18) — views → sign-up → 30-day conversion</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Stage</th><th>Recent monthly range (H1 2026)</th></tr></thead>
-      <tbody>
-        <tr><td>Popup views</td><td>~35k–57k / month</td></tr>
-        <tr><td>Email sign-ups</td><td>2,224 → 3,520 / month (rate ~4.3–7.6%)</td></tr>
-        <tr><td>SMS sign-ups</td><td>2,026 → 3,225 / month</td></tr>
-        <tr><td>Orders within 30 days of signing up</td><td>361 → 644 / month</td></tr>
-        <tr><td>Sales within 30 days</td><td>₹20.6L → ₹33.6L / month</td></tr>
-        <tr><td>CVR attributed</td><td>~13–21% (via Alia discount code)</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">Sign-up <b>rate</b> has softened from ~19% (Apr 2025) to ~4–7% recently — worth investigating (popup fatigue / traffic mix). Absolute captures are up because traffic grew.</p>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>The quiz answers predict buyers — segment the welcome flow by them</h2><span class="kicker">poll response → order conversion (Nov 2025 shown; pattern holds across H1 2026)</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>"What matters most in self-care?"</th><th class="num">Responses</th><th class="num">CVR</th></tr></thead>
-      <tbody>
-        <tr><td>Key Ingredients</td><td class="num">259</td><td class="num good-text">30.9%</td></tr>
-        <tr><td>Clean Beauty</td><td class="num">367</td><td class="num good-text">25.3%</td></tr>
-        <tr><td>Faster Results</td><td class="num">501</td><td class="num">24.9%</td></tr>
-        <tr><td>Dermat Recommendations</td><td class="num">343</td><td class="num">21.0%</td></tr>
-        <tr><td>Simplified Routine (highest volume)</td><td class="num">273</td><td class="num warn">9.9%</td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag win"><b>Actionable:</b> the popup isn't just capture — the <b>answers signal intent</b>. "Key Ingredients", "Clean Beauty" and "Faster Results" people convert 2.5–3× better than "Simplified Routine". Same for concern ("Dry Skin", "Wrinkles" convert highest). <b>Tailor the Welcome-ALIA sequence to each answer</b> instead of one generic flow — the highest-leverage next move on the best-performing channel.</div>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>The funnel fixes, in priority order</h2><span class="kicker">this is the most important funnel in the account — signup rate first, then the messaging behind it</span></div>
-    <ul class="pts">
-      <li><b>1 · Sign-up rate (the multiplier).</b> 7 steps, no skip anywhere, mandatory age, email before phone — and the rate fell 19.3% → 4.33% while views grew to ~57–71k/month. Rebuild: gift → <b>phone/WhatsApp first</b> → email (skippable) → one high-signal question (skippable) → reveal code <b>with expiry</b>. At ~60k views, recovering to ~8% ≈ <b>5,700 signups/month vs ~3,000</b> — feeding the best-converting cohort in the account.</li>
-      <li><b>2 · Automation messaging (bestseller-led).</b> Alia's own attribution: <b>Microshots = ~65% of popup-signup orders (1,776)</b>. The welcome must sell the bestseller explicitly — product story, clinical proof, reviews — not generic brand copy. Carry the <b>dynamic coupon + its expiry</b> in every message (today: zero mentions across all 4 emails).</li>
-      <li><b>2b · The offer expires in 30 MINUTES — and no message ever says so.</b> The urgency exists but is invisible; and 30 minutes is shorter than the consideration cycle of a ₹5,000-AOV product ("finished while they crawl through the page"). <b>Two tests:</b> (A) keep the dynamic coupon, lengthen the expiry to match the AOV's decision time; (B) keep 30 minutes but fire welcome email #1 + WhatsApp #1 <b>the instant they sign up</b> (non-buyers only), carrying the code + the literal expiry time — so the urgency is real and usable, not already dead.</li>
-      <li><b>3 · Collection introduction — missing entirely.</b> No email in the welcome (or any automation) walks the signup through the collections — bestsellers, anti-aging, hair, body. Add a collection-introduction email (bestsellers-first, quiz-answer-matched) so new signups discover the catalogue beyond the one product they saw.</li>
-      <li><b>4 · Branch by quiz answer.</b> The answers predict AOV and conversion (Sensitive = highest AOV; Key-Ingredients 30.9% CVR vs Simplified-Routine 9.9%); the segments already exist in Klaviyo — the flow just doesn't use them.</li>
-    </ul>
-  </div>
-  <div class="flag win"><b>Verdict:</b> Alia is the healthiest part of the retention stack — a high-converting capture engine feeding the #1 email flow, with rich zero-party data that predicts purchase. Fix the sign-up rate first, make the automations sell the bestseller with the code + expiry, introduce the collections, and branch by answer.</div>
-</section>
+
 
 <!-- ========== 8 OMNICHANNEL ========== -->
 <section class="view" id="v8" data-g="g1">
@@ -616,69 +350,76 @@
     <div class="col to">
       <div class="lab">Lifetime target 2 · Repeat rate</div>
       <div class="amt">19.7% <span style="font-size:18px;color:var(--accent)">→</span> <span style="color:var(--good-text)">30%</span></div>
-      <div class="sub">low for skincare today — the category supports 30%</div>
+      <div class="sub">low for skincare today, the category supports 30%</div>
     </div>
   </div>
+
   <div class="card">
-    <div class="cardhead"><h2>The five stages of retention</h2><span class="kicker">the plan's spine. Every build and every campaign belongs to one stage.</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Stage</th><th>What we do</th></tr></thead>
-      <tbody>
-        <tr><td><b>1 · Acquisition</b></td><td>Improve the popup (fewer questions, skip buttons, phone first, longer offer window). Nurture the welcome flow on WhatsApp and email: code and expiry in every message, bestseller-led, catalogue and founder introduction, branched by quiz answer.</td></tr>
-        <tr><td><b>2 · Recovery</b></td><td>Browse, cart, checkout and collection abandonment on both channels, productised to Microshots first. The signup offer follows the person until they order. Prospect, customer and member each get their own message.</td></tr>
-        <tr><td><b>3 · Activation</b></td><td>Post-purchase education per product: how to use, what to expect, when results come. Skin Analyser results email with recommended products.</td></tr>
-        <tr><td><b>4 · Replenishment, cross-sell, upsell</b></td><td>Reworked replenishment copy (founder angle), cross-sell on proven paths (Foot Facial to Microshots, Microshots to Sensation Cream), membership introduced founder-led to 2-time buyers only.</td></tr>
-        <tr><td><b>5 · Win-back</b></td><td>Day 90 and day 365, personalised to the skin type and concern each person shared. Lapsed October buyers already prove this converts.</td></tr>
-      </tbody>
-    </table></div>
-    <div class="flag win"><b>How we execute, in two phases:</b> Phase 1, send campaigns to each stage's segments and measure what performs. Phase 2, automate the winners. No automation gets built before its campaign proves the audience.</div>
+    <div class="cardhead"><h2>Part 1 · Acquisition</h2><span class="kicker">the Alia popup and the welcome flow, on email and WhatsApp</span></div>
+    <ul class="pts">
+      <li><b>Extend the welcome offer window.</b> It dies in 30 minutes today and no message mentions it. Show the expiry in the popup and in every welcome message.</li>
+      <li><b>Cut popup friction.</b> Skip buttons on age, phone and email. Fewer questions, or break the popup into 4 to 5 clean stages. Phone and WhatsApp before email. Drop age from the popup, the Skin Analyser already collects it.</li>
+      <li><b>Fix the WhatsApp welcome trigger.</b> It fires on first order today, so 579 signups became 117 entries last week. Re-trigger on the Alia signup, non-buyers only.</li>
+      <li><b>Rework the welcome messages.</b> Code and expiry in every message. Sell the bestseller Microshots first. Introduce the catalogue, the founder and the brand story. Branch by quiz answer and age.</li>
+      <li><b>One monthly slot for the never-bought cohort.</b> 21,000 prospects who engage more than customers. Founder letters, the research lab, education, a limited-time offer, new launches.</li>
+      <li><b>Two CTAs for the Skin Analyser</b> in the popup and welcome, and a results email with the recommended products.</li>
+    </ul>
   </div>
+
   <div class="card">
-    <div class="cardhead"><h2>The three wins</h2></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Win</th><th>What it is</th><th>Why it's first-order</th></tr></thead>
-      <tbody>
-        <tr><td><b>1 · The activation &amp; second-order engine</b></td><td>Per-SKU activation flows on delivery (usage → results window → cross-sell), FF→Microshots cross-sell, win-back at day 90+, welcome split by quiz answer</td><td>Order 1→2 is the cliff (19.7% repeat; FF 13%). Post-purchase education is the most-skipped, highest-LTV move (+22% 60-day LTV). The audience and the paths are already proven in the data.</td></tr>
-        <tr><td><b>2 · Fix the leaks</b></td><td>Loosen WA frequency caps on high-intent flows (+email fallback), kill/rebuild the two ₹0 flows, build order-confirmed email + order-delivered both channels, retime replenishment to ~day 55 (74-day median reorder)</td><td>Recoverable revenue with zero new audience: the capped 56% of Welcome triggers alone is ~1,900 people/half not receiving a 149×-ROI flow.</td></tr>
-        <tr><td><b>3 · The calendar &amp; omnichannel rebuild</b></td><td>Email 2→3-4/wk on the 75/20/5 mix, WA rebalanced to the themes that earn (restock, social-proof, education), the launch trilogy on every drop, SMS via Bik only where a moment needs it</td><td>Same lists, better mix: the under-used formats already average ₹68–69k vs ₹46k for product pushes. Clicks (0.76%) are the email bottleneck — creative, not targeting.</td></tr>
-      </tbody>
-    </table></div>
+    <div class="cardhead"><h2>Part 2 · Recovery</h2><span class="kicker">browse, cart, checkout and collection abandonment</span></div>
+    <ul class="pts">
+      <li><b>Recheck every entry trigger on WhatsApp.</b> The welcome trigger is wrong, the checkout trigger reads as a hardcoded product, and the product-specific triggers point at haircare that nobody buys. Verify all of them first.</li>
+      <li><b>Build browse abandonment on email.</b> It does not exist. Productise it to Microshots first, then the other proven viewed-product segments.</li>
+      <li><b>Re-point WhatsApp browse abandonment</b> from haircare to the bestsellers people actually buy from the popup.</li>
+      <li><b>Rework abandoned checkout completely.</b> One generic email today. Build 3 to 4 emails, product-specific, with separate versions for prospect, customer and member.</li>
+      <li><b>Strengthen abandoned cart.</b> More emails on the Microshots flow, educational and beginner-friendly content, fix the filter that sends the new-user message to people who already bought Microshots, kill the Foot Facial relaunch that earns zero.</li>
+      <li><b>Remove the membership line from every recovery message.</b> A/B a plain product message with a dynamic code, on email and WhatsApp.</li>
+      <li><b>The signup offer follows the person</b> through browse, cart and checkout until they place the order, with its expiry shown.</li>
+    </ul>
   </div>
+
   <div class="card">
-    <div class="cardhead"><h2>Build order</h2><span class="kicker">Month 1 = leaks &amp; quick wins · Month 2 = the missing flows · Month 3 = calendar &amp; channels</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th>Month</th><th>Build</th></tr></thead>
-      <tbody>
-        <tr><td><b>Month 1</b></td><td>Loosen WA frequency caps on Welcome / Checkout / Replenishment (+ email fallback for capped) · kill or rebuild "Abandon-cart FF-old" and "Replenishment Cleansing Balm" (₹0) · build Order-Confirmed email (the ~90%-open message) + Order-Delivered on both channels · retime replenishment to ~day 55 · split Welcome-ALIA into 3 quiz-answer branches</td></tr>
-        <tr><td><b>Month 2</b></td><td>Activation flow per hero SKU (Foot Facial · Microshots · Hair) AND per collection, triggered on delivery: how-to-use → what-to-expect → results check-in → data-proven cross-sell (FF→MS 547; MS→Sensation Cream 232) · <b>members-program flow</b> (onboarding, renewal, member-only drops) · win-back flow email+WA (day 90 / 120, value-first then offer) · SMS stays on Bik, used only if a moment needs it (no Klaviyo SMS cost)</td></tr>
-        <tr><td><b>Month 3</b></td><td>Email to 3–4/wk on the 75/20/5 mix · WA calendar rebalanced (≥1 restock + 1 social-proof + 1 education per month) · launch trilogy on every drop (teaser → launch → reminder → post) · collection-abandonment both channels · collection-introduction refresh in welcome · continue the A/B program (subject-line learnings are already compounding)</td></tr>
-      </tbody>
-    </table></div>
+    <div class="cardhead"><h2>Part 3 · Activation</h2><span class="kicker">after the order is confirmed</span></div>
+    <ul class="pts">
+      <li><b>Product education per product.</b> How to use it, what to expect, when results come. Microshots first, then Foot Facial and the hair range.</li>
+      <li><b>Skin Analyser results email is mandatory.</b> The recommendations shown on the website must reach the inbox with the products attached.</li>
+      <li><b>Use age and quiz answers</b> for the product recommendations in these messages and in the campaigns calendar.</li>
+      <li><b>Introduce the community and the founder</b> right after the first order, this is where trust compounds.</li>
+    </ul>
   </div>
+
   <div class="card">
-    <div class="cardhead"><h2>The content calendar — current vs prescribed</h2><span class="kicker">what they send today vs what to send — from their own campaign data</span></div>
-    <div class="tblwrap"><table>
-      <thead><tr><th></th><th>Doing now</th><th>Should be doing</th></tr></thead>
-      <tbody>
-        <tr><td><b>Email frequency</b></td><td>2.0/week</td><td>3–4/week for this revenue band, scaled one added send at a time, judged on revenue-per-send</td></tr>
-        <tr><td><b>WhatsApp frequency</b></td><td>2.3/week</td><td>Keep 2–3/week; rebalance themes rather than add volume (0.10% opt-out = room, but variety first)</td></tr>
-        <tr><td><b>Format mix</b></td><td>~58–66% product push</td><td>75/20/5: 75% designed showcases · 20% plain-text pattern-interrupts (founder notes — currently zero) · 5% scroll-stoppers</td></tr>
-        <tr><td><b>Monthly spine</b></td><td>ad-hoc themes</td><td>5 evergreen slots every month: social proof · us-vs-them · one USP · bestsellers · objection-buster/FAQ — then launches on top</td></tr>
-        <tr><td><b>Launches</b></td><td>single launch blast</td><td>Launch trilogy: teaser → launch → reminder → post-story; 4–8 evergreen sends/month around them; one idea per email</td></tr>
-        <tr><td><b>Offers</b></td><td>discount-led promos</td><td>80/20 value-to-promo; exclusivity/membership framing (their own A/B: "This isn't for everyone" won); ₹-off over %-off at this AOV</td></tr>
-        <tr><td><b>Segments</b></td><td>engaged_45 + product-intent (good)</td><td>Keep; add quiz-answer segments (skin type / concern / priority) as campaign audiences — the data shows they convert 2.5–3× differently</td></tr>
-      </tbody>
-    </table></div>
+    <div class="cardhead"><h2>Part 4 · Replenishment</h2></div>
+    <ul class="pts">
+      <li><b>The current replenishment is generic.</b> Rework the messaging around the founder angle: because you bought this, here is the best next step.</li>
+      <li><b>Experiment before locking.</b> Write 2 to 3 versions, test, keep the winner.</li>
+      <li><b>Microshots replenishment gets good interaction</b> and the best repeat rate, rework it first.</li>
+      <li><b>Time it to the real reorder window</b> so the reminder lands before the product runs out.</li>
+    </ul>
   </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 5 · Cross-sell, upsell and win-back</h2></div>
+    <ul class="pts">
+      <li><b>Cross-sell on the proven paths.</b> Foot Facial buyers to Microshots (547 already did it), Microshots buyers to Sensation Cream and masks.</li>
+      <li><b>Membership becomes a founder-led flow for 2-time buyers only.</b> They have invested in the brand, the founder introduces the programme, then the offer. It leaves every other automation.</li>
+      <li><b>Win-back at day 90 and day 365,</b> personalised to the skin type and concern each person shared. October buyers who lapsed are already coming back when touched.</li>
+      <li><b>After a year of silence,</b> target them purely on the skincare data they gave us.</li>
+    </ul>
+  </div>
+
+  <div class="flag win"><b>How we execute, in two phases:</b> Phase 1, send campaigns to each part's segments and measure what performs. Phase 2, automate the winners. No automation gets built before its campaign proves the audience.</div>
+
   <div class="card">
     <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">every target starts from today's verified number</span></div>
     <div class="tiles">
       <div class="tile"><div class="v">18.7% → 25%</div><div class="l">retention share of Shopify revenue</div></div>
-      <div class="tile"><div class="v">19.7% → 30%</div><div class="l">lifetime repeat rate — low for skincare today</div></div>
-      <div class="tile"><div class="v">13% → 20%</div><div class="l">Foot-Facial buyer repeat (via activation + cross-sell)</div></div>
+      <div class="tile"><div class="v">19.7% → 30%</div><div class="l">lifetime repeat rate, low for skincare today</div></div>
+      <div class="tile"><div class="v">13% → 20%</div><div class="l">Foot Facial buyer repeat, via activation and cross-sell</div></div>
       <div class="tile"><div class="v">0.76% → 1.2%+</div><div class="l">email campaign click rate</div></div>
-      <div class="tile"><div class="v">42–80% → &lt;10%</div><div class="l">WA flow triggers lost to capping</div></div>
-      <div class="tile"><div class="v">4.3% → 8%+</div><div class="l">popup sign-up rate (shorter, skippable, WhatsApp-first)</div></div>
+      <div class="tile"><div class="v">579 → 579</div><div class="l">every Alia signup enters the welcome flow, not 117</div></div>
+      <div class="tile"><div class="v">4.3% → 8%+</div><div class="l">popup sign-up rate, shorter and skippable</div></div>
     </div>
   </div>
 </section>
@@ -691,6 +432,14 @@
     window.scrollTo({top:0});}
   tabs.forEach(function(t){t.addEventListener('click',function(){go(t.dataset.view);});});
   go('g1');
+  var tt=document.createElement('div');
+  tt.style.cssText='position:fixed;pointer-events:none;background:#2c2437;color:#fff;padding:6px 11px;border-radius:6px;font-size:12.5px;font-weight:600;z-index:99;display:none;box-shadow:0 2px 10px rgba(0,0,0,.25)';
+  document.body.appendChild(tt);
+  document.querySelectorAll('#v4 svg path').forEach(function(p){
+    var t=p.querySelector('title'); if(!t) return; var txt=t.textContent;
+    p.addEventListener('mousemove',function(e){ tt.textContent=txt; tt.style.display='block'; tt.style.left=(e.clientX+14)+'px'; tt.style.top=(e.clientY+14)+'px'; p.style.opacity='0.85'; });
+    p.addEventListener('mouseleave',function(){ tt.style.display='none'; p.style.opacity=''; });
+  });
 </script>
 </body>
 </html>

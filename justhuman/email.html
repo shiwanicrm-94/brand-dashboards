@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JustHuman · Email (Klaviyo)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{position:relative;padding-left:24px;font-size:13.5px;margin-bottom:8px;color:var(--ink);line-height:1.55;}
+  ul.pts li::before{content:"✦";position:absolute;left:2px;top:2px;color:var(--accent);font-size:11px;}
+  .split{display:flex;height:26px;border-radius:6px;overflow:hidden;font-size:11px;font-weight:700;color:#fff;margin:10px 0;}
+  .split span{display:flex;align-items:center;justify-content:center;}
+  details{border:1px solid var(--ring);border-radius:8px;margin-top:8px;background:var(--card);}
+  details summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:13.5px;list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{content:"▸ ";color:var(--accent);}
+  details[open] summary::before{content:"▾ ";}
+  details .body{padding:0 14px 14px;}
+  .msg{border-left:3px solid var(--accent);background:var(--hero);border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;}
+  .msg .mh{font-weight:700;font-size:13px;}
+  .msg .mstat{font-size:11.5px;color:var(--ink2);margin-top:3px;}
+  .msg .mcopy{font-size:12px;color:var(--ink2);margin-top:6px;white-space:pre-line;border-top:1px dashed var(--ring);padding-top:6px;}
+  .shot{margin-top:8px;border:1px dashed var(--baseline,#c8bedb);border-radius:6px;padding:10px;font-size:11.5px;color:var(--muted);text-align:center;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .src{font-size:11px;color:var(--muted);font-style:italic;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">JustHuman · Email deep-dive (Klaviyo) · Jan to Jun 2026 · Prepared by Shiwani Agrawal</div>
+</header>
+<nav class="tabs"><a class="tab" href="index.html" style="text-decoration:none">← Back to the audit</a><a class="tab" href="email.html" style="text-decoration:none">Email</a><a class="tab" href="whatsapp.html" style="text-decoration:none">WhatsApp</a><a class="tab" href="alia.html" style="text-decoration:none">Alia</a></nav>
+<main class="wrap">
+<section class="view active" id="v5">
+  <h1>Email <span style="font-size:14px;color:var(--muted)">— Klaviyo</span></h1>
+  <p class="kicker">36 flows (17 live, 19 draft) + campaigns. H1 2026, live API.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹34.7L</div><div class="l">email retention revenue, H1</div></div>
+    <div class="tile"><div class="v">₹16.8L</div><div class="l">from flows (automations)</div></div>
+    <div class="tile"><div class="v">₹17.3L</div><div class="l">from campaigns</div></div>
+    <div class="tile good"><div class="v">₹6.0L</div><div class="l">Welcome-ALIA — #1 flow</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Flow-by-flow verdicts (from the account walkthrough)</h2><span class="kicker">what is wrong inside each email automation, and the fix</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome (ALIA)</b></td><td>Generic brand copy. No offer, no expiry, no catalogue, no bestseller. The 30-minute code is never mentioned.</td><td>Code + expiry in every message, Microshots-led, catalogue and founder introduction, branch by quiz answer, non-buyer filter and purchase exit.</td></tr>
+        <tr><td><b>Browse abandonment</b></td><td class="crit">Does not exist on email.</td><td>Build it, productised to Microshots first (1,112 viewers a week), then CB and DSC. Viewed-product segments already perform in campaigns.</td></tr>
+        <tr><td><b>Abandoned checkout</b></td><td class="crit">The most important automation has ONE generic email.</td><td>Complete rework: 3 to 4 emails, product-specific, offer-holder version with code and expiry, beginner vs repeat versions.</td></tr>
+        <tr><td><b>Abandoned cart</b></td><td>Only 2 emails, generic, membership-led. MS cart flow performs well for new users with just 2 emails. FF relaunch earns ₹0.</td><td>Add emails to the MS flow, educational product-specific content, kill or rebuild FF relaunch, remove membership push.</td></tr>
+        <tr><td><b>Membership messaging</b></td><td>Every automation pushes the 10% member line. Only 600 of 24,000 customers are members.</td><td>Remove from all automations. A/B plain product message + dynamic code. New founder-led membership flow for 2-time buyers only.</td></tr>
+        <tr><td><b>Replenishment</b></td><td>Generic. MS replenishment gets good interaction but the copy is flat.</td><td>Rework around the founder angle: because you bought this, here is the best next step. Test 2 or 3 versions.</td></tr>
+        <tr><td><b>Skin Analyser</b></td><td class="crit">Good submit rates, used nowhere. Recommendations never reach the inbox.</td><td>Mandatory results email with the recommended products. Two CTA buttons in popup and welcome to take the analysis. Use collected age for recommendations.</td></tr>
+        <tr><td><b>Tracking</b></td><td class="warn">Apple privacy opens are NOT excluded. Open rates are inflated.</td><td>Tick the MPP exclusion in Klaviyo settings; re-baseline open benchmarks after.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Prospects engage with our emails more than customers do, yet campaigns are imagery-led product pushes. Curate prospect campaigns around the founder, the research lab and product testing: trust first, then the offer.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Top email flows (H1 2026)</h2><span class="kicker">recipients · conversions · revenue, from Klaviyo</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th class="num">Recipients</th><th class="num">Conv.</th><th class="num">Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>Welcome flow ALIA <span class="good-text">(popup-driven)</span></td><td class="num">~25.4k</td><td class="num">107</td><td class="num good-text">₹5.96L</td></tr>
+        <tr><td>Abandon Cart — Generic (members)</td><td class="num">3.2k</td><td class="num">38</td><td class="num">₹2.43L</td></tr>
+        <tr><td>Abandon Cart — Generic (non-members)</td><td class="num">1.7k</td><td class="num">25</td><td class="num">₹1.49L</td></tr>
+        <tr><td>Post-Purchase — non-members (membership upsell)</td><td class="num">5.4k</td><td class="num">22</td><td class="num">₹1.01L</td></tr>
+        <tr><td>Abandoned cart — Microshots relaunch</td><td class="num">~1.4k</td><td class="num">30</td><td class="num">₹1.20L</td></tr>
+        <tr><td>Replenishment — Foot Facial + Generic</td><td class="num">1.2k</td><td class="num">13</td><td class="num">₹0.58L</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Total email flow revenue H1 ₹16.8L (Klaviyo) ≈ ₹17.5L (tracker). Membership model drives the members/non-members split across flows.</p>
+  </div>
+  <details>
+    <summary>Drill-down · Welcome flow ALIA (entry: Alia list · 4 emails · live)</summary>
+    <div class="body">
+      <p class="src">Entry trigger: added to Klaviyo list "Alia New Subscribers" (26,773). Exit: purchase / unsubscribe. 4 emails with delays. Copy from Porcellia flows-structure doc; per-email stats from Klaviyo.</p>
+      <div class="msg"><div class="mh">Email 1 — "Are you ready to take back control?" (immediate)</div><div class="mstat">8,928 recipients · 2,649 opens (30%) · 82 clicks · 76 conv · ₹4.06L</div><div class="mcopy">Thank-you for signing up · India's #1 neurocosmetics · founder's journey, categories, USPs · membership banner. ("Imagine if you could uplift not just your skin but also your mood — the skin-brain axis.")</div></div>
+      <div class="msg"><div class="mh">Email 2 — brand ethos / 40+ (after delay)</div><div class="mstat">7,787 recipients · 2,221 opens · 29 clicks · 13 conv · ₹0.76L</div><div class="mcopy">Clean · fast · addictively good · neurocosmetics · skin minimalists · bestsellers (MS, FF, Peace Mask, Cleansing Balm) each with a punchline · membership banner.</div></div>
+      <div class="msg"><div class="mh">Email 3 — founder's note / neurocosmetics education</div><div class="mstat">7,042 recipients · 2,061 opens · 20 clicks · 15 conv · ₹0.94L</div><div class="mcopy">Founder's note · educational angle on neurocosmetics · membership banner.</div></div>
+      <div class="msg"><div class="mh">Email 4 — social proof</div><div class="mstat">1,663 recipients · 495 opens · 6 clicks · 3 conv · ₹0.20L</div><div class="mcopy">Social proofing · how JH helped women in their skincare journey · past events (FF & the soiree) · membership banner.</div></div>
+      <div class="shot">📷 Rendered message screenshots — I can capture each email image from Klaviyo on request (email renders are pullable via API).</div>
+      <p class="note"><b>Read:</b> Email 1 does the heavy lifting (₹4.06L of ₹6.0L). Click rates are low (~1%) across all four — the sequence converts on opens/brand, not clicks; worth testing stronger single-CTA emails.</p>
+    </div>
+  </details>
+  <div class="card">
+    <div class="cardhead"><h2>Campaign pattern — what's being sent, to whom, how often</h2><span class="kicker">53 email campaigns Jan–Jun 2026, from the Klaviyo API</span></div>
+    <ul class="pts">
+      <li><b>Cadence is 2.0/week</b> (Jan 7 · Feb 13 · Mar 8 · Apr 8 · May 7 · Jun 10). For this revenue band the proven ladder is <b>3–4/week</b> — headroom for ~1–2 more sends/week <i>if variety improves</i> (sending the same type burns lists, not frequency).</li>
+      <li><b>Targeting is tight and disciplined:</b> almost every campaign goes to <b>"engaged_45 days"</b> + product-intent segments (ATC Cleansing Balm L30, ATC Microshots L45, product viewers) — typically 2,000–3,000 recipients. That discipline is why delivery is 99.6% and opens run 66–78%.</li>
+      <li><b>The cost of that discipline: reach.</b> ~2.5k recipients per send from a 40k+ engaged-capable list, and <b>click rate is just 0.76%</b> (benchmark >1.2%) — the list is opening but not clicking. Fix is creative/CTA (hero + one CTA above the fold), not more segmentation.</li>
+      <li><b>Theme mix skews product-push.</b> Same pattern as WhatsApp: product/launch angles dominate; education, social-proof and use-case angles — which win in their own A/B tests — are under-used.</li>
+    </ul>
+    
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Segment performance — target more, target less</h2><span class="kicker">every campaign's included audiences joined to its attributed revenue (53 campaigns, Klaviyo)</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Segment</th><th class="num">Times targeted</th><th class="num">Attributed rev</th><th class="num">Rev / send</th><th>Call</th></tr></thead>
+      <tbody>
+        <tr><td>Viewed Cleansing Balm in L5</td><td class="num">1</td><td class="num">₹90,818</td><td class="num good-text">₹90,818</td><td class="good-text">Target more</td></tr>
+        <tr><td>Viewed DSC Cream in L15 + opened</td><td class="num">1</td><td class="num">₹87,236</td><td class="num good-text">₹87,236</td><td class="good-text">Target more</td></tr>
+        <tr><td>ATC DSC Cream in the L30</td><td class="num">3</td><td class="num">₹1.57L</td><td class="num good-text">₹52,478</td><td class="good-text">Target more</td></tr>
+        <tr><td>ATC Cleansing Balm in the L30</td><td class="num">5</td><td class="num">₹2.56L</td><td class="num good-text">₹51,130</td><td class="good-text">Target more</td></tr>
+        <tr><td>Viewed MS in L45 + opened in L60</td><td class="num">3</td><td class="num">₹1.49L</td><td class="num">₹49,792</td><td class="good-text">Target more</td></tr>
+        <tr><td>Engaged_30</td><td class="num">7</td><td class="num">₹3.39L</td><td class="num">₹48,469</td><td>Keep</td></tr>
+        <tr><td>engaged_45 days (the workhorse)</td><td class="num">32</td><td class="num">₹12.1L</td><td class="num">₹37,871</td><td>Keep as base</td></tr>
+        <tr><td>Alia poll answered + no order</td><td class="num">4</td><td class="num">₹1.40L</td><td class="num">₹34,900</td><td class="good-text">Target more (barely used)</td></tr>
+        <tr><td>Opened atleast once in L45</td><td class="num">8</td><td class="num">₹0.71L</td><td class="num warn">₹8,847</td><td class="warn">Target less — 4× weaker than base</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The pattern:</b> fresh product-intent segments (viewed/added-to-cart in the last 5–30 days) earn <b>2–10× per send</b> vs broad engagement blasts. Shift 1–2 sends/week from "opened in L45"-style audiences to product-intent + Alia-answer segments — same list, more revenue per send.</div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>A/B test learnings — what messaging actually wins</h2><span class="kicker">6 subject-line / CTA tests from the internal tracker</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Test</th><th>Winning line</th><th class="num">Rev (win)</th><th>Learning</th></tr></thead>
+      <tbody>
+        <tr><td>Body Soother (Apr)</td><td>"Your dry skin has been patient long enough"</td><td class="num good-text">₹33.0K</td><td>Problem-aware emotional tension &gt;&gt; educational framing (vs ₹14K)</td></tr>
+        <tr><td>Body Soother (Jun)</td><td>"One jar. Four versions of later"</td><td class="num good-text">₹36.3K</td><td>Concrete product line &gt; abstract/metaphorical (vs ₹22K)</td></tr>
+        <tr><td>User Letter (Jun)</td><td>CTA "Find the Fix"</td><td class="num good-text">₹18.0K</td><td>Solution-oriented CTA &gt; "Buy Now" (vs ₹11K)</td></tr>
+        <tr><td>Membership (May)</td><td>"This isn't for everyone"</td><td class="num">↑ open + click</td><td>Exclusivity framing wins for membership/insider offers</td></tr>
+        <tr><td>Melting Balm (Apr)</td><td>"That tight feeling after cleansing?"</td><td class="num good-text">₹14.1K</td><td>Relatable concern &gt; clever wordplay for revenue (vs ₹8.6K)</td></tr>
+        <tr><td>Soiree (Mar)</td><td>"You should've been in that room…"</td><td class="num">₹9.7K</td><td>Curiosity/exclusivity &gt; descriptive emotional for events</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The messaging playbook (proven on JustHuman's own list):</b> lead with the reader's <b>problem/feeling</b>, not the product's benefit · use <b>concrete</b> over metaphorical · <b>exclusivity</b> sells membership · replace "Buy Now" with <b>solution-oriented CTAs</b> ("Find the Fix").</div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>What's missing / weak</h2></div>
+    <ul class="pts">
+      <li><b>Transactional flows sit in draft</b> — Order Confirmed, Order Cancelled, Shipping Confirmation are not live in Klaviyo (handled on WhatsApp instead; fine, but no email fallback).</li>
+      <li><b>Skin-Analyzer quiz doesn't feed a live email nurture</b> — the flow is drafted, not live; a large engaged segment is uncaptured on email.</li>
+      <li><b>The generic "Welcome flow" is ₹0 (draft)</b> — all welcome value comes from Welcome-ALIA. Fine while Alia dominates capture, but a single point of dependence.</li>
+      <li><b>Several "relaunch" variants left in draft</b> — duplicated effort not switched on.</li>
+    </ul>
+  </div>
+</section>
+</main>
+</body>
+</html>
