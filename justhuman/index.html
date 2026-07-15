@@ -359,6 +359,7 @@
       <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
       <tbody>
         <tr><td><b>Welcome (ALIA)</b></td><td>Generic brand copy. No offer, no expiry, no catalogue, no bestseller. The 30-minute code is never mentioned.</td><td>Code + expiry in every message, Microshots-led, catalogue and founder introduction, branch by quiz answer, non-buyer filter and purchase exit.</td></tr>
+        <tr><td><b>Post-purchase</b></td><td class="warn">Customers are most active right after buying, and the current post-purchase emails are generic membership upsells, not specific to the product bought.</td><td>Purchase-specific activation series per product: usage, expectations, results, then the cross-sell.</td></tr>
         <tr><td><b>Browse abandonment</b></td><td class="crit">Does not exist on email.</td><td>Build it, productised to Microshots first (1,112 viewers a week), then CB and DSC. Viewed-product segments already perform in campaigns.</td></tr>
         <tr><td><b>Abandoned checkout</b></td><td class="crit">The most important automation has ONE generic email.</td><td>Complete rework: 3 to 4 emails, product-specific, offer-holder version with code and expiry, beginner vs repeat versions.</td></tr>
         <tr><td><b>Abandoned cart</b></td><td>Only 2 emails, generic, membership-led. MS cart flow performs well for new users with just 2 emails. FF relaunch earns ₹0.</td><td>Add emails to the MS flow, educational product-specific content, kill or rebuild FF relaunch, remove membership push.</td></tr>
@@ -454,7 +455,7 @@
   <div class="card">
     <div class="cardhead"><h2>Evidence · screenshots from the account walkthrough</h2><span class="kicker">captured by Shiwani, 15 July 2026</span></div>
     <figure style="margin:14px 0 0">
-      <img src="evidence/klaviyo-tracking.png" alt="Klaviyo tracking settings: Apple Mail Privacy Protection opens are NOT excluded from attribution, so open rates are inflated." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: klaviyo-tracking.png ] </span>')">
+      <img src="evidence/klaviyo-tracking.png" alt="Klaviyo tracking settings: Apple Mail Privacy Protection opens are NOT excluded from attribution, so open rates are inflated." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
       <figcaption class="note" style="margin-top:6px">Klaviyo tracking settings: Apple Mail Privacy Protection opens are NOT excluded from attribution, so open rates are inflated.</figcaption>
     </figure>
 
@@ -475,6 +476,7 @@
     <div class="tblwrap"><table>
       <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
       <tbody>
+        <tr><td><b>Post-purchase (order confirmation)</b></td><td class="crit">The most important flow: customers are most active right after buying. Today it is ONE generic message, unchanged in 2.5 years, paid at marketing rates, and it duplicates the order updates the shipping partner already sends.</td><td>Make every post-purchase message specific to what they bought: how to use it, what to expect, when results come. This is the front door of the activation flow.</td></tr>
         <tr><td><b>Welcome flow</b></td><td class="crit">Trigger is "customer created" = first order. Last week: 579 Alia signups, only 117 entered. We introduce the brand to people who already bought. Only the last message converts; the rest add spend.</td><td>Re-trigger on Alia signup. Offer-led message 1 with code and expiry. 3 messages max, non-buyers only.</td></tr>
         <tr><td><b>Browse abandonment</b></td><td class="crit">Specialised for haircare (3 product IDs) which nobody bought in 30 days. 823 of 985 triggers stopped. The generic fallback branch converts best (85.63% CTR, ₹12.45K vs ₹1.55K).</td><td>Re-point the specialisation to Microshots and the products people actually buy from the popup. Loosen the stop conditions.</td></tr>
         <tr><td><b>Abandoned checkout</b></td><td class="warn">Entry trigger reads "Abandoned A Product" with a hardcoded product name: recheck it is truly checkout abandonment. Only filter is order count over 0. One generic first message.</td><td>Verify the trigger, split prospect vs customer vs member, product-specific messages, offer-holder version with code and expiry.</td></tr>
@@ -553,18 +555,29 @@
   <div class="card">
     <div class="cardhead"><h2>Evidence · screenshots from the account walkthrough</h2><span class="kicker">captured by Shiwani, 15 July 2026</span></div>
     <figure style="margin:14px 0 0">
-      <img src="evidence/bik-browse-abandon.png" alt="Browse abandonment in Bik: 985 triggered, 823 stopped. The condition targets 3 haircare product IDs while the generic fallback branch converts best (85.63% CTR, ₹12.45K)." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: bik-browse-abandon.png ] </span>')">
-      <figcaption class="note" style="margin-top:6px">Browse abandonment in Bik: 985 triggered, 823 stopped. The condition targets 3 haircare product IDs while the generic fallback branch converts best (85.63% CTR, ₹12.45K).</figcaption>
+      <img src="evidence/bik-post-purchase.png" alt="Post-purchase order confirmation: ONE generic message (Hello name, View Order Details), last saved 898 days ago. The most active customer moment gets the weakest message, paid at marketing rates." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Post-purchase order confirmation: ONE generic message (Hello name, View Order Details), last saved 898 days ago. The most active customer moment gets the weakest message, paid at marketing rates.</figcaption>
     </figure>
     <figure style="margin:14px 0 0">
-      <img src="evidence/bik-checkout-flow.png" alt="Abandoned checkout in Bik: trigger reads "Abandoned A Product" with a hardcoded product, the only filter is order count above 0, one generic first message." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: bik-checkout-flow.png ] </span>')">
-      <figcaption class="note" style="margin-top:6px">Abandoned checkout in Bik: trigger reads "Abandoned A Product" with a hardcoded product, the only filter is order count above 0, one generic first message.</figcaption>
+      <img src="evidence/bik-browse-abandon.png" alt="Browse abandonment: 985 triggered, 823 stopped. The condition targets 3 haircare product IDs while the generic fallback branch converts best (85.63% CTR)." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Browse abandonment: 985 triggered, 823 stopped. The condition targets 3 haircare product IDs while the generic fallback branch converts best (85.63% CTR).</figcaption>
     </figure>
     <figure style="margin:14px 0 0">
-      <img src="evidence/wa-cart-template.png" alt="The cart template sent to everyone: "Your 10% Limitless member advantage is already included". Not relevant to prospects and non-members." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: wa-cart-template.png ] </span>')">
-      <figcaption class="note" style="margin-top:6px">The cart template sent to everyone: "Your 10% Limitless member advantage is already included". Not relevant to prospects and non-members.</figcaption>
+      <img src="evidence/bik-checkout-trigger.png" alt="Checkout abandonment trigger config: fires on Abandoned Cart Created, cancels on Ordered, frequency limit 2 per day. Recheck this wiring." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Checkout abandonment trigger config: fires on Abandoned Cart Created, cancels on Ordered, frequency limit 2 per day. Recheck this wiring.</figcaption>
     </figure>
-
+    <figure style="margin:14px 0 0">
+      <img src="evidence/bik-checkout-flow.png" alt="Checkout abandonment flow: 185 triggered, 39 messages, Rs 24.05K in 7 days. Two generic cart-saved templates, no prospect vs customer vs member split." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Checkout abandonment flow: 185 triggered, 39 messages, Rs 24.05K in 7 days. Two generic cart-saved templates, no prospect vs customer vs member split.</figcaption>
+    </figure>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/bik-cart-new-users.png" alt="Abandon Cart, New Users: trigger reads Abandoned A Product with a hardcoded product, and the only filter is order count above 0, so existing Microshots buyers can get the new-user message." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Abandon Cart, New Users: trigger reads Abandoned A Product with a hardcoded product, and the only filter is order count above 0, so existing Microshots buyers can get the new-user message.</figcaption>
+    </figure>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/wa-cart-template.png" alt="The cart template for non-members: Limitless membership unlocks a 10% advantage. Membership pushed on people who did not choose it." style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">The cart template for non-members: Limitless membership unlocks a 10% advantage. Membership pushed on people who did not choose it.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -686,6 +699,7 @@
     <div class="cardhead"><h2>Part 3 · Activation</h2><span class="kicker">after the order is confirmed</span></div>
     <ul class="pts">
       <li><b>Product education per product.</b> How to use it, what to expect, when results come. Microshots first, then Foot Facial and the hair range.</li>
+      <li><b>Replace the generic order confirmation on WhatsApp.</b> It is one message, unchanged in 2.5 years, and it repeats what the shipping partner already sends while we pay marketing rates for it. It becomes the purchase-specific opener of the activation flow.</li>
       <li><b>Skin Analyser results email is mandatory.</b> The recommendations shown on the website must reach the inbox with the products attached.</li>
       <li><b>Use age and quiz answers</b> for the product recommendations in these messages and in the campaigns calendar.</li>
       <li><b>Introduce the community and the founder</b> right after the first order, this is where trust compounds.</li>
