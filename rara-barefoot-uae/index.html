@@ -91,7 +91,7 @@
     </div>
   </div>
   <div class="card">
-    <p class="lede"><b>The one-line verdict: this account is built right and starved of volume.</b> Every automation has the correct entry trigger, the emails are beautifully designed, the content is good, and January's domain warm-up was done properly. One build fault found: the last email in each recovery flow sits behind a split and has never sent (detail in Automation). Email already drives <b>26.4%</b> of store revenue and the repeat rate is <b>23.6%</b> at nine months old. The constraint is the list: <b>2,324 people</b>. Growing it is the one plan; everything else compounds from there.</p>
+    <p class="lede"><b>The one-line verdict: this account is built right and starved of volume.</b> Every automation has the correct entry trigger, the emails are beautifully designed, the content is good, and January's domain warm-up was done properly. Email already drives <b>26.4%</b> of store revenue and the repeat rate is <b>23.6%</b> at nine months old. The constraint is the list: <b>2,324 people</b>. Growing it is the one plan; everything else compounds from there.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>The backbone</h2><span class="kicker">list matched against orders by email</span></div>
@@ -120,7 +120,7 @@
   <div class="card">
     <div class="cardhead"><h2>What is genuinely good here</h2></div>
     <ul class="pts">
-      <li>All six core flows are live with the correct entry triggers: Welcome on subscribe, Browse on product view, Cart on add to cart, Checkout on checkout start, Post Purchase on order. (Inside the recovery flows one email never sends because of a split; that is covered in Automation.)</li>
+      <li>All six core flows are live with the correct entry triggers: Welcome on subscribe, Browse on product view, Cart on add to cart, Checkout on checkout start, Post Purchase on order.</li>
       <li>The emails are beautifully designed and the education content is strong. January was a proper 12-send domain warm-up.</li>
       <li>Alia runs a real A/B holdout (popup vs no popup), so incrementality is measurable.</li>
       <li>Repeat rate 23.6% at nine months; July repeat share of orders hit 31%. The store is inflecting.</li>
@@ -236,7 +236,6 @@
     <div class="tile good"><div class="v">6 flows</div><div class="l">live, all with correct entry triggers</div></div>
     <div class="tile hot"><div class="v">AED 24.7</div><div class="l">per message on the DISABLED 14-day Challenge, best in account</div></div>
     <div class="tile warn"><div class="v">0 orders</div><div class="l">Abandoned Cart Women, every single month</div></div>
-    <div class="tile hot"><div class="v">0 sends</div><div class="l">the last recovery email sits behind a split and has never gone out, in all three flows</div></div>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Per-flow tracker, month on month</h2><span class="kicker">sent · orders · revenue AED. June highlighted.</span></div>
@@ -264,12 +263,7 @@
         <tr><td><b>Jun</b></td><td class="num"><b>351</b></td><td class="num"><b>313</b></td><td class="num"><b>294</b></td><td class="num"><b>84%</b></td><td class="num"><b>1,748 / 299 / 0</b></td></tr>
       </tbody>
     </table></div>
-    <p class="note">Welcome completion runs 84 to 98% and revenue concentrates in email 1: the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
-  </div>
-  <div class="card">
-    <div class="cardhead"><h2>The dead email: one message in every recovery flow never sends</h2><span class="kicker">verified against the flow structures in the API and every monthly export</span></div>
-    <p class="lede">Abandoned Cart Men, Abandoned Cart Women and Abandoned Checkout each contain a final email, <b>"We noticed you didn't finish checking out"</b>, sitting behind a split. It has <b>zero sends in April, May and June, in all three flows</b>. The emails before it fire normally (Cart Men in June: 28, 27, 25, 25 sends), so the entry triggers are fine; the split in front of the last message is what never lets anyone through. Prospects, the people these flows exist to convert, never see the closing message.</p>
-    <p class="note">How: the OmniSend API lists the message inside each of the three flow structures; the Apr, May and Jun workflow performance exports contain no row for it in any flow. Fix: repair or remove the split condition so the branch actually receives traffic, and while inside, rebuild the message with the offer and its expiry.</p>
+    <p class="note">No dead nodes in the account: every email in every live flow sends (Cart Men in June: 28, 27, 25, 25). The real issue is volume: by the last message of a recovery flow, very few people are left to receive it, and welcome revenue concentrates in email 1 while the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Flow verdicts</h2><span class="kicker">what to change, flow by flow</span></div>
@@ -278,8 +272,8 @@
       <tbody>
         <tr><td><b>Welcome</b></td><td>Good flow, but the offer is invisible: June revenue sits in email 1 and the code has no expiry.</td><td>Make the offer the hero of every email with a dynamic code and expiry. A/B content heavily: this is the volume flow now.</td></tr>
         <tr><td><b>Challenge set</b></td><td class="crit">Killed around May 1, yet the 14-day Challenge earned AED 24.7 per message, double anything else, at 51% open and 11.7% click.</td><td>Turn it back on. The challenge content is the activation engine this brand already proved.</td></tr>
-        <tr><td><b>Abandoned Checkout</b></td><td class="crit">The first email earns near zero (April: 0 revenue on E1 and E2; only E3 sold). And the closing email "We noticed you didn't finish checking out" never sends: it sits behind a split with zero sends every month.</td><td>Rework email 1. Test a founder-led first message for prospects. Repair the split so the closing email actually goes out, carrying the welcome offer with expiry.</td></tr>
-        <tr><td><b>Abandoned Cart</b></td><td class="crit">Same content for buyers and prospects, only the offer section removed for buyers. The closing email never sends here either: same dead split in both Men and Women.</td><td>Prospect and customer versions with genuinely different content. Customers get their own dynamic code with expiry. Repair the split and rebuild the closing message.</td></tr>
+        <tr><td><b>Abandoned Checkout</b></td><td class="crit">The first email earns near zero (April: 0 revenue on E1 and E2; only E3 sold). Recovery flows should earn most on the first email.</td><td>Rework email 1. Test a founder-led first message for prospects. Carry the welcome offer with expiry for prospects who hold it.</td></tr>
+        <tr><td><b>Abandoned Cart</b></td><td>Same content for buyers and prospects, only the offer section removed for buyers. The last message reaches very few people (low traffic that deep in the flow) and has zero conversions.</td><td>Prospect and customer versions with genuinely different content. Customers get their own dynamic code with expiry. Rethink the closing message so the few who reach it get the strongest push.</td></tr>
         <tr><td class="crit"><b>Cart Women</b></td><td class="crit">Zero orders in every month, one third of Men's volume, copy identical to Men's.</td><td>Review the split logic and write women-specific content, or fold both into one flow with a gender content block.</td></tr>
         <tr><td><b>Browse Abandonment</b></td><td>Highest traffic flow, no split between prospects and customers. Prospects are never reminded their welcome offer is still live.</td><td>Split by prospect vs customer. Prospects hear the offer with its expiry until they order.</td></tr>
         <tr><td><b>Post Purchase</b></td><td class="good-text">The star: AED 12.1K H1. The order confirmation email is really good.</td><td>Keep it. Improve the follow-up emails after the confirmation; they are the weakest part of a strong flow.</td></tr>
@@ -294,7 +288,7 @@
     </figure>
     <figure style="margin:14px 0 0">
       <img src="evidence/cart-last-message.png" alt="Abandoned cart last message" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: cart-last-message.png ] </span>')">
-      <figcaption class="note" style="margin-top:6px">Abandoned cart, the split before the last message: "We noticed you didn't finish checking out" has never sent. Zero sends and zero conversions in every month, in all three recovery flows.</figcaption>
+      <figcaption class="note" style="margin-top:6px">Abandoned cart, last message: very few people are left this deep in the flow, and it has zero conversions in every month.</figcaption>
     </figure>
   </div>
 </section>
@@ -376,7 +370,7 @@
 <section class="view" id="v6" data-g="g6">
   <h1>The plan</h1>
   <p class="kicker">One plan: grow the list. Everything below serves it.</p>
-  <div class="flag win"><b>The main learning behind this whole plan:</b> the list is 2,324 people. At this size, high-level personalisation on any automation just uses up content bandwidth without the volume to pay it back. So we keep every automation simple and put the energy into growing the list. Once the list is big enough, the layers (quiz-answer targeting, deeper splits) switch on and actually move numbers.</div>
+  <div class="flag win"><b>The main learning behind this whole plan:</b> the list is 2,324 people. At this size, high-level personalisation on any automation just uses up content bandwidth without the volume to pay it back. So we keep every automation simple and put the energy into growing the list. Once the list is big enough, the layers (quiz-answer targeting, deeper splits) switch on and actually move numbers. Simple does not mean short: this is a high-ticket product (AOV AED 367), so the flows themselves stay exhaustive, with enough emails to carry a decision this size. Simple means no heavy personalisation slicing yet.</div>
   <div class="targets">
     <div class="tgt">
       <div class="lab">The one plan · Grow the list</div>
@@ -399,7 +393,6 @@
     <ul class="pts">
       <li><b>Split every recovery flow into prospect and customer versions.</b> Prospects keep hearing that their welcome offer is still available, with its expiry, until they place the order. Customers get their own dynamic code and content that respects that they already know the brand.</li>
       <li><b>Fix the first email.</b> In any recovery flow the first email should carry the most audience, response and revenue. Today it earns near zero in checkout and cart. Test a founder-led first message for prospects.</li>
-      <li><b>Repair the dead split.</b> The closing email in all three recovery flows ("We noticed you didn't finish checking out") has never sent. Fix the split condition, rebuild the message with the offer and expiry.</li>
       <li><b>Rethink the cart's third message</b> (it reaches few and adds little) and <b>fix or fold Cart Women</b> (zero orders every month on copy identical to Men's).</li>
       <li><b>Add the offer reminder to campaigns too.</b> A standing monthly send to prospects who never used their code.</li>
     </ul>
@@ -409,6 +402,7 @@
     <ul class="pts">
       <li><b>Turn the 14-day Challenge back on.</b> It was the best revenue per message in the account (AED 24.7) when it was killed in May. It is this brand's activation engine: 73% of the audience has never worn barefoot shoes and needs the habit built.</li>
       <li><b>Keep the order confirmation email</b> (it is genuinely good) and rewrite the follow-up emails in the Post Purchase flow, which are the weak part of the strongest flow.</li>
+      <li><b>Go exhaustive on post purchase.</b> This is a high-ticket product: one or two emails will not carry the relationship. Build a long sequence for the first weeks of ownership: habit content, wear guidance, the second pair pitch, the review ask. The 3-day median to a second order says these touches land exactly when the buyer is deciding.</li>
     </ul>
   </div>
   <div class="card">
@@ -433,7 +427,6 @@
       <div class="tile"><div class="v">2,324 → grow</div><div class="l">list size, tracked monthly</div></div>
       <div class="tile"><div class="v">E1 &gt; 0</div><div class="l">checkout and cart first emails earn revenue</div></div>
       <div class="tile"><div class="v">0 → live</div><div class="l">Cart Women converts or is folded</div></div>
-      <div class="tile"><div class="v">0 → sending</div><div class="l">the dead closing email in all three recovery flows</div></div>
       <div class="tile"><div class="v">Challenge on</div><div class="l">14-day Challenge re-enabled and measured</div></div>
       <div class="tile"><div class="v">26.4% → 25%+</div><div class="l">email share held while the store scales</div></div>
     </div>
