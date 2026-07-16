@@ -42,6 +42,7 @@
   th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
   .tblwrap{overflow-x:auto;}
+  th.grp,td.grp{border-left:2px solid var(--ring);padding-left:12px;}
   .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
   .lede{color:var(--ink2);max-width:74ch;}
   .lede b{color:var(--ink);}
@@ -238,29 +239,35 @@
     <div class="tile warn"><div class="v">0 orders</div><div class="l">Abandoned Cart Women, every single month</div></div>
   </div>
   <div class="card">
-    <div class="cardhead"><h2>Per-flow tracker, month on month</h2><span class="kicker">sent · orders · revenue AED. June highlighted.</span></div>
+    <div class="cardhead"><h2>Per-flow tracker, month on month</h2><span class="kicker">for each month: how many emails went out, how many orders they brought, and the revenue</span></div>
     <div class="tblwrap"><table>
-      <thead><tr><th>Flow</th><th class="num">Apr</th><th class="num">May</th><th class="num">Jun</th><th class="num">H1 total</th></tr></thead>
+      <thead>
+        <tr><th rowspan="2">Flow</th><th class="num grp" colspan="3">April</th><th class="num grp" colspan="3">May</th><th class="num grp" colspan="3">June</th><th class="num grp" colspan="3">H1 total</th></tr>
+        <tr><th class="num grp">Sent</th><th class="num">Orders</th><th class="num">AED</th><th class="num grp">Sent</th><th class="num">Orders</th><th class="num">AED</th><th class="num grp">Sent</th><th class="num">Orders</th><th class="num">AED</th><th class="num grp">Sent</th><th class="num">Orders</th><th class="num">AED</th></tr>
+      </thead>
       <tbody>
-        <tr><td><b>Post Purchase</b></td><td class="num">20 s · 2 o · 1,198</td><td class="num">171 · 3 · 1,397</td><td class="num good-text"><b>341 · 7 · 2,471</b></td><td class="num">813 s · 32 o · 12,119</td></tr>
-        <tr><td><b>Welcome</b></td><td class="num">386 · 0 · 0</td><td class="num">491 · 0 · 0</td><td class="num good-text"><b>958 · 7 · 2,047</b></td><td class="num">2,838 · 14 · 3,494</td></tr>
-        <tr><td><b>Abandoned Checkout</b></td><td class="num">213 · 1 · 549</td><td class="num">151 · 3 · 1,597</td><td class="num"><b>289 · 4 · 1,522</b></td><td class="num">1,138 · 12 · 5,477</td></tr>
-        <tr><td><b>Browse Abandonment</b></td><td class="num">862 · 0 · 0</td><td class="num">539 · 2 · 848</td><td class="num"><b>742 · 4 · 1,196</b></td><td class="num">3,463 · 12 · 4,411</td></tr>
-        <tr><td>Cart Men</td><td class="num">134 · 0 · 0</td><td class="num">140 · 2 · 798</td><td class="num"><b>105 · 1 · 299</b></td><td class="num">516 · 3 · 1,097</td></tr>
-        <tr><td class="crit">Cart Women</td><td class="num crit">37 · 0 · 0</td><td class="num crit">34 · 0 · 0</td><td class="num crit"><b>47 · 0 · 0</b></td><td class="num crit">164 · 0 · 0</td></tr>
-        <tr><td class="warn">Challenge set (killed ~May 1)</td><td class="num">1,118 · 2 · 1,011</td><td class="num">0</td><td class="num">0</td><td class="num">14-day Challenge: 212 · 8 · 5,241</td></tr>
+        <tr><td><b>Post Purchase</b></td><td class="num grp">20</td><td class="num">2</td><td class="num">1,198</td><td class="num grp">171</td><td class="num">3</td><td class="num">1,397</td><td class="num grp"><b>341</b></td><td class="num"><b>7</b></td><td class="num good-text"><b>2,471</b></td><td class="num grp">813</td><td class="num">32</td><td class="num">12,119</td></tr>
+        <tr><td><b>Welcome</b></td><td class="num grp">386</td><td class="num">0</td><td class="num">0</td><td class="num grp">491</td><td class="num">0</td><td class="num">0</td><td class="num grp"><b>958</b></td><td class="num"><b>7</b></td><td class="num good-text"><b>2,047</b></td><td class="num grp">2,838</td><td class="num">14</td><td class="num">3,494</td></tr>
+        <tr><td><b>Abandoned Checkout</b></td><td class="num grp">213</td><td class="num">1</td><td class="num">549</td><td class="num grp">151</td><td class="num">3</td><td class="num">1,597</td><td class="num grp"><b>289</b></td><td class="num"><b>4</b></td><td class="num"><b>1,522</b></td><td class="num grp">1,138</td><td class="num">12</td><td class="num">5,477</td></tr>
+        <tr><td><b>Browse Abandonment</b></td><td class="num grp">862</td><td class="num">0</td><td class="num">0</td><td class="num grp">539</td><td class="num">2</td><td class="num">848</td><td class="num grp"><b>742</b></td><td class="num"><b>4</b></td><td class="num"><b>1,196</b></td><td class="num grp">3,463</td><td class="num">12</td><td class="num">4,411</td></tr>
+        <tr><td>Cart Men</td><td class="num grp">134</td><td class="num">0</td><td class="num">0</td><td class="num grp">140</td><td class="num">2</td><td class="num">798</td><td class="num grp"><b>105</b></td><td class="num"><b>1</b></td><td class="num"><b>299</b></td><td class="num grp">516</td><td class="num">3</td><td class="num">1,097</td></tr>
+        <tr><td class="crit">Cart Women</td><td class="num grp crit">37</td><td class="num crit">0</td><td class="num crit">0</td><td class="num grp crit">34</td><td class="num crit">0</td><td class="num crit">0</td><td class="num grp crit"><b>47</b></td><td class="num crit"><b>0</b></td><td class="num crit"><b>0</b></td><td class="num grp crit">164</td><td class="num crit">0</td><td class="num crit">0</td></tr>
+        <tr><td class="warn">14-day Challenge (killed around May 1)</td><td class="num grp">1,118</td><td class="num">2</td><td class="num">1,011</td><td class="num grp">0</td><td class="num">0</td><td class="num">0</td><td class="num grp">0</td><td class="num">0</td><td class="num">0</td><td class="num grp">212</td><td class="num">8</td><td class="num">5,241</td></tr>
       </tbody>
     </table></div>
-    <p class="note">Every flow's volume scaled with Alia (welcome sends 386 to 958 in two months). June flow revenue AED 7,535 on a 31.4K store month.</p>
+    <p class="note">How to read one row: Post Purchase in June sent 341 emails, they brought 7 orders and AED 2,471. The Challenge row's April numbers cover the whole challenge set (three flows ran that month); its H1 total is the 14-day Challenge flow alone, the earner of the set. Every flow's volume scaled with Alia (welcome sends 386 to 958 in two months). June flow revenue AED 7,535 on a 31.4K store month.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Do people reach the last email? Yes. Does it earn? No.</h2><span class="kicker">welcome flow, per message</span></div>
     <div class="tblwrap"><table>
-      <thead><tr><th>Month</th><th class="num">Email 1</th><th class="num">Email 2</th><th class="num">Email 3</th><th class="num">Reach E3</th><th class="num">Revenue split E1 / E2 / E3</th></tr></thead>
+      <thead>
+        <tr><th rowspan="2">Month</th><th class="num grp" colspan="3">People who received</th><th class="num grp" rowspan="2">Reach email 3</th><th class="num grp" colspan="3">Revenue AED, by email</th></tr>
+        <tr><th class="num grp">Email 1</th><th class="num">Email 2</th><th class="num">Email 3</th><th class="num grp">Email 1</th><th class="num">Email 2</th><th class="num">Email 3</th></tr>
+      </thead>
       <tbody>
-        <tr><td>Apr</td><td class="num">138</td><td class="num">129</td><td class="num">119</td><td class="num">86%</td><td class="num">0 / 0 / 0</td></tr>
-        <tr><td>May</td><td class="num">167</td><td class="num">161</td><td class="num">163</td><td class="num">98%</td><td class="num">0 / 0 / 0</td></tr>
-        <tr><td><b>Jun</b></td><td class="num"><b>351</b></td><td class="num"><b>313</b></td><td class="num"><b>294</b></td><td class="num"><b>84%</b></td><td class="num"><b>1,748 / 299 / 0</b></td></tr>
+        <tr><td>Apr</td><td class="num grp">138</td><td class="num">129</td><td class="num">119</td><td class="num grp">86%</td><td class="num grp">0</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td>May</td><td class="num grp">167</td><td class="num">161</td><td class="num">163</td><td class="num grp">98%</td><td class="num grp">0</td><td class="num">0</td><td class="num">0</td></tr>
+        <tr><td><b>Jun</b></td><td class="num grp"><b>351</b></td><td class="num"><b>313</b></td><td class="num"><b>294</b></td><td class="num grp"><b>84%</b></td><td class="num grp good-text"><b>1,748</b></td><td class="num"><b>299</b></td><td class="num crit"><b>0</b></td></tr>
       </tbody>
     </table></div>
     <p class="note">No dead nodes in the account: every email in every live flow sends (Cart Men in June: 28, 27, 25, 25). The real issue is volume: by the last message of a recovery flow, very few people are left to receive it, and welcome revenue concentrates in email 1 while the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
