@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RARA Barefoot UAE · Retention Overview</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c;
+    --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+      --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  }
+  :root[data-theme="dark"]{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+    --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  :root[data-theme="light"]{ --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:18px 24px;}
+  header .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  header .brandmark em{font-style:normal;color:var(--accent);}
+  header .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 60px;}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 12px;border-radius:99px;margin:32px 0 10px;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:30px;line-height:1.18;margin:0 0 14px;letter-spacing:-.01em;}
+  .lead{color:var(--ink2);max-width:74ch;font-size:15px;margin:0 0 8px;}
+  .lead b{color:var(--ink);}
+  .hero{background:var(--hero);border:1px solid var(--ring);border-radius:14px;padding:24px;margin:8px 0 6px;display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;}
+  .hero .col{text-align:center;}
+  .hero .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .hero .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:34px;line-height:1.05;margin:8px 0 4px;}
+  .hero .col.to .amt{color:var(--good-text);}
+  .hero .sub{font-size:12.5px;color:var(--ink2);line-height:1.4;}
+  .hero .mid{text-align:center;}
+  .hero .mult{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:22px;color:var(--accent);}
+  .hero .arrow{font-size:26px;color:var(--accent);line-height:1;}
+  .herohow{font-size:12.5px;color:var(--ink2);margin:0 0 4px;padding-left:12px;border-left:3px solid var(--accent);line-height:1.55;}
+  .herohow b{color:var(--ink);}
+  .sechead{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;margin:30px 0 4px;}
+  .secsub{color:var(--ink2);font-size:13.5px;margin:0 0 16px;}
+  .levers{display:grid;gap:12px;}
+  .lever{background:var(--card);border:1px solid var(--ring);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr minmax(150px,auto);gap:16px;align-items:center;}
+  .lvn{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;color:#fff;background:var(--accent);border-radius:99px;width:38px;height:38px;display:grid;place-items:center;}
+  .lvbody h3{margin:0 0 4px;font-size:16px;}
+  .lvbody p{margin:0 0 8px;font-size:13px;color:var(--ink2);line-height:1.55;}
+  .lvbody p b{color:var(--ink);}
+  .why{font-size:11.5px;color:var(--muted);margin:0 0 4px;padding-left:10px;border-left:2px solid var(--ring);line-height:1.5;}
+  .why b{color:var(--ink2);font-weight:600;}
+  .lvgain{text-align:right;}
+  .lvg-num{display:block;font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:20px;color:var(--good-text);white-space:nowrap;}
+  .lvg-lab{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:20px;max-width:82ch;border-top:1px solid var(--ring);padding-top:16px;}
+  .note b{color:var(--ink2);}
+  .fullbtn{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;border-radius:99px;padding:11px 22px;}
+  @media(max-width:660px){
+    .hero{grid-template-columns:1fr;gap:14px;}
+    .hero .arrow{transform:rotate(90deg);}
+    .lever{grid-template-columns:34px 1fr;}
+    .lvgain{grid-column:2;text-align:left;margin-top:2px;}
+    h1{font-size:24px;} .hero .amt{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Overview</div>
+  <div class="subtitle">RARA Barefoot UAE · Prepared by Shiwani Agrawal · The goal, and how we get there · July 2026</div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">The goal</p>
+  <h1>Grow the list first. Everything else already works.</h1>
+  <p class="lead">This account is built right: correct triggers on every flow, beautiful emails, strong content, and email already drives <b>26.4%</b> of store revenue with a <b>23.6%</b> repeat rate at nine months old. The constraint is a list of <b>2,324 people</b>. Double the popup's submit rate and every flow downstream doubles with it.</p>
+
+  <div class="hero">
+    <div class="col today">
+      <div class="lab">Today</div>
+      <div class="amt">5%<span style="font-size:15px;font-weight:600;color:var(--muted)"> submit</span></div>
+      <div class="sub">~12K popup views a month<br>list of 2,324 · 2,005 prospects</div>
+    </div>
+    <div class="mid">
+      <div class="mult">2x</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="col to">
+      <div class="lab">Target</div>
+      <div class="amt">10%<span style="font-size:15px;font-weight:600;color:var(--good-text)"> submit</span></div>
+      <div class="sub">twice the signups on the same traffic<br>every flow's audience doubles</div>
+    </div>
+  </div>
+  <p class="herohow"><b>How the math works:</b> the popup gets about 12K views a month and converts 5% to email. Cutting friction (7 screens, no skips, an unused phone question) and strengthening the offer moves submit toward 10%, the level healthy popups reach. Email revenue follows list size here: flow volume already doubled between April and June as signups grew, and revenue followed. Source: Alia analytics + OmniSend exports + Shopify orders.</p>
+
+  <h2 class="sechead">The seven moves that get us there</h2>
+  <p class="secsub">Each comes from the account walkthrough. Each has its proof.</p>
+
+  <div class="levers">
+
+    <div class="lever">
+      <span class="lvn">1</span>
+      <div class="lvbody">
+        <h3>Cut the popup, grow the list</h3>
+        <p>Seven screens, no skip button anywhere, and a phone question we never use because the account is email only. Fewer steps, skips on everything, drop the phone. Personalisation questions return next quarter once the list can support them.</p>
+        <p class="why"><b>Proof:</b> 5% submit on ~12K monthly views. Every question costs signups; the phone answer is used nowhere.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">5% → 10%</span><span class="lvg-lab">submit rate, twice the signups</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">2</span>
+      <div class="lvbody">
+        <h3>Make the offer land</h3>
+        <p>WELCOME25 is a fixed code with no expiry, shown once and never repeated. Test a stronger offer and the mystery discount format. Switch to a dynamic code with a real deadline, visible in the popup and in every welcome email.</p>
+        <p class="why"><b>Proof:</b> June welcome revenue sits entirely in email 1 (AED 1,748 of 2,047). The later emails engage and sell nothing.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">no expiry → real urgency</span><span class="lvg-lab">dynamic code with deadline</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">3</span>
+      <div class="lvbody">
+        <h3>Turn the 14-day Challenge back on</h3>
+        <p>The Challenge post-purchase flow was the most efficient thing in the account and it was switched off around May 1. For an audience where 73% have never worn barefoot shoes, the challenge is the activation engine.</p>
+        <p class="why"><b>Proof:</b> AED 24.7 per message, 51% open, 11.7% click. Double the next best flow.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">AED 24.7</span><span class="lvg-lab">per message, best in account, currently off</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">4</span>
+      <div class="lvbody">
+        <h3>Split recovery into prospects and customers</h3>
+        <p>Browse abandonment, the highest-traffic flow, sends one sequence to everyone. Prospects are never reminded their welcome offer is still available. The offer must follow them through browse, cart, checkout and campaigns until they order. Customers get their own dynamic code and content that respects they already know the brand.</p>
+        <p class="why"><b>Proof:</b> 3,463 browse sends in H1 with no split; prospects are 2,005 of the 2,324 list.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">2,005</span><span class="lvg-lab">prospects never reminded of their offer</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">5</span>
+      <div class="lvbody">
+        <h3>Fix the first email of every recovery flow</h3>
+        <p>The first email should carry the most audience and the most revenue. In checkout and cart it earns near zero. Test a founder-led first message for prospects and A/B the content until email 1 converts.</p>
+        <p class="why"><b>Proof:</b> April checkout: emails 1 and 2 earned AED 0, only email 3 sold. Cart Women: zero orders in every month on copy identical to Men's.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">E1 = 0</span><span class="lvg-lab">today in checkout and cart; it should lead</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">6</span>
+      <div class="lvbody">
+        <h3>Give campaigns conversion moments</h3>
+        <p>The education calendar holds excellent attention and sells almost nothing. Keep the content spine, add offer-led sends: welcome-offer reminders for prospects, bestseller moments, the mystery discount test.</p>
+        <p class="why"><b>Proof:</b> 42 campaigns, 49.3% open, 10 orders and AED 3,402 in 6.5 months.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">10 orders</span><span class="lvg-lab">from 13.2K campaign sends in H1</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">7</span>
+      <div class="lvbody">
+        <h3>Use the answers we already collect</h3>
+        <p>Every quiz answer sits on the contact as a tag, ready to target. Only the Gym Goers sends ever used one, and they worked. The beginners (never used barefoot) and the pain-driven visitors are the two biggest stories never told.</p>
+        <p class="why"><b>Proof:</b> 2 of 12 campaign audiences are answer-based. 'Never used barefoot': 2,713 answers, zero campaigns. Pain-driven: 999 answers, zero campaigns.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">2 of 12</span><span class="lvg-lab">audiences use the data we collect</span></div>
+    </div>
+
+  </div>
+
+  <p class="note"><b>How we execute:</b> five stages: Acquisition, Recovery, Activation, Replenishment with cross-sell, Win-back. Two phases: campaigns prove each segment first, then the winners become automations. The moves above are the means to the goal, not separate goals to add up.</p>
+
+  <a class="fullbtn" href="index.html">Open the full audit →</a>
+</main>
+</body>
+</html>

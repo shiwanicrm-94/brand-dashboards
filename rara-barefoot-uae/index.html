@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RARA Barefoot UAE · Retention Audit (Internal)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{position:relative;padding-left:24px;font-size:13.5px;margin-bottom:8px;color:var(--ink);line-height:1.55;}
+  ul.pts li::before{content:"✦";position:absolute;left:2px;top:2px;color:var(--accent);font-size:11px;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .src{font-size:11px;color:var(--muted);font-style:italic;}
+  .targets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 6px;}
+  .tgt{background:var(--hero);border:1px solid var(--ring);border-radius:12px;padding:20px 22px;text-align:center;}
+  .tgt .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .tgt .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;margin:8px 0 4px;}
+  .tgt .amt .arr{color:var(--accent);font-size:24px;padding:0 6px;}
+  .tgt .amt .to{color:var(--good-text);}
+  .tgt .sub{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}.targets{grid-template-columns:1fr;}.tgt .amt{font-size:26px;}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">RARA Barefoot UAE · OmniSend (email) + Alia (popup) · Jan 1 to Jul 16, 2026 · Store history from Nov 2025 · Prepared by Shiwani Agrawal</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-view="g1">1 · Retention Overview</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g2">2 · Deep Analysis</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g3">3 · Automation</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g4">4 · Campaign</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g5">5 · Alia</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g6">6 · The Plan</button>
+</nav>
+
+<main class="wrap">
+
+<!-- ===== 1 RETENTION OVERVIEW ===== -->
+<section class="view active" id="v1" data-g="g1">
+  <h1>Retention overview</h1>
+  <p class="kicker">Internal audit. OmniSend API (live) · OmniSend performance exports · Shopify UAE orders · Alia analytics. Every number cross-checked.</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">Priority 1 · Grow the list</div>
+      <div class="amt">5<small>%</small><span class="arr">→</span><span class="to">10<small>%</small></span></div>
+      <div class="sub">popup submit rate. The list is 2,324 people. Doubling the submit rate doubles every flow downstream.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Priority 2 · Hold the machine's quality</div>
+      <div class="amt">26.4<small>%</small><span class="arr">→</span><span class="to">25<small>%+</small></span></div>
+      <div class="sub">email share of store revenue, held while the store scales. The machine works; feed it more people.</div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="lede"><b>The one-line verdict: this account is built right and starved of volume.</b> Every automation has the correct trigger, the emails are beautifully designed, the content is good, and January's domain warm-up was done properly. Email already drives <b>26.4%</b> of store revenue and the repeat rate is <b>23.6%</b> at nine months old. The constraint is the list: <b>2,324 people</b>. Growing it is priority one; everything else compounds from there.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The backbone</h2><span class="kicker">list matched against orders by email</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">2,324</div><div class="l">list size (1,860 subscribed)</div></div>
+      <div class="tile"><div class="v">284</div><div class="l">customers: 217 one-time · 46 two-time · 21 three-time+</div></div>
+      <div class="tile"><div class="v">2,005</div><div class="l">prospects, never ordered (ratio 12:88)</div></div>
+      <div class="tile good"><div class="v">134</div><div class="l">new customers in Jun and Jul: half of all customers ever</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Month on month: store and email</h2><span class="kicker">store from Shopify orders; email attribution from OmniSend</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Orders</th><th class="num">Store revenue AED</th><th class="num">Flow revenue AED</th><th class="num">Repeat share of orders</th></tr></thead>
+      <tbody>
+        <tr><td>Feb</td><td class="num">41</td><td class="num">17,618</td><td class="num src">export starts Apr</td><td class="num">37%</td></tr>
+        <tr><td>Mar</td><td class="num">23</td><td class="num">12,527</td><td class="num src">export starts Apr</td><td class="num">35%</td></tr>
+        <tr><td>Apr</td><td class="num">38</td><td class="num">21,798</td><td class="num">2,758</td><td class="num">16%</td></tr>
+        <tr><td>May</td><td class="num">63</td><td class="num">26,012</td><td class="num">4,640</td><td class="num">22%</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>95</b></td><td class="num"><b>31,413</b></td><td class="num good-text"><b>7,535</b></td><td class="num"><b>23%</b></td></tr>
+        <tr><td>Jul (16 days)</td><td class="num">89</td><td class="num">25,927</td><td class="num src">month open</td><td class="num good-text">31%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">H1 email attribution: automations AED 33,298 (84 orders) + campaigns AED 3,402 (10 orders) = AED 36,700 on AED 139,115 store revenue. Flows carry 91% of email revenue. Channel is email only: no SMS anywhere, though the popup collects phone numbers.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>What is genuinely good here</h2></div>
+    <ul class="pts">
+      <li>All six core flows are live with the correct triggers: Welcome on subscribe, Browse on product view, Cart on add to cart, Checkout on checkout start, Post Purchase on order.</li>
+      <li>The emails are beautifully designed and the education content is strong. January was a proper 12-send domain warm-up.</li>
+      <li>Alia runs a real A/B holdout (popup vs no popup), so incrementality is measurable.</li>
+      <li>Repeat rate 23.6% at nine months; July repeat share of orders hit 31%. The store is inflecting.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 2 DEEP ANALYSIS ===== -->
+<section class="view" id="v2" data-g="g2">
+  <h1>Deep analysis</h1>
+  <p class="kicker">Cohorts from the full UAE order history (Nov 2025 to Jul 16, 2026), voided excluded, customer key = email.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">393</div><div class="l">orders · AED 144,357 · AOV 367</div></div>
+    <div class="tile"><div class="v">284</div><div class="l">customers</div></div>
+    <div class="tile good"><div class="v">23.6%</div><div class="l">repeat rate at 9 months old</div></div>
+    <div class="tile"><div class="v">XANADU</div><div class="l">bestseller, with URUK behind it</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>First, second and third orders, month on month</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">1st orders</th><th class="num">2nd orders</th><th class="num">3rd+ orders</th><th class="num">Revenue AED</th><th class="num">Repeat share</th></tr></thead>
+      <tbody>
+        <tr><td>Jan</td><td class="num">19</td><td class="num">6</td><td class="num">0</td><td class="num">3,820</td><td class="num">24%</td></tr>
+        <tr><td>Feb</td><td class="num">26</td><td class="num">6</td><td class="num">9</td><td class="num">17,618</td><td class="num">37%</td></tr>
+        <tr><td>Mar</td><td class="num">15</td><td class="num">5</td><td class="num">3</td><td class="num">12,527</td><td class="num">35%</td></tr>
+        <tr><td>Apr</td><td class="num">32</td><td class="num">4</td><td class="num">2</td><td class="num">21,798</td><td class="num">16%</td></tr>
+        <tr><td>May</td><td class="num">49</td><td class="num">12</td><td class="num">2</td><td class="num">26,012</td><td class="num">22%</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>73</b></td><td class="num"><b>14</b></td><td class="num"><b>8</b></td><td class="num"><b>31,413</b></td><td class="num"><b>23%</b></td></tr>
+        <tr><td>Jul (16d)</td><td class="num">61</td><td class="num">18</td><td class="num good-text">10</td><td class="num">25,927</td><td class="num good-text">31%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Second and third orders are arriving faster each month (Jul: 28 repeat orders in 16 days). Acquisition is scaling and the repeat layer is forming behind it. Lifetime distribution: 1x 217 · 2x 46 · 3x 11 · 4+ 10.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>India benchmark</h2><span class="kicker">the sister store, for context only</span></div>
+    <p class="lede">RARA India: 5,259 orders since Oct 2025 (INR). Its tracker shows retention share climbing 9.85% in October to 13% in November to 58% in December. The India playbook (email + WhatsApp) is the ceiling this UAE account can grow into once the list supports it.</p>
+  </div>
+</section>
+
+<!-- ===== 3 AUTOMATION ===== -->
+<section class="view" id="v3" data-g="g3">
+  <h1>Automation</h1>
+  <p class="kicker">Per flow, per month, per message. June is the decision month. Sources: OmniSend workflow exports + H1 performance report + API.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">AED 33.3K</div><div class="l">flow revenue H1 · 84 orders · AED 2.81 per message</div></div>
+    <div class="tile good"><div class="v">6 flows</div><div class="l">live, all with correct triggers</div></div>
+    <div class="tile hot"><div class="v">AED 24.7</div><div class="l">per message on the DISABLED 14-day Challenge, best in account</div></div>
+    <div class="tile warn"><div class="v">0 orders</div><div class="l">Abandoned Cart Women, every single month</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Per-flow tracker, month on month</h2><span class="kicker">sent · orders · revenue AED. June highlighted.</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th class="num">Apr</th><th class="num">May</th><th class="num">Jun</th><th class="num">H1 total</th></tr></thead>
+      <tbody>
+        <tr><td><b>Post Purchase</b></td><td class="num">20 s · 2 o · 1,198</td><td class="num">171 · 3 · 1,397</td><td class="num good-text"><b>341 · 7 · 2,471</b></td><td class="num">813 s · 32 o · 12,119</td></tr>
+        <tr><td><b>Welcome</b></td><td class="num">386 · 0 · 0</td><td class="num">491 · 0 · 0</td><td class="num good-text"><b>958 · 7 · 2,047</b></td><td class="num">2,838 · 14 · 3,494</td></tr>
+        <tr><td><b>Abandoned Checkout</b></td><td class="num">213 · 1 · 549</td><td class="num">151 · 3 · 1,597</td><td class="num"><b>289 · 4 · 1,522</b></td><td class="num">1,138 · 12 · 5,477</td></tr>
+        <tr><td><b>Browse Abandonment</b></td><td class="num">862 · 0 · 0</td><td class="num">539 · 2 · 848</td><td class="num"><b>742 · 4 · 1,196</b></td><td class="num">3,463 · 12 · 4,411</td></tr>
+        <tr><td>Cart Men</td><td class="num">134 · 0 · 0</td><td class="num">140 · 2 · 798</td><td class="num"><b>105 · 1 · 299</b></td><td class="num">516 · 3 · 1,097</td></tr>
+        <tr><td class="crit">Cart Women</td><td class="num crit">37 · 0 · 0</td><td class="num crit">34 · 0 · 0</td><td class="num crit"><b>47 · 0 · 0</b></td><td class="num crit">164 · 0 · 0</td></tr>
+        <tr><td class="warn">Challenge set (killed ~May 1)</td><td class="num">1,118 · 2 · 1,011</td><td class="num">0</td><td class="num">0</td><td class="num">14-day Challenge: 212 · 8 · 5,241</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Every flow's volume scaled with Alia (welcome sends 386 to 958 in two months). June flow revenue AED 7,535 on a 31.4K store month.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Do people reach the last email? Yes. Does it earn? No.</h2><span class="kicker">welcome flow, per message</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Email 1</th><th class="num">Email 2</th><th class="num">Email 3</th><th class="num">Reach E3</th><th class="num">Revenue split E1 / E2 / E3</th></tr></thead>
+      <tbody>
+        <tr><td>Apr</td><td class="num">138</td><td class="num">129</td><td class="num">119</td><td class="num">86%</td><td class="num">0 / 0 / 0</td></tr>
+        <tr><td>May</td><td class="num">167</td><td class="num">161</td><td class="num">163</td><td class="num">98%</td><td class="num">0 / 0 / 0</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>351</b></td><td class="num"><b>313</b></td><td class="num"><b>294</b></td><td class="num"><b>84%</b></td><td class="num"><b>1,748 / 299 / 0</b></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">No dead nodes anywhere in the account: welcome completion 84 to 98%, checkout runs 3 emails, Cart Men runs 4, all firing. The problem is that revenue concentrates in email 1 and the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Flow verdicts</h2><span class="kicker">what to change, flow by flow</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow</th><th>What we found</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome</b></td><td>Good flow, but the offer is invisible: June revenue sits in email 1 and the code has no expiry.</td><td>Make the offer the hero of every email with a dynamic code and expiry. A/B content heavily: this is the volume flow now.</td></tr>
+        <tr><td><b>Challenge set</b></td><td class="crit">Killed around May 1, yet the 14-day Challenge earned AED 24.7 per message, double anything else, at 51% open and 11.7% click.</td><td>Turn it back on. The challenge content is the activation engine this brand already proved.</td></tr>
+        <tr><td><b>Abandoned Checkout</b></td><td class="crit">The first email earns near zero (April: 0 revenue on E1 and E2; only E3 sold). Recovery flows should earn most on the first email.</td><td>Rework email 1. Test a founder-led first message for prospects. Carry the welcome offer with expiry for prospects who hold it.</td></tr>
+        <tr><td><b>Abandoned Cart</b></td><td>Same content for buyers and prospects, only the offer section removed for buyers. The third message barely reaches anyone and adds little.</td><td>Prospect and customer versions with genuinely different content. Customers get their own dynamic code with expiry. Rethink or cut message 3.</td></tr>
+        <tr><td class="crit"><b>Cart Women</b></td><td class="crit">Zero orders in every month, one third of Men's volume, copy identical to Men's.</td><td>Review the split logic and write women-specific content, or fold both into one flow with a gender content block.</td></tr>
+        <tr><td><b>Browse Abandonment</b></td><td>Highest traffic flow, no split between prospects and customers. Prospects are never reminded their welcome offer is still live.</td><td>Split by prospect vs customer. Prospects hear the offer with its expiry until they order.</td></tr>
+        <tr><td><b>Post Purchase</b></td><td class="good-text">The star: AED 12.1K H1. The order confirmation email is really good.</td><td>Keep it. Improve the follow-up emails after the confirmation; they are the weakest part of a strong flow.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Evidence</h2><span class="kicker">from the account walkthrough</span></div>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/browse-abandon-flow.png" alt="Browse abandonment flow" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">Browse Abandonment: 555 completed the trigger, email 1 sent to 478 (32.85% open, AED 795), then an 8 hour wait. One sequence for everyone: no prospect vs customer split, no offer reminder.</figcaption>
+    </figure>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/cart-last-message.png" alt="Abandoned cart last message" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: cart-last-message.png ] </span>')">
+      <figcaption class="note" style="margin-top:6px">Abandoned cart, last message: zero conversions in every month.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== 4 CAMPAIGN ===== -->
+<section class="view" id="v4" data-g="g4">
+  <h1>Campaign</h1>
+  <p class="kicker">42 campaigns, all email. Stats from the OmniSend API, revenue from the performance report.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">13.2K</div><div class="l">messages sent H1 · 49.3% open · 1.47% click</div></div>
+    <div class="tile warn"><div class="v">10 orders</div><div class="l">AED 3,402 in 6.5 months: campaigns engage but do not sell</div></div>
+    <div class="tile"><div class="v">2 of 12</div><div class="l">audiences are quiz-answer based; the rest are generic pools</div></div>
+    <div class="tile good"><div class="v">0.42%</div><div class="l">unsubscribe rate, list is healthy</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Month on month</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Campaigns</th><th class="num">Sent</th><th class="num">Open</th><th class="num">Click</th><th class="num">Unsubs</th></tr></thead>
+      <tbody>
+        <tr><td>Jan (warm-up)</td><td class="num">11</td><td class="num">533</td><td class="num">51.2%</td><td class="num">7.32%</td><td class="num">0</td></tr>
+        <tr><td>Feb</td><td class="num">5</td><td class="num">255</td><td class="num">52.5%</td><td class="num">4.71%</td><td class="num">0</td></tr>
+        <tr><td>Mar</td><td class="num">3</td><td class="num">272</td><td class="num">58.5%</td><td class="num">2.94%</td><td class="num">3</td></tr>
+        <tr><td>Apr</td><td class="num">6</td><td class="num">1,898</td><td class="num good-text">60.4%</td><td class="num">1.48%</td><td class="num">11</td></tr>
+        <tr><td>May</td><td class="num">6</td><td class="num">2,783</td><td class="num">52.0%</td><td class="num">1.37%</td><td class="num">13</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>7</b></td><td class="num"><b>4,147</b></td><td class="num warn"><b>45.7%</b></td><td class="num warn"><b>1.06%</b></td><td class="num"><b>14</b></td></tr>
+        <tr><td>Jul (16d)</td><td class="num">4</td><td class="num">3,311</td><td class="num warn">43.8%</td><td class="num warn">0.76%</td><td class="num">15</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Reach grew 15x since March as the list grew, while opens slid from 60% to 46% and clicks from 1.5% to 1.1%. The calendar is education only (Posture, Travel, Persona, Runner). Best opens: April Survey 63.8%, Persona 62.2%, Travel 61.9%. Only one sale campaign all half (Xanadu 50% off).</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Verdict</h2></div>
+    <ul class="pts">
+      <li><b>Campaigns need conversion moments.</b> Education holds attention (49% opens) but produced 10 orders in 6.5 months. Add offer-led sends: welcome-offer reminders for prospects who never used their code, bestseller restocks, and the mystery discount test.</li>
+      <li><b>Use the answers.</b> Only the Gym Goers sends targeted a quiz answer (and it worked twice). The 'never used barefoot' audience of 1,475 and the pain-driven audience of 441 have never had a campaign written for them.</li>
+      <li><b>Remind prospects their welcome offer is alive.</b> No campaign has ever done this. It becomes a standing monthly slot until the person orders.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 5 ALIA ===== -->
+<section class="view" id="v5" data-g="g5">
+  <h1>Alia <span style="font-size:14px;color:var(--muted)">the popup, and the list it feeds</span></h1>
+  <p class="kicker">The list is the constraint. This is where it grows.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">~12K</div><div class="l">popup views a month</div></div>
+    <div class="tile warn"><div class="v">5%</div><div class="l">email submit rate · 5% phone (phones never used anywhere)</div></div>
+    <div class="tile"><div class="v">7</div><div class="l">popup screens, no skip button on any of them</div></div>
+    <div class="tile good"><div class="v">A/B live</div><div class="l">popup vs no-popup holdout, incrementality measurable</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The friction problem</h2></div>
+    <p class="lede">Seven screens stand between a visitor and the code: intro, three quiz questions, email, phone, reveal. There is no skip anywhere. We collect the phone number and never send anything to it, because this account is email only. That question is pure friction. The result is a 5% submit rate on 12K monthly views. Cut the steps, add skip buttons, drop the phone question, and make the offer land harder: a mystery discount is the test to start with, and the code needs an expiry (WELCOME25 today has none). Personalisation questions can return next quarter once the list is big enough to slice.</p>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/alia-popup-7-screens.png" alt="Alia popup 7 screens" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">All 7 popup screens. No skip on any step. Email, then phone, then the code.</figcaption>
+    </figure>
+    <figure style="margin:14px 0 0">
+      <img src="evidence/welcome25-reveal.png" alt="WELCOME25 reveal" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy">
+      <figcaption class="note" style="margin-top:6px">The reveal screen: fixed code WELCOME25, no expiry shown. Offer history in the contact tags: 500 off, then welcome50, now welcome25.</figcaption>
+    </figure>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The answers we collect, and what they are worth</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Question</th><th>Biggest answers</th><th>Used in targeting?</th></tr></thead>
+      <tbody>
+        <tr><td>Have you used barefoot shoes before?</td><td>Never 2,713 (73%) · sometimes 620 · mostly 639</td><td class="crit">Never targeted</td></tr>
+        <tr><td>Where will you use them most?</td><td>Gym 1,323 · everyday 945 · running 759</td><td class="good-text">Gym Goers: 3 campaigns, it worked</td></tr>
+        <tr><td>What matters most?</td><td>All-day comfort 2,251 · performance 1,011</td><td class="crit">Performance: 2 campaigns. Comfort: never</td></tr>
+        <tr><td>What got you curious?</td><td>Reveal now 6,554 · barefoot-curious 2,079 · pain-driven 999</td><td class="crit">Never targeted</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Every answer is stored on the contact as an OmniSend tag, so answer-targeting needs no new infrastructure. Only 2 of the 12 audiences campaigns use are answer-based. The 'never used barefoot' beginners and the pain-driven visitors are the two biggest untouched stories.</p>
+  </div>
+</section>
+
+<!-- ===== 6 THE PLAN ===== -->
+<section class="view" id="v6" data-g="g6">
+  <h1>The plan</h1>
+  <p class="kicker">Everything below serves the two priorities.</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">Priority 1 · Grow the list</div>
+      <div class="amt">5<small>%</small><span class="arr">→</span><span class="to">10<small>%</small></span></div>
+      <div class="sub">popup submit rate. Same traffic, twice the signups, twice the people in every flow.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Priority 2 · Hold the machine's quality</div>
+      <div class="amt">26.4<small>%</small><span class="arr">→</span><span class="to">25<small>%+</small></span></div>
+      <div class="sub">email share of store revenue, held while volume scales.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 1 · Acquisition</h2><span class="kicker">the popup and the welcome flow</span></div>
+    <ul class="pts">
+      <li><b>Cut the popup.</b> Fewer screens, a skip button on every step, and drop the phone question entirely: we are email only, so collecting phones just costs signups.</li>
+      <li><b>Make the offer land.</b> Test a stronger offer and test the mystery discount format. Move from the fixed WELCOME25 to a dynamic code with a real expiry, shown in the popup and in every welcome email.</li>
+      <li><b>A/B the welcome hard.</b> It is now the volume flow (958 sends in June) and its revenue lives in email 1 only. Test subject lines, offer placement and a founder-led variant.</li>
+      <li><b>Personalisation waits.</b> The quiz questions return next quarter once the list can support slicing. List first, layers later.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Part 2 · Recovery</h2><span class="kicker">browse, cart, checkout</span></div>
+    <ul class="pts">
+      <li><b>Split every recovery flow into prospect and customer versions.</b> Prospects keep hearing that their welcome offer is still available, with its expiry, until they place the order. Customers get their own dynamic code and content that respects that they already know the brand.</li>
+      <li><b>Fix the first email.</b> In any recovery flow the first email should carry the most audience, response and revenue. Today it earns near zero in checkout and cart. Test a founder-led first message for prospects.</li>
+      <li><b>Rethink the cart's third message</b> (it reaches few and adds little) and <b>fix or fold Cart Women</b> (zero orders every month on copy identical to Men's).</li>
+      <li><b>Add the offer reminder to campaigns too.</b> A standing monthly send to prospects who never used their code.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Part 3 · Activation</h2><span class="kicker">after the order</span></div>
+    <ul class="pts">
+      <li><b>Turn the 14-day Challenge back on.</b> It was the best revenue per message in the account (AED 24.7) when it was killed in May. It is this brand's activation engine: 73% of the audience has never worn barefoot shoes and needs the habit built.</li>
+      <li><b>Keep the order confirmation email</b> (it is genuinely good) and rewrite the follow-up emails in the Post Purchase flow, which are the weak part of the strongest flow.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Part 4 · Replenishment, cross-sell, upsell</h2></div>
+    <ul class="pts">
+      <li><b>Second-pair cross-sell on the proven bestsellers.</b> XANADU and URUK buyers get the other silhouette after the activation window.</li>
+      <li><b>Use the use-case answer for the pitch:</b> gym people get the training story, everyday people get the comfort story.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Part 5 · Win-back</h2></div>
+    <ul class="pts">
+      <li><b>Day-90 win-back by quiz answer.</b> The answers already sit on every contact. Small volumes today, but it compounds as the 134 new Jun and Jul customers age.</li>
+    </ul>
+  </div>
+  <div class="flag win"><b>How we execute, in two phases:</b> Phase 1, send campaigns to each part's segments and measure what performs. Phase 2, automate the winners. No automation gets built before its campaign proves the audience.</div>
+  <div class="card">
+    <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">every target starts from today's verified number</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">5% → 10%</div><div class="l">popup submit rate</div></div>
+      <div class="tile"><div class="v">2,324 → grow</div><div class="l">list size, tracked monthly</div></div>
+      <div class="tile"><div class="v">E1 &gt; 0</div><div class="l">checkout and cart first emails earn revenue</div></div>
+      <div class="tile"><div class="v">0 → live</div><div class="l">Cart Women converts or is folded</div></div>
+      <div class="tile"><div class="v">Challenge on</div><div class="l">14-day Challenge re-enabled and measured</div></div>
+      <div class="tile"><div class="v">26.4% → 25%+</div><div class="l">email share held while the store scales</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+  var tabs=document.querySelectorAll('.tab');
+  function go(v){tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.view===v);});
+    document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('active',s.dataset.g===v);});
+    window.scrollTo({top:0});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){go(t.dataset.view);});});
+  go('g1');
+</script>
+</body>
+</html>
