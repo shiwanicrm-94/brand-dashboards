@@ -52,7 +52,7 @@
   .flag.win{border-left-color:var(--good);}
   .note{font-size:12px;color:var(--muted);margin-top:12px;}
   .src{font-size:11px;color:var(--muted);font-style:italic;}
-  .targets{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 6px;}
+  .targets{display:grid;grid-template-columns:1fr;gap:14px;margin:16px 0 6px;}
   .tgt{background:var(--hero);border:1px solid var(--ring);border-radius:12px;padding:20px 22px;text-align:center;}
   .tgt .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
   .tgt .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;margin:8px 0 4px;}
@@ -85,18 +85,13 @@
   <p class="kicker">Internal audit. OmniSend API (live) · OmniSend performance exports · Shopify UAE orders · Alia analytics. Every number cross-checked.</p>
   <div class="targets">
     <div class="tgt">
-      <div class="lab">Priority 1 · Grow the list</div>
+      <div class="lab">The one plan · Grow the list</div>
       <div class="amt">5<small>%</small><span class="arr">→</span><span class="to">10<small>%</small></span></div>
-      <div class="sub">popup submit rate. The list is 2,324 people. Doubling the submit rate doubles every flow downstream.</div>
-    </div>
-    <div class="tgt">
-      <div class="lab">Priority 2 · Hold the machine's quality</div>
-      <div class="amt">26.4<small>%</small><span class="arr">→</span><span class="to">25<small>%+</small></span></div>
-      <div class="sub">email share of store revenue, held while the store scales. The machine works; feed it more people.</div>
+      <div class="sub">popup submit rate. The list is 2,324 people. Doubling the submit rate doubles every flow downstream. Everything else in this audit serves this.</div>
     </div>
   </div>
   <div class="card">
-    <p class="lede"><b>The one-line verdict: this account is built right and starved of volume.</b> Every automation has the correct trigger, the emails are beautifully designed, the content is good, and January's domain warm-up was done properly. Email already drives <b>26.4%</b> of store revenue and the repeat rate is <b>23.6%</b> at nine months old. The constraint is the list: <b>2,324 people</b>. Growing it is priority one; everything else compounds from there.</p>
+    <p class="lede"><b>The one-line verdict: this account is built right and starved of volume.</b> Every automation has the correct entry trigger, the emails are beautifully designed, the content is good, and January's domain warm-up was done properly. One build fault found: the last email in each recovery flow sits behind a split and has never sent (detail in Automation). Email already drives <b>26.4%</b> of store revenue and the repeat rate is <b>23.6%</b> at nine months old. The constraint is the list: <b>2,324 people</b>. Growing it is the one plan; everything else compounds from there.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>The backbone</h2><span class="kicker">list matched against orders by email</span></div>
@@ -125,7 +120,7 @@
   <div class="card">
     <div class="cardhead"><h2>What is genuinely good here</h2></div>
     <ul class="pts">
-      <li>All six core flows are live with the correct triggers: Welcome on subscribe, Browse on product view, Cart on add to cart, Checkout on checkout start, Post Purchase on order.</li>
+      <li>All six core flows are live with the correct entry triggers: Welcome on subscribe, Browse on product view, Cart on add to cart, Checkout on checkout start, Post Purchase on order. (Inside the recovery flows one email never sends because of a split; that is covered in Automation.)</li>
       <li>The emails are beautifully designed and the education content is strong. January was a proper 12-send domain warm-up.</li>
       <li>Alia runs a real A/B holdout (popup vs no popup), so incrementality is measurable.</li>
       <li>Repeat rate 23.6% at nine months; July repeat share of orders hit 31%. The store is inflecting.</li>
@@ -139,9 +134,80 @@
   <p class="kicker">Cohorts from the full UAE order history (Nov 2025 to Jul 16, 2026), voided excluded, customer key = email.</p>
   <div class="tiles">
     <div class="tile"><div class="v">393</div><div class="l">orders · AED 144,357 · AOV 367</div></div>
-    <div class="tile"><div class="v">284</div><div class="l">customers</div></div>
+    <div class="tile"><div class="v">284</div><div class="l">customers · 2,005 prospects on the list</div></div>
     <div class="tile good"><div class="v">23.6%</div><div class="l">repeat rate at 9 months old</div></div>
-    <div class="tile"><div class="v">XANADU</div><div class="l">bestseller, with URUK behind it</div></div>
+    <div class="tile hot"><div class="v">3 days</div><div class="l">median time to the 2nd order (75% within 13 days)</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Where the retention is: first product → % who buy again</h2><span class="kicker">every customer classified by their first order</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First order</th><th class="num">First-buyers</th><th class="num">Buy again</th></tr></thead>
+      <tbody>
+        <tr><td>XANADU</td><td class="num">109</td><td class="num good-text">26.6%</td></tr>
+        <tr><td>URUK</td><td class="num">108</td><td class="num">23.1%</td></tr>
+        <tr><td>ZANZIBAR</td><td class="num">55</td><td class="num warn">18.2%</td></tr>
+        <tr><td>Two pairs in the first order</td><td class="num">12</td><td class="num good-text">25.0%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The key finding:</b> people who started with two pairs repeat strongly (the 7 URUK plus XANADU starters repeat at 42.9%), and XANADU starters repeat best among singles. ZANZIBAR starters repeat worst (18.2%): the post purchase content for them should steer toward XANADU and URUK.</div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Cross-sell / up-sell map: what repeat buyers buy next</h2><span class="kicker">1st order → 2nd order, by silhouette (67 repeat customers). Hover a ribbon.</span></div>
+    <div style="color:var(--ink);overflow-x:auto">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" style="min-width:640px;width:100%;height:auto;font-family:Poppins,sans-serif">
+<path d="M169.0 24.0 C380.0 24.0 380.0 24.0 591.0 24.0 L591.0 90.3 C380.0 90.3 380.0 90.3 169.0 90.3 Z" fill="#7f5fc4" opacity="0.45"><title>XANADU to XANADU: 20 customers</title></path>
+<path d="M169.0 90.3 C380.0 90.3 380.0 130.8 591.0 130.8 L591.0 147.3 C380.0 147.3 380.0 106.8 169.0 106.8 Z" fill="#f2643b" opacity="0.5"><title>XANADU to URUK: 5 customers</title></path>
+<path d="M169.0 106.8 C380.0 106.8 380.0 230.9 591.0 230.9 L591.0 244.2 C380.0 244.2 380.0 120.1 169.0 120.1 Z" fill="#f2643b" opacity="0.5"><title>XANADU to ZANZIBAR: 4 customers</title></path>
+<path d="M169.0 134.1 C380.0 134.1 380.0 90.3 591.0 90.3 L591.0 106.8 C380.0 106.8 380.0 150.7 169.0 150.7 Z" fill="#f2643b" opacity="0.5"><title>URUK to XANADU: 5 customers</title></path>
+<path d="M169.0 150.7 C380.0 150.7 380.0 147.3 591.0 147.3 L591.0 207.0 C380.0 207.0 380.0 210.3 169.0 210.3 Z" fill="#7f5fc4" opacity="0.45"><title>URUK to URUK: 18 customers</title></path>
+<path d="M169.0 210.3 C380.0 210.3 380.0 244.2 591.0 244.2 L591.0 247.5 C380.0 247.5 380.0 213.6 169.0 213.6 Z" fill="#f2643b" opacity="0.5"><title>URUK to ZANZIBAR: 1 customers</title></path>
+<path d="M169.0 213.6 C380.0 213.6 380.0 284.7 591.0 284.7 L591.0 288.0 C380.0 288.0 380.0 216.9 169.0 216.9 Z" fill="#7f5fc4" opacity="0.45"><title>URUK to Two pairs: 1 customers</title></path>
+<path d="M169.0 230.9 C380.0 230.9 380.0 106.8 591.0 106.8 L591.0 113.5 C380.0 113.5 380.0 237.6 169.0 237.6 Z" fill="#f2643b" opacity="0.5"><title>ZANZIBAR to XANADU: 2 customers</title></path>
+<path d="M169.0 237.6 C380.0 237.6 380.0 207.0 591.0 207.0 L591.0 210.3 C380.0 210.3 380.0 240.9 169.0 240.9 Z" fill="#f2643b" opacity="0.5"><title>ZANZIBAR to URUK: 1 customers</title></path>
+<path d="M169.0 240.9 C380.0 240.9 380.0 247.5 591.0 247.5 L591.0 270.7 C380.0 270.7 380.0 264.1 169.0 264.1 Z" fill="#7f5fc4" opacity="0.45"><title>ZANZIBAR to ZANZIBAR: 7 customers</title></path>
+<path d="M169.0 278.1 C380.0 278.1 380.0 113.5 591.0 113.5 L591.0 116.8 C380.0 116.8 380.0 281.4 169.0 281.4 Z" fill="#7f5fc4" opacity="0.45"><title>Two pairs to XANADU: 1 customers</title></path>
+<path d="M169.0 281.4 C380.0 281.4 380.0 210.3 591.0 210.3 L591.0 216.9 C380.0 216.9 380.0 288.0 169.0 288.0 Z" fill="#7f5fc4" opacity="0.45"><title>Two pairs to URUK: 2 customers</title></path>
+<rect x="155" y="24.0" width="14" height="96.1" rx="3" fill="#7f5fc4"/><text x="147" y="76.0" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">XANADU <tspan fill="#8d8399">29</tspan></text>
+<rect x="155" y="134.1" width="14" height="82.8" rx="3" fill="#7f5fc4"/><text x="147" y="179.5" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">URUK <tspan fill="#8d8399">25</tspan></text>
+<rect x="155" y="230.9" width="14" height="33.1" rx="3" fill="#7f5fc4"/><text x="147" y="251.5" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">ZANZIBAR <tspan fill="#8d8399">10</tspan></text>
+<rect x="155" y="278.1" width="14" height="9.9" rx="3" fill="#7f5fc4"/><text x="147" y="287.0" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">Two pairs <tspan fill="#8d8399">3</tspan></text>
+<rect x="591" y="24.0" width="14" height="92.8" rx="3" fill="#f2643b"/><text x="613" y="74.4" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">28</tspan> XANADU</text>
+<rect x="591" y="130.8" width="14" height="86.1" rx="3" fill="#f2643b"/><text x="613" y="177.9" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">26</tspan> URUK</text>
+<rect x="591" y="230.9" width="14" height="39.8" rx="3" fill="#f2643b"/><text x="613" y="254.8" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">12</tspan> ZANZIBAR</text>
+<rect x="591" y="284.7" width="14" height="3.3" rx="3" fill="#f2643b"/><text x="613" y="290.3" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">1</tspan> Two pairs</text>
+<text x="155" y="12" text-anchor="middle" font-size="10.5" fill="#8d8399" letter-spacing="1">FIRST ORDER</text>
+<text x="605" y="12" text-anchor="middle" font-size="10.5" fill="#8d8399" letter-spacing="1">SECOND ORDER</text>
+</svg>
+    </div>
+    <div class="legend" style="display:flex;gap:16px;font-size:12px;color:var(--ink2);margin-top:6px"><span><span style="display:inline-block;width:12px;height:12px;background:#7f5fc4;border-radius:2px;vertical-align:middle"></span> same silhouette (second pair, replenishment)</span><span><span style="display:inline-block;width:12px;height:12px;background:#f2643b;border-radius:2px;vertical-align:middle"></span> crossed silhouette (cross-sell)</span></div>
+    <div class="tblwrap" style="margin-top:14px"><table>
+      <thead><tr><th>Top paths (1st → 2nd)</th><th class="num">Customers</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>XANADU → XANADU</td><td class="num good-text">20</td><td>second pair, same silhouette</td></tr>
+        <tr><td>URUK → URUK</td><td class="num">18</td><td>second pair, same silhouette</td></tr>
+        <tr><td>ZANZIBAR → ZANZIBAR</td><td class="num">7</td><td>second pair, same silhouette</td></tr>
+        <tr><td>XANADU → URUK</td><td class="num">5</td><td>cross-sell</td></tr>
+        <tr><td>URUK → XANADU</td><td class="num">5</td><td>cross-sell</td></tr>
+        <tr><td>XANADU → ZANZIBAR</td><td class="num">4</td><td>cross-sell</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The cross-sell playbook:</b> the 2nd order splits <b>73% same silhouette / 27% crossed</b>. The proven move is the second pair of what they already love (another colour), and the biggest crossing is XANADU ↔ URUK in both directions. So the post purchase pitch leads with the second pair, then introduces the other silhouette. ZANZIBAR barely pulls buyers across; it earns its keep with its own repeaters.</div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Cohorts: % placing a 2nd order within 30 / 60 / 90 days</h2><span class="kicker">by first-order month</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First-order month</th><th class="num">Cohort</th><th class="num">by 30d</th><th class="num">by 60d</th><th class="num">by 90d</th></tr></thead>
+      <tbody>
+        <tr><td>Jan 2026</td><td class="num">19</td><td class="num">26.3%</td><td class="num">26.3%</td><td class="num">26.3%</td></tr>
+        <tr><td>Feb</td><td class="num">26</td><td class="num">19.2%</td><td class="num">23.1%</td><td class="num">23.1%</td></tr>
+        <tr><td>Mar</td><td class="num">15</td><td class="num">26.7%</td><td class="num">26.7%</td><td class="num">26.7%</td></tr>
+        <tr><td>Apr</td><td class="num">32</td><td class="num">15.6%</td><td class="num">25.0%</td><td class="num">28.1%</td></tr>
+        <tr><td>May</td><td class="num">49</td><td class="num">20.4%</td><td class="num">22.4%</td><td class="num src">not 90d old</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>73</b></td><td class="num"><b>15.1%</b></td><td class="num src">not 60d old</td><td class="num src">not 90d old</td></tr>
+        <tr><td>Jul (16 days)</td><td class="num">61</td><td class="num good-text">21.3% already</td><td class="num src">open</td><td class="num src">open</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">The pattern that matters: almost all repeat happens inside the first 30 days (the 60 and 90 day columns barely add), and the median gap is 3 days. The second order decision is made in the first two weeks of ownership. That is exactly the window the Post Purchase flow and the 14-day Challenge own: activation content in week one and two is where repeat is won or lost. Nov and Dec 2025 cohorts (9 customers) are left out for size.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>First, second and third orders, month on month</h2></div>
@@ -159,10 +225,6 @@
     </table></div>
     <p class="note">Second and third orders are arriving faster each month (Jul: 28 repeat orders in 16 days). Acquisition is scaling and the repeat layer is forming behind it. Lifetime distribution: 1x 217 · 2x 46 · 3x 11 · 4+ 10.</p>
   </div>
-  <div class="card">
-    <div class="cardhead"><h2>India benchmark</h2><span class="kicker">the sister store, for context only</span></div>
-    <p class="lede">RARA India: 5,259 orders since Oct 2025 (INR). Its tracker shows retention share climbing 9.85% in October to 13% in November to 58% in December. The India playbook (email + WhatsApp) is the ceiling this UAE account can grow into once the list supports it.</p>
-  </div>
 </section>
 
 <!-- ===== 3 AUTOMATION ===== -->
@@ -171,9 +233,10 @@
   <p class="kicker">Per flow, per month, per message. June is the decision month. Sources: OmniSend workflow exports + H1 performance report + API.</p>
   <div class="tiles">
     <div class="tile"><div class="v">AED 33.3K</div><div class="l">flow revenue H1 · 84 orders · AED 2.81 per message</div></div>
-    <div class="tile good"><div class="v">6 flows</div><div class="l">live, all with correct triggers</div></div>
+    <div class="tile good"><div class="v">6 flows</div><div class="l">live, all with correct entry triggers</div></div>
     <div class="tile hot"><div class="v">AED 24.7</div><div class="l">per message on the DISABLED 14-day Challenge, best in account</div></div>
     <div class="tile warn"><div class="v">0 orders</div><div class="l">Abandoned Cart Women, every single month</div></div>
+    <div class="tile hot"><div class="v">0 sends</div><div class="l">the last recovery email sits behind a split and has never gone out, in all three flows</div></div>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Per-flow tracker, month on month</h2><span class="kicker">sent · orders · revenue AED. June highlighted.</span></div>
@@ -201,7 +264,12 @@
         <tr><td><b>Jun</b></td><td class="num"><b>351</b></td><td class="num"><b>313</b></td><td class="num"><b>294</b></td><td class="num"><b>84%</b></td><td class="num"><b>1,748 / 299 / 0</b></td></tr>
       </tbody>
     </table></div>
-    <p class="note">No dead nodes anywhere in the account: welcome completion 84 to 98%, checkout runs 3 emails, Cart Men runs 4, all firing. The problem is that revenue concentrates in email 1 and the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
+    <p class="note">Welcome completion runs 84 to 98% and revenue concentrates in email 1: the later emails engage without selling. The offer is not visible in the flow and the WELCOME25 code has no expiry.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The dead email: one message in every recovery flow never sends</h2><span class="kicker">verified against the flow structures in the API and every monthly export</span></div>
+    <p class="lede">Abandoned Cart Men, Abandoned Cart Women and Abandoned Checkout each contain a final email, <b>"We noticed you didn't finish checking out"</b>, sitting behind a split. It has <b>zero sends in April, May and June, in all three flows</b>. The emails before it fire normally (Cart Men in June: 28, 27, 25, 25 sends), so the entry triggers are fine; the split in front of the last message is what never lets anyone through. Prospects, the people these flows exist to convert, never see the closing message.</p>
+    <p class="note">How: the OmniSend API lists the message inside each of the three flow structures; the Apr, May and Jun workflow performance exports contain no row for it in any flow. Fix: repair or remove the split condition so the branch actually receives traffic, and while inside, rebuild the message with the offer and its expiry.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Flow verdicts</h2><span class="kicker">what to change, flow by flow</span></div>
@@ -210,8 +278,8 @@
       <tbody>
         <tr><td><b>Welcome</b></td><td>Good flow, but the offer is invisible: June revenue sits in email 1 and the code has no expiry.</td><td>Make the offer the hero of every email with a dynamic code and expiry. A/B content heavily: this is the volume flow now.</td></tr>
         <tr><td><b>Challenge set</b></td><td class="crit">Killed around May 1, yet the 14-day Challenge earned AED 24.7 per message, double anything else, at 51% open and 11.7% click.</td><td>Turn it back on. The challenge content is the activation engine this brand already proved.</td></tr>
-        <tr><td><b>Abandoned Checkout</b></td><td class="crit">The first email earns near zero (April: 0 revenue on E1 and E2; only E3 sold). Recovery flows should earn most on the first email.</td><td>Rework email 1. Test a founder-led first message for prospects. Carry the welcome offer with expiry for prospects who hold it.</td></tr>
-        <tr><td><b>Abandoned Cart</b></td><td>Same content for buyers and prospects, only the offer section removed for buyers. The third message barely reaches anyone and adds little.</td><td>Prospect and customer versions with genuinely different content. Customers get their own dynamic code with expiry. Rethink or cut message 3.</td></tr>
+        <tr><td><b>Abandoned Checkout</b></td><td class="crit">The first email earns near zero (April: 0 revenue on E1 and E2; only E3 sold). And the closing email "We noticed you didn't finish checking out" never sends: it sits behind a split with zero sends every month.</td><td>Rework email 1. Test a founder-led first message for prospects. Repair the split so the closing email actually goes out, carrying the welcome offer with expiry.</td></tr>
+        <tr><td><b>Abandoned Cart</b></td><td class="crit">Same content for buyers and prospects, only the offer section removed for buyers. The closing email never sends here either: same dead split in both Men and Women.</td><td>Prospect and customer versions with genuinely different content. Customers get their own dynamic code with expiry. Repair the split and rebuild the closing message.</td></tr>
         <tr><td class="crit"><b>Cart Women</b></td><td class="crit">Zero orders in every month, one third of Men's volume, copy identical to Men's.</td><td>Review the split logic and write women-specific content, or fold both into one flow with a gender content block.</td></tr>
         <tr><td><b>Browse Abandonment</b></td><td>Highest traffic flow, no split between prospects and customers. Prospects are never reminded their welcome offer is still live.</td><td>Split by prospect vs customer. Prospects hear the offer with its expiry until they order.</td></tr>
         <tr><td><b>Post Purchase</b></td><td class="good-text">The star: AED 12.1K H1. The order confirmation email is really good.</td><td>Keep it. Improve the follow-up emails after the confirmation; they are the weakest part of a strong flow.</td></tr>
@@ -226,7 +294,7 @@
     </figure>
     <figure style="margin:14px 0 0">
       <img src="evidence/cart-last-message.png" alt="Abandoned cart last message" style="max-width:100%;border:1px solid var(--ring);border-radius:8px" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.insertAdjacentHTML('afterbegin','<span style=\'color:var(--crit);font-weight:600\'>[ screenshot pending: cart-last-message.png ] </span>')">
-      <figcaption class="note" style="margin-top:6px">Abandoned cart, last message: zero conversions in every month.</figcaption>
+      <figcaption class="note" style="margin-top:6px">Abandoned cart, the split before the last message: "We noticed you didn't finish checking out" has never sent. Zero sends and zero conversions in every month, in all three recovery flows.</figcaption>
     </figure>
   </div>
 </section>
@@ -307,18 +375,13 @@
 <!-- ===== 6 THE PLAN ===== -->
 <section class="view" id="v6" data-g="g6">
   <h1>The plan</h1>
-  <p class="kicker">Everything below serves the two priorities.</p>
+  <p class="kicker">One plan: grow the list. Everything below serves it.</p>
   <div class="flag win"><b>The main learning behind this whole plan:</b> the list is 2,324 people. At this size, high-level personalisation on any automation just uses up content bandwidth without the volume to pay it back. So we keep every automation simple and put the energy into growing the list. Once the list is big enough, the layers (quiz-answer targeting, deeper splits) switch on and actually move numbers.</div>
   <div class="targets">
     <div class="tgt">
-      <div class="lab">Priority 1 · Grow the list</div>
+      <div class="lab">The one plan · Grow the list</div>
       <div class="amt">5<small>%</small><span class="arr">→</span><span class="to">10<small>%</small></span></div>
-      <div class="sub">popup submit rate. Same traffic, twice the signups, twice the people in every flow.</div>
-    </div>
-    <div class="tgt">
-      <div class="lab">Priority 2 · Hold the machine's quality</div>
-      <div class="amt">26.4<small>%</small><span class="arr">→</span><span class="to">25<small>%+</small></span></div>
-      <div class="sub">email share of store revenue, held while volume scales.</div>
+      <div class="sub">popup submit rate. Same traffic, twice the signups, twice the people in every flow. Every part below serves this.</div>
     </div>
   </div>
 
@@ -336,6 +399,7 @@
     <ul class="pts">
       <li><b>Split every recovery flow into prospect and customer versions.</b> Prospects keep hearing that their welcome offer is still available, with its expiry, until they place the order. Customers get their own dynamic code and content that respects that they already know the brand.</li>
       <li><b>Fix the first email.</b> In any recovery flow the first email should carry the most audience, response and revenue. Today it earns near zero in checkout and cart. Test a founder-led first message for prospects.</li>
+      <li><b>Repair the dead split.</b> The closing email in all three recovery flows ("We noticed you didn't finish checking out") has never sent. Fix the split condition, rebuild the message with the offer and expiry.</li>
       <li><b>Rethink the cart's third message</b> (it reaches few and adds little) and <b>fix or fold Cart Women</b> (zero orders every month on copy identical to Men's).</li>
       <li><b>Add the offer reminder to campaigns too.</b> A standing monthly send to prospects who never used their code.</li>
     </ul>
@@ -369,6 +433,7 @@
       <div class="tile"><div class="v">2,324 → grow</div><div class="l">list size, tracked monthly</div></div>
       <div class="tile"><div class="v">E1 &gt; 0</div><div class="l">checkout and cart first emails earn revenue</div></div>
       <div class="tile"><div class="v">0 → live</div><div class="l">Cart Women converts or is folded</div></div>
+      <div class="tile"><div class="v">0 → sending</div><div class="l">the dead closing email in all three recovery flows</div></div>
       <div class="tile"><div class="v">Challenge on</div><div class="l">14-day Challenge re-enabled and measured</div></div>
       <div class="tile"><div class="v">26.4% → 25%+</div><div class="l">email share held while the store scales</div></div>
     </div>
