@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RARA Barefoot India · Retention Audit (Internal)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;border-bottom:3px solid var(--accent);}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:22px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#cfcfcf;font-size:12.5px;margin-top:3px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{position:relative;padding-left:24px;font-size:13.5px;margin-bottom:8px;color:var(--ink);line-height:1.55;}
+  ul.pts li::before{content:"✦";position:absolute;left:2px;top:2px;color:var(--accent);font-size:11px;}
+  .split{display:flex;height:26px;border-radius:6px;overflow:hidden;font-size:11px;font-weight:700;color:#fff;margin:10px 0;}
+  .split span{display:flex;align-items:center;justify-content:center;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;border-top:1px solid var(--ring);border-right:1px solid var(--ring);border-bottom:1px solid var(--ring);}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .targets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 6px;} @media(max-width:900px){.targets{grid-template-columns:1fr;}}
+  .tgt{background:var(--hero);border:1px solid var(--ring);border-radius:12px;padding:14px 16px;text-align:center;}
+  .tgt .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .tgt .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:27px;line-height:1.1;margin:6px 0 3px;white-space:nowrap;}
+  .tgt .amt .arr{color:var(--accent);font-size:26px;padding:0 6px;}
+  .tgt .amt .to{color:var(--good-text);}
+  .tgt .sub{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+  ul.check{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.check li{margin-bottom:8px;font-size:13.5px;line-height:1.55;}
+  ul.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;}
+  ul.check input{margin-top:4px;accent-color:var(--accent);flex:none;width:15px;height:15px;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}.targets{grid-template-columns:1fr;}.tgt .amt{font-size:28px;}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">RARA Barefoot India · OmniSend (email) + Kwik Engage (WhatsApp) + Alia (popup) · Cohort on full Shopify order history</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-view="g1">1 · Current State</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g2">2 · Deep Analysis</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g4">3 · Email</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g5">4 · WhatsApp</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g6">5 · Alia</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g3">6 · The Plan</button>
+</nav>
+
+<main class="wrap">
+
+<!-- ========== VIEW 1 · CURRENT STATE ========== -->
+<section class="view active" id="v1" data-g="g1">
+  <h1>Executive summary</h1>
+  <p class="kicker">Internal audit of RARA Barefoot India.</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">Lifetime target 1 · Retention share</div>
+      <div class="amt">21.6<small>%</small> <span class="arr">→</span> <span class="to">30-35<small>%</small></span></div>
+      <div class="sub">of store revenue from retention. May ran at 39.5%, so this is proven ground.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Lifetime target 2 · Repeat rate</div>
+      <div class="amt">17.2<small>%</small> <span class="arr">→</span> <span class="to">23<small>%</small></span></div>
+      <div class="sub">of customers buy again. RARA UAE runs 23.6%.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Lifetime target 3 · Balance the list</div>
+      <div class="amt">12:88 <span class="arr">→</span> <span class="to">60:40</span></div>
+      <div class="sub">customers to prospects on the list. Today only 12 of every 100 have bought.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Account at a glance</h2></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">35,034</div><div class="l">Kwik Engage users (WhatsApp)</div></div>
+      <div class="tile"><div class="v">22,639</div><div class="l">OmniSend contacts · 19,628 email-subscribed</div></div>
+      <div class="tile"><div class="v">3,837</div><div class="l">Shopify customers who ever bought</div></div>
+      <div class="tile"><div class="v">₹3.34 Cr</div><div class="l">store revenue since October 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RETENTION SUMMARY ========== -->
+<section class="view" id="v2" data-g="g1">
+  <h1>Retention summary <span style="font-size:14px;color:var(--muted)">· month on month: what we get, what we retain</span></h1>
+  <p class="kicker">Email figures are 7-day attribution; WhatsApp figures match the Kwik Engage panel. Campaign and flow revenue are never blended.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹11.4L</div><div class="l">June retention revenue</div></div>
+    <div class="tile"><div class="v">21.6%</div><div class="l">of June Shopify revenue (₹52.8L)</div></div>
+    <div class="tile"><div class="v">₹3.7L</div><div class="l">WhatsApp, June</div></div>
+    <div class="tile"><div class="v">₹7.7L</div><div class="l">Email, June</div></div>
+  </div>
+  <div class="card" id="coverage">
+    <div class="cardhead"><h2>Mandatory flow coverage · email vs WhatsApp</h2><span class="kicker">every essential flow a repeat-purchase footwear brand must run: live or not on each channel</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Mandatory flow</th><th>Email (OmniSend)</th><th>WhatsApp (Kwik Engage)</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome / popup</b></td><td class="warn">⚠️ live, 3 emails</td><td class="crit">✕ missing</td><td class="crit">The WhatsApp trigger is Customer Created, not popup signup: effectively no welcome flow exists on Kwik Engage. The email welcome runs but its offer sits at the very bottom of the email</td></tr>
+        <tr><td><b>Collection abandonment</b></td><td class="crit">✕ missing</td><td class="crit">✕ missing</td><td class="crit">Missing on both, while Kwikpass already captures the traffic</td></tr>
+        <tr><td><b>Browse abandonment</b></td><td class="good-text">✅ live (2 emails)</td><td class="crit">✕ missing</td><td>Email only, performs well, but no offer is mentioned anywhere and there is no prospect vs customer split</td></tr>
+        <tr><td><b>Abandoned cart</b></td><td class="warn">⚠️ live (Men 7 + Women 7)</td><td class="crit">✕ missing</td><td>Email only. The Men flow's B arm is not working; the Women flow's later messages barely send (2 people vs 290 on message 1)</td></tr>
+        <tr><td><b>Abandoned checkout</b></td><td class="warn">⚠️ live (7 emails)</td><td class="warn">⚠️ live, 0.47% Jun / 0.00% Jul recovery</td><td>Live on both. Email reuses the cart messaging; the WhatsApp series never mentions the ₹500 first-order offer while the email series carries ₹750</td></tr>
+        <tr><td><b>Order confirmed</b></td><td class="crit">✕ missing</td><td class="good-text">✅ live (Prepaid + COD)</td><td>WhatsApp carries it</td></tr>
+        <tr><td><b>Order shipped / delivered</b></td><td class="crit">✕ missing</td><td class="good-text">✅ live</td><td>WhatsApp carries it</td></tr>
+        <tr><td><b>Activation (barefoot transition)</b></td><td class="crit">✕ missing</td><td class="crit">✕ missing</td><td class="crit">Missing on both. The category's #1 usage need, and 4,135 contacts said their knees, feet or back hurt</td></tr>
+        <tr><td><b>Post purchase</b></td><td class="warn">⚠️ lite 3-email version runs; full 5-email version disabled</td><td class="crit">✕ off since 12 June</td><td>The running version only sells; no product education, no care steps</td></tr>
+        <tr><td><b>Replenishment / second pair</b></td><td class="crit">✕ missing</td><td class="crit">✕ off since 12 June</td><td class="crit">The 10-day second-pair window has no flow on either channel</td></tr>
+        <tr><td><b>Upsell / cross-sell</b></td><td class="crit">✕ disabled</td><td class="crit">✕ off since 12 June</td><td class="crit">None running on either channel. This is a lifestyle product; we need it</td></tr>
+        <tr><td><b>Win-back</b></td><td class="crit">✕ missing</td><td class="crit">✕ missing</td><td class="crit">2,090 customers past 90 days get nothing, anywhere</td></tr>
+        <tr><td><b>Review / NPS</b></td><td class="crit">✕ missing</td><td class="good-text">✅ live (JudgeMe + NPS)</td><td>WhatsApp only, works</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Channel split of retention revenue · June</h2></div>
+    <div class="split"><span style="width:33%;background:var(--accent)">WhatsApp 33%</span><span style="width:67%;background:var(--seq700)">Email 67%</span></div>
+    <div class="cardhead" style="margin-top:14px"><h2>Month by month</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Email campaigns</th><th class="num">Email flows</th><th class="num">WA campaigns</th><th class="num">WA flows</th><th class="num">Total retention</th><th class="num">Shopify rev</th><th class="num">Ret %</th></tr></thead>
+      <tbody>
+        <tr><td>May 2026</td><td class="num">₹1.98L</td><td class="num">₹6.07L</td><td class="num">₹3.70L</td><td class="num">₹4.92L</td><td class="num">₹16.66L</td><td class="num">₹42.17L</td><td class="num">39.5%</td></tr>
+        <tr><td>Jun 2026</td><td class="num">₹2.21L</td><td class="num">₹5.46L</td><td class="num">₹1.77L</td><td class="num">₹1.93L</td><td class="num">₹11.38L</td><td class="num">₹52.80L</td><td class="num">21.6%</td></tr>
+        <tr><td>Jul 1-15</td><td class="num" colspan="4" style="text-align:right;color:var(--muted)">split not in the Report</td><td class="num">₹2.91L</td><td class="num">₹26.89L</td><td class="num">10.8%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">June: ₹11.4L retention revenue, 21.6% of Shopify. WhatsApp ₹3.7L, email ₹7.7L.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>First purchase vs second purchase, month on month</h2><span class="kicker">Shopify order export, full history classifies each customer. Cancelled orders excluded, order-created basis.</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Orders</th><th class="num">First-time</th><th class="num">Repeat</th><th class="num">Repeat % of orders</th><th class="num">Repeat % of revenue</th></tr></thead>
+      <tbody>
+        <tr><td>May 2026</td><td class="num">644</td><td class="num">477</td><td class="num">167</td><td class="num good-text">25.9%</td><td class="num good-text">27.1%</td></tr>
+        <tr><td>Jun 2026</td><td class="num">680</td><td class="num">557</td><td class="num">123</td><td class="num">18.1%</td><td class="num">12.2%</td></tr>
+        <tr><td>Jul (to 16)</td><td class="num">393</td><td class="num">313</td><td class="num">80</td><td class="num">20.4%</td><td class="num">11.4%</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ========== OMNICHANNEL · section of the current state ========== -->
+<section class="view" id="v3" data-g="g1">
+  <h1 style="font-size:20px">Omnichannel <span style="font-size:13px;color:var(--muted)">· section of the current state</span></h1>
+  <p class="kicker">Which channels exist and how every surface delivers.</p>
+  <div class="card">
+    <div class="cardhead"><h2>Channel scoreboard</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Channel</th><th>Status</th><th class="num">June revenue</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td><b>WhatsApp (Kwik Engage)</b></td><td class="good-text">✅ live</td><td class="num">₹3.7L</td><td>The most important channel in India, reaching the full 35,034-user list. Number quality GREEN, tier 100K a day with about 5% used, so Meta is not the constraint. The constraints are the missing recovery flows, the 2-a-day cap, and 1 campaign a month. Kwik Engage open-attributed (4d).</td></tr>
+        <tr><td><b>Email (OmniSend)</b></td><td class="good-text">✅ live</td><td class="num">₹7.7L</td><td>19,628 subscribed, barely half the WhatsApp audience. Steady cadence, but opens are Apple-inflated (60.6%) and clicks are the honest number (1.15%). Report 7-day attribution.</td></tr>
+        <tr><td><b>SMS</b></td><td class="warn">not onboarded</td><td class="num">₹0</td><td>14,421 SMS-subscribed contacts sit in OmniSend; zero SMS campaigns ever sent. Kwik Engage SMS channel not onboarded either. A fallback lane for capped WhatsApp messages and email-only signups exists unused.</td></tr>
+        <tr><td><b>RCS / Instagram / Facebook</b></td><td class="crit">✕ not connected</td><td class="num">₹0</td><td>Not onboarded on Kwik Engage. Evaluate after the owned channels are fixed.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The omnichannel gap in one line:</b> when the 2-a-day WhatsApp cap drops a recovery message, nothing falls back to email or SMS; when a signup gives only an email, WhatsApp never meets them. Every channel runs solo.</div>
+  </div>
+</section>
+
+<!-- ========== VIEW 2 · DEEP ANALYSIS ========== -->
+<section class="view" id="v4" data-g="g2">
+  <h1>Cohort-level analysis</h1>
+  <p class="kicker">Shopify order export, full history: 4,632 valid orders after removing cancellations. Customer key = email, else phone. Revenue on order-created basis.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">3,837</div><div class="l">customers (bought at least once, Shopify)</div></div>
+    <div class="tile hot"><div class="v">30,866</div><div class="l">prospects on the WhatsApp list: never placed an order (88.1% of 35,045)</div></div>
+    <div class="tile"><div class="v">35,045</div><div class="l">WhatsApp users · 22,639 email contacts, of which 19,628 subscribed</div></div>
+    <div class="tile warn"><div class="v">17.17%</div><div class="l">repeat rate (2+ orders): 1x 3,178 · 2x 571 · 3x 67 · 4x+ 21</div></div>
+    <div class="tile good"><div class="v">10 days</div><div class="l">median time to 2nd order (a quarter within 4 days, three-quarters within 30)</div></div>
+    <div class="tile"><div class="v">₹3.34 Cr</div><div class="l">revenue since October 2025</div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Customers by value · the customer grid</h2><span class="kicker">from the order export; buckets sum to 3,837 customers and ₹3.34 Cr exactly</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Segment</th><th>Rule</th><th class="num">Customers</th><th class="num">Share</th><th class="num">Lifetime revenue</th><th class="num">Rev share</th></tr></thead>
+      <tbody>
+        <tr><td class="good-text">VIP / Champions</td><td>3+ orders, bought in last 120d</td><td class="num">62</td><td class="num">1.6%</td><td class="num">₹13.6L</td><td class="num">4.1%</td></tr>
+        <tr><td>VIP lapsed</td><td>3+ orders, quiet 120d+</td><td class="num">26</td><td class="num">0.7%</td><td class="num">₹6.6L</td><td class="num">2.0%</td></tr>
+        <tr><td class="good-text">Loyal</td><td>2 orders, bought in last 90d</td><td class="num">312</td><td class="num">8.1%</td><td class="num">₹41.1L</td><td class="num">12.3%</td></tr>
+        <tr><td class="warn">Loyal at risk</td><td>2 orders, quiet 90d+</td><td class="num">259</td><td class="num">6.8%</td><td class="num">₹38.6L</td><td class="num">11.6%</td></tr>
+        <tr><td>New</td><td>1 order, last 30d</td><td class="num">538</td><td class="num">14.0%</td><td class="num">₹39.6L</td><td class="num">11.9%</td></tr>
+        <tr><td>Promising</td><td>1 order, 31-90d ago</td><td class="num">843</td><td class="num">22.0%</td><td class="num">₹60.7L</td><td class="num">18.2%</td></tr>
+        <tr><td class="warn">Worth saving</td><td>1 order, 91-180d ago</td><td class="num">1,194</td><td class="num">31.1%</td><td class="num">₹87.8L</td><td class="num">26.3%</td></tr>
+        <tr><td class="crit">Sleeping / lost</td><td>1 order, 180d+ ago</td><td class="num">603</td><td class="num">15.7%</td><td class="num">₹45.6L</td><td class="num">13.7%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Lapsed base: 2,090 customers past 90 days since last order (54%), 1,801 past 120 days, 690 past 180 days. No flow or campaign targets any of them on either channel.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Where the retention is (and isn't): first line → % who buy again</h2><span class="kicker">RARA India sells 3 shoe lines in colourways (10 SKUs). All 10 SKUs sold in July 2026; nothing delisted.</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First-purchase line</th><th>Positioning</th><th class="num">First-time buyers</th><th class="num">Median order ₹</th><th class="num">Buy again</th></tr></thead>
+      <tbody>
+        <tr><td><b>XANADU</b> <span class="good-text">(best repeater)</span></td><td>Training / gym</td><td class="num">1,458</td><td class="num">₹7,999</td><td class="num good-text">20.7%</td></tr>
+        <tr><td><b>URUK</b></td><td>Walk / jog / play</td><td class="num">1,444</td><td class="num">₹7,499</td><td class="num">17.0%</td></tr>
+        <tr><td><b>ZANZIBAR</b> <span class="crit">(cheapest, weakest)</span></td><td>All-day / everyday</td><td class="num">984</td><td class="num">₹6,999</td><td class="num crit">12.3%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>The key finding:</b> out of every 100 XANADU first-buyers, 21 buy again; out of every 100 ZANZIBAR first-buyers, 12 do. Steering and cross-selling toward XANADU is the cohort lever the data supports.</div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Cross-sell map · what repeat buyers buy next</h2><span class="kicker">first order line → second order line, top 5 line pairs shown. Hover a ribbon.</span></div>
+    <div style="color:var(--ink);overflow-x:auto">
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" style="min-width:640px;width:100%;height:auto;font-family:Poppins,sans-serif">
+<path d="M169 22 C380 22 380 22 591 22 L591 111.5 C380 111.5 380 111.5 169 111.5 Z" fill="#7a7a7a" opacity="0.45"><title>XANADU to XANADU: 231 customers (same line, colour swap or second pair)</title></path>
+<path d="M169 111.5 C380 111.5 380 132.4 591 132.4 L591 152.5 C380 152.5 380 131.6 169 131.6 Z" fill="#f2643b" opacity="0.5"><title>XANADU to URUK: 52 customers (crossed line)</title></path>
+<path d="M169 141.6 C380 141.6 380 22 591 22 L591 42.9 C380 42.9 380 162.5 169 162.5 Z" fill="#f2643b" opacity="0.5" transform="translate(0,20)"><title>URUK to XANADU: 54 customers (crossed line, the top cross path)</title></path>
+<path d="M169 182.5 C380 182.5 380 172.6 591 172.6 L591 239.8 C380 239.8 380 249.7 169 249.7 Z" fill="#7a7a7a" opacity="0.45"><title>URUK to URUK: 174 customers (same line)</title></path>
+<path d="M169 259.7 C380 259.7 380 249.8 591 249.8 L591 277.3 C380 277.3 380 287.2 169 287.2 Z" fill="#7a7a7a" opacity="0.45"><title>ZANZIBAR to ZANZIBAR: 71 customers (same line)</title></path>
+<rect x="155" y="22" width="14" height="119.6" rx="3" fill="#3a2e42"/><text x="147" y="86" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">XANADU <tspan fill="#8d8399">283</tspan></text>
+<rect x="155" y="182.5" width="14" height="87.2" rx="3" fill="#3a2e42"/><text x="147" y="230" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">URUK <tspan fill="#8d8399">228</tspan></text>
+<rect x="155" y="259.7" width="14" height="27.5" rx="3" fill="#3a2e42"/><text x="147" y="277" text-anchor="end" font-size="12" font-weight="600" fill="currentColor">ZANZIBAR <tspan fill="#8d8399">71</tspan></text>
+<rect x="591" y="22" width="14" height="110.5" rx="3" fill="#f2643b"/><text x="613" y="80" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">285</tspan> XANADU</text>
+<rect x="591" y="152.4" width="14" height="87.4" rx="3" fill="#f2643b" transform="translate(0,20)"/><text x="613" y="220" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">226</tspan> URUK</text>
+<rect x="591" y="249.8" width="14" height="27.5" rx="3" fill="#f2643b"/><text x="613" y="267" text-anchor="start" font-size="12" font-weight="600" fill="currentColor"><tspan fill="#8d8399">71</tspan> ZANZIBAR</text>
+<text x="155" y="12" text-anchor="middle" font-size="10.5" fill="#8d8399" letter-spacing="1">FIRST PURCHASE</text>
+<text x="605" y="12" text-anchor="middle" font-size="10.5" fill="#8d8399" letter-spacing="1">SECOND PURCHASE</text>
+</svg>
+    </div>
+    <div class="legend" style="display:flex;gap:16px;font-size:12px;color:var(--ink2);margin-top:6px"><span><span style="display:inline-block;width:12px;height:12px;background:#7a7a7a;border-radius:2px;vertical-align:middle"></span> same line (colour swap / second pair)</span><span><span style="display:inline-block;width:12px;height:12px;background:#f2643b;border-radius:2px;vertical-align:middle"></span> crossed line (cross-sell)</span></div>
+    <div class="tblwrap" style="margin-top:14px"><table>
+      <thead><tr><th>Top SKU-level paths (1st → later order)</th><th class="num">Customers</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td>XANADU BLACK → URUK BLUE</td><td class="num">15</td><td>crossed line</td></tr>
+        <tr><td>ZANZIBAR BLUE → XANADU BLACK</td><td class="num">14</td><td>trade-up to the premium line</td></tr>
+        <tr><td>URUK WHITE → XANADU WHITE</td><td class="num">14</td><td>trade-up, same colour</td></tr>
+        <tr><td>URUK BLUE → XANADU BLACK</td><td class="num">13</td><td>trade-up</td></tr>
+        <tr><td>XANADU BLACK → XANADU WHITE</td><td class="num">13</td><td>colour swap</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Same-line rebuy dominates: XANADU→XANADU 231, URUK→URUK 174, ZANZIBAR→ZANZIBAR 71. Biggest crossing: URUK→XANADU (54). Exact-same-shoe rebuy: XANADU BLACK 113 · XANADU WHITE 76 · URUK BLUE 63.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Repeat, cohort over cohort</h2><span class="kicker">% of each first-order month's customers placing a 2nd order within 30 / 60 / 90 days</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>First-order month</th><th class="num">Cohort size</th><th class="num">by 30d</th><th class="num">by 60d</th><th class="num">by 90d</th></tr></thead>
+      <tbody>
+        <tr><td>May 2026</td><td class="num">477</td><td class="num good-text">16.6%</td><td class="num">17.8%</td><td class="num">18.2% *</td></tr>
+        <tr><td>Jun 2026</td><td class="num">557</td><td class="num">14.9%</td><td class="num">15.3% *</td><td class="num">15.3% *</td></tr>
+        <tr><td>Jul 2026</td><td class="num">313</td><td class="num">8.6% *</td><td class="num">8.6% *</td><td class="num">8.6% *</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">* cohort not yet mature at that window. Verdict: not improving. May reached 16.6% by day 30, June slipped to 14.9%. The 60 and 90 day columns add little over the 30-day column, so the rebuy window is short.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Per-product table · buyers, order value, rebuy, days to reorder</h2><span class="kicker">first-order buyers per SKU, Shopify export</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>SKU</th><th class="num">Buyers</th><th class="num">Median order ₹</th><th class="num">Out of 100, rebuy</th><th class="num">Median days to reorder</th></tr></thead>
+      <tbody>
+        <tr><td>XANADU BLACK</td><td class="num">757</td><td class="num">7,999</td><td class="num good-text">21.0</td><td class="num">14</td></tr>
+        <tr><td>URUK BLUE</td><td class="num">705</td><td class="num">7,499</td><td class="num">15.2</td><td class="num">14</td></tr>
+        <tr><td>XANADU WHITE</td><td class="num">550</td><td class="num">7,999</td><td class="num">19.6</td><td class="num">9</td></tr>
+        <tr><td>ZANZIBAR BLUE</td><td class="num">550</td><td class="num">6,999</td><td class="num">13.1</td><td class="num">11</td></tr>
+        <tr><td>URUK WHITE</td><td class="num">332</td><td class="num">7,499</td><td class="num">19.9</td><td class="num">7.5</td></tr>
+        <tr><td>ZANZIBAR YELLOW</td><td class="num">254</td><td class="num">6,999</td><td class="num crit">10.6</td><td class="num">15</td></tr>
+        <tr><td>URUK BLACK</td><td class="num">216</td><td class="num">7,749</td><td class="num">13.4</td><td class="num">8</td></tr>
+        <tr><td>URUK NEON</td><td class="num">193</td><td class="num">7,499</td><td class="num good-text">21.8</td><td class="num">6</td></tr>
+        <tr><td>ZANZIBAR GREY</td><td class="num">185</td><td class="num">5,999</td><td class="num">14.1</td><td class="num">6.5</td></tr>
+        <tr><td>XANADU GREY</td><td class="num">162</td><td class="num">7,499</td><td class="num good-text">22.2</td><td class="num">7</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Line level: XANADU 1,457 buyers · ₹7,999 · 20.7 rebuy per 100 · 11 days. URUK 1,442 · ₹7,499 · 16.9 · 8.5 days. ZANZIBAR 987 · ₹6,999 · 12.6 · 10.5 days. 95.2% of orders are over ₹4,000: one shoe is one order, so a second order is a second pair.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>First, second and third orders, month on month</h2><span class="kicker">every order classified by whether it was that customer's 1st, 2nd, 3rd or 4th+ purchase</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">1st orders</th><th class="num">2nd orders</th><th class="num">3rd orders</th><th class="num">4th+ orders</th></tr></thead>
+      <tbody>
+        <tr><td>May 2026</td><td class="num">477</td><td class="num good-text">136</td><td class="num good-text">21</td><td class="num">10</td></tr>
+        <tr><td>Jun 2026</td><td class="num">557</td><td class="num">106</td><td class="num">10</td><td class="num">7</td></tr>
+        <tr><td>Jul (to 16)</td><td class="num">313</td><td class="num">62</td><td class="num">10</td><td class="num">8</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Second orders peaked in May (136) and fell to 106 in June. Lifetime distribution: 1x 3,178 · 2x 571 · 3x 67 · 4x+ 21.</p>
+  </div>
+</section>
+
+<!-- ========== VIEW 3 · EMAIL ========== -->
+<section class="view" id="v5" data-g="g4">
+  <h1>Email <span style="font-size:14px;color:var(--muted)">· OmniSend</span></h1>
+  <p class="kicker">96 campaigns (93 sent). Report email figures are 7-day attribution.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">6</div><div class="l">live email flows</div></div>
+    <div class="tile"><div class="v">₹42.49L</div><div class="l">email revenue from flows (Report)</div></div>
+    <div class="tile"><div class="v">₹14.49L</div><div class="l">email revenue from campaigns (Report)</div></div>
+    <div class="tile warn"><div class="v">1.15%</div><div class="l">click rate on 277,459 sends; opens (60.6%) are Apple-inflated</div></div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Flow-by-flow verdicts (from the account walkthrough)</h2><span class="kicker">what is wrong inside each email automation, and the fix</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome</b></td><td class="warn">Open rate is bad for what is the most engaged moment. The welcome offer sits at the very bottom of the email, where only the 1-2% who scroll ever see it.</td><td>Rework the content heavily. Move the offer to the TOP of the email. Add more emails to the flow.</td></tr>
+        <tr><td><b>Browse abandonment</b></td><td class="warn">Performing well, but no offer is mentioned anywhere, and it is only 2 emails. No split between customer and prospect: for a prospect, ₹500 off is a big deal and it is never mentioned.</td><td>Add the welcome offer, split prospect vs customer, and add informative emails explaining WHY a high-ticket India product costs this much.</td></tr>
+        <tr><td><b>Abandoned cart · Men</b></td><td class="warn">50-50 A/B split, and the B section is not working.</td><td>Check prospects converted from this flow in the last 30 days; think about this flow in depth.</td></tr>
+        <tr><td><b>Abandoned cart · Women</b></td><td class="crit">The last split goes out to nobody. The second message went to only 2 people while the first went to 290. Broken.</td><td>Check it end to end.</td></tr>
+        <tr><td><b>Abandoned checkout</b></td><td class="crit">Same messaging angle as abandoned cart, no checkout-specific personalization. This is the most important, closest-to-conversion automation on email and it is not giving good results. Normally the first email converts most; not the case here.</td><td>Rethink the message.</td></tr>
+        <tr><td><b>Post purchase</b></td><td class="warn">High-ticket product: the buyer must be taught how to use the product, how to care for it, all those steps. Right now we are only selling.</td><td>Build the education series into post purchase.</td></tr>
+        <tr><td><b>Upsell / cross-sell</b></td><td class="crit">None exists.</td><td>This is a lifestyle product; we need it.</td></tr>
+        <tr><td><b>Win-back</b></td><td class="crit">None exists.</td><td>Build it for the 2,090 lapsed customers.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Flows carry email: flow revenue is 63 to 82% of total email revenue every month, and Welcome is the best email flow in nearly every month.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Campaign pattern · what's being sent, to whom, how often</h2><span class="kicker">93 sent campaigns, per-campaign stats</span></div>
+    <ul class="pts">
+      <li><b>Cadence held up on email:</b> May 7 · Jun 8 · Jul 4 in the first 15 days.</li>
+      <li><b>Aggregate over all sends:</b> 277,459 sent · 168,195 opened (60.6%) · 3,198 clicked (1.15%) · 359 bounced · 2,909 unsubscribed · 9 complaints. Largest sends reach 6,600 to 6,800 recipients, near the full subscribed base.</li>
+      <li><b>Clicks are the problem:</b> June average click rate 0.93% while opens look high (Apple-inflated). The fix is creative and offer, not more sends.</li>
+      <li><b>All email, no SMS:</b> zero SMS campaigns ever, despite 14,421 SMS-subscribed contacts.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Segment and tag performance · target more, target less</h2><span class="kicker">every contact carries their Alia quiz answers as OmniSend tags (105 distinct tags on all 22,639 contacts)</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Quiz-answer tag</th><th class="num">Contacts</th><th>What it means for targeting</th></tr></thead>
+      <tbody>
+        <tr><td>all day comfort</td><td class="num">13,106</td><td>ZANZIBAR / everyday angle, ready-made</td></tr>
+        <tr><td>curious about barefoot and natural movement</td><td class="num">11,365</td><td>education-to-first-order track</td></tr>
+        <tr><td>gym or strength training</td><td class="num">7,527</td><td>XANADU angle (the best-retaining line)</td></tr>
+        <tr><td>strong performance for training or sport</td><td class="num">6,414</td><td>XANADU / URUK performance angle</td></tr>
+        <tr><td>i liked the design and brand vibe</td><td class="num">6,135</td><td>design-led creative</td></tr>
+        <tr><td>everyday casual wear</td><td class="num">5,406</td><td>ZANZIBAR angle</td></tr>
+        <tr><td>running or walking</td><td class="num">5,073</td><td>URUK angle</td></tr>
+        <tr><td>knees / feet / back hurt in regular shoes</td><td class="num">4,135</td><td>the pain-relief track, the category's strongest story</td></tr>
+        <tr><td>i use them sometimes</td><td class="num">2,527</td><td>warm, barefoot-familiar</td></tr>
+        <tr><td>for office</td><td class="num">1,992</td><td>office use-case</td></tr>
+        <tr><td>i mostly wear barefoot already</td><td class="num">1,619</td><td>hottest cohort (highest purchase rate in Alia data)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>Usage: roughly 5 of 96 campaigns ever targeted by quiz answer.</b> The answer lists exist on both platforms (never-used-barefoot 4,429 · where-you'll-use-them 4,762 · curious 3,093); nothing reads them today. The data keeps flowing in.</div>
+  </div>
+</section>
+
+<!-- ========== VIEW 4 · WHATSAPP ========== -->
+<section class="view" id="v6" data-g="g5">
+  <h1>WhatsApp <span style="font-size:14px;color:var(--muted)">· Kwik Engage</span></h1>
+  <p class="kicker">All sales on this page are Kwik Engage open-attributed (4-day window). Campaign and flow revenue are never blended.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">₹3.70L</div><div class="l">WhatsApp revenue in June: campaigns ₹1.77L + flows ₹1.93L</div></div>
+    <div class="tile good"><div class="v">18.3x</div><div class="l">blended campaign ROAS (7 cost-tracked campaigns, May to July)</div></div>
+    <div class="tile good"><div class="v">70x</div><div class="l">June automation return (₹1.93L on ₹2,752 send cost)</div></div>
+    <div class="tile"><div class="v">74.3%</div><div class="l">average campaign delivery</div></div>
+  </div>
+  <p class="note">On 12 June, the Post Purchase, Purchase reminder and Upsell flows were turned off. To ask the client: what was the problem, why were they turned off.</p>
+
+  <div class="card">
+    <div class="cardhead"><h2>Flow-by-flow verdicts (from the canvas walkthroughs)</h2><span class="kicker">what is wired inside each WhatsApp automation, and the fix</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Automation</th><th>What we found</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome</b></td><td class="crit">The entry trigger is Customer Created, so the welcome flow effectively DOES NOT EXIST: popup signups never enter it (June: 362 entries, all buyers). No code, no offer, no expiry in any message while the popup promises ₹500 off.</td><td>Retrigger on the popup signup. Offer-led message 1 with the code and a real expiry.</td></tr>
+        <tr><td><b>Collection abandonment</b></td><td class="crit">Not available.</td><td>Build it. Among the most important automations for this brand: we use Kwikpass, so the collection and browse traffic is already captured and currently wasted.</td></tr>
+        <tr><td><b>Browse abandonment</b></td><td class="crit">Not available.</td><td>Build it. Kwikpass already captures this traffic; without the flow it is wasted.</td></tr>
+        <tr><td><b>Cart abandonment</b></td><td class="crit">Not available.</td><td>Build it. Kwikpass already captures this traffic; without the flow it is wasted.</td></tr>
+        <tr><td><b>Abandoned checkout</b></td><td class="crit">The one recovery flow that exists. No dynamic product image, no prospect vs customer split. In the ENTIRE series a signup never learns they have ₹500 off their first order. COD is not promoted anywhere. The website USPs are missing from the messaging. Email's checkout flow carries a ₹750 offer; WhatsApp carries none.</td><td>Add offer parity (₹750), promote COD, put every website USP into the messages, split prospect vs customer, add the dynamic image. WhatsApp is the most important channel in India; email reaches barely half the audience.</td></tr>
+        <tr><td><b>Order confirmation, fulfilled, delivered</b></td><td class="good-text">Exist and are okay.</td><td>Keep.</td></tr>
+        <tr><td><b>JudgeMe feedback</b></td><td class="good-text">Exists (₹32,996 in June).</td><td>Keep.</td></tr>
+        <tr><td><b>Cross-sell</b></td><td class="crit">Not available, on campaigns or automations.</td><td>Build it and take it live.</td></tr>
+        <tr><td><b>Upsell</b></td><td class="crit">Not available. The old Upsell flow with code GIFT750 was turned off on 12 June.</td><td>Build it and take it live.</td></tr>
+        <tr><td><b>Win-back</b></td><td class="crit">Not available, on campaigns or automations. Lapsed customers are not targeted anywhere on WhatsApp.</td><td>Build it and take it live.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag"><b>Frequency cap:</b> WhatsApp is capped at 2 messages per person per day; a capped message is dropped and the person exits the flow. Changing the cap needs client sign-off.</div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Flow performance · June, every automation with its cost</h2><span class="kicker">"NA" = no revenue attribution wired</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Flow (June 2026)</th><th class="num">Sent</th><th class="num">Delivered</th><th class="num">Sales ₹</th><th class="num">Orders</th><th class="num">Cost ₹</th><th class="num">Return per ₹1</th><th class="num">Unsubs</th></tr></thead>
+      <tbody>
+        <tr><td>Welcome Flow</td><td class="num">1,033</td><td class="num">621</td><td class="num good-text">1,10,736</td><td class="num">24</td><td class="num">614.79</td><td class="num good-text">₹180</td><td class="num warn">11</td></tr>
+        <tr><td>Feedback_JudgeMe</td><td class="num">559</td><td class="num">332</td><td class="num">32,996</td><td class="num">5</td><td class="num">328.68</td><td class="num">₹100</td><td class="num">1</td></tr>
+        <tr><td>NPSRating</td><td class="num">562</td><td class="num">369</td><td class="num">24,997</td><td class="num">3</td><td class="num">365.31</td><td class="num">₹68</td><td class="num">2</td></tr>
+        <tr><td>Abandoned_Checkout_Men</td><td class="num">1,912</td><td class="num">892 (46.7%)</td><td class="num">24,747</td><td class="num">4</td><td class="num">884.07</td><td class="num">₹28</td><td class="num">5</td></tr>
+        <tr><td>Abandonment Checkout Women</td><td class="num">205</td><td class="num">115 (56.1%)</td><td class="num crit">0</td><td class="num">0</td><td class="num">114.84</td><td class="num crit">₹0</td><td class="num">1</td></tr>
+        <tr><td>Fulfilled</td><td class="num">658</td><td class="num">637</td><td class="num warn">NA (46.78% click rate)</td><td class="num">NA</td><td class="num">134.50</td><td class="num">NA</td><td class="num">0</td></tr>
+        <tr><td>Delivered</td><td class="num">596</td><td class="num">578</td><td class="num warn">NA</td><td class="num">NA</td><td class="num">137.25</td><td class="num">NA</td><td class="num">1</td></tr>
+        <tr><td>Prepaid order confirmation</td><td class="num">590</td><td class="num">569</td><td class="num warn">NA (27.24% click rate)</td><td class="num">NA</td><td class="num">127.75</td><td class="num">NA</td><td class="num">0</td></tr>
+        <tr><td>COD Order Confirmation</td><td class="num">164</td><td class="num">162</td><td class="num warn">NA</td><td class="num">NA</td><td class="num">37.25</td><td class="num">NA</td><td class="num">0</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">July 1-16: Welcome 755 sent · ₹49,993 · 15 orders · ₹110 per ₹1. JudgeMe 372 sent · ₹8,499 · 4 orders. NPSRating 370 sent · ₹0. June automation total ₹1,93,476 cross-foots exactly with the panel Overview split.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>The checkout abandonment pool</h2><span class="kicker">Fastrr checkout events (checkout runs on Shiprocket Fastrr)</span></div>
+    <div class="tiles">
+      <div class="tile hot"><div class="v">₹68.9L</div><div class="l">abandoned in June (843 checkouts)</div></div>
+      <div class="tile hot"><div class="v">₹46.0L</div><div class="l">abandoned July 1-16 (641 checkouts)</div></div>
+      <div class="tile"><div class="v">₹5.5-8.5K</div><div class="l">value per abandoned checkout</div></div>
+      <div class="tile warn"><div class="v">~₹69K</div><div class="l">a month per 1% of recovery (June pool)</div></div>
+    </div>
+    <div class="tblwrap" style="margin-top:12px"><table>
+      <thead><tr><th>Period</th><th class="num">Abandoned ₹</th><th class="num">Checkouts</th><th class="num">Recovered ₹</th><th class="num">Recovery rate</th></tr></thead>
+      <tbody>
+        <tr><td>June 2026</td><td class="num">68,94,617</td><td class="num">843</td><td class="num">24,747</td><td class="num crit">0.47%</td></tr>
+        <tr><td>July 1-16</td><td class="num">45,99,585</td><td class="num">641</td><td class="num crit">0</td><td class="num crit">0.00%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">June abandoned value is panel-measured checkout value including repeat attempts.</p>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Delivery</h2><span class="kicker">average delivery by surface</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">74.3%</div><div class="l">campaigns, average delivered</div></div>
+      <div class="tile warn"><div class="v">66-68%</div><div class="l">automations, June and July</div></div>
+      <div class="tile hot"><div class="v">48-50%</div><div class="l">checkout-abandonment flows, the weak spot</div></div>
+      <div class="tile"><div class="v">GREEN</div><div class="l">number quality · tier 100K a day, about 5% used</div></div>
+    </div>
+  </div>
+
+  
+</section>
+
+<!-- ========== VIEW 5 · ALIA ========== -->
+<section class="view" id="v7" data-g="g6">
+  <h1>Alia <span style="font-size:14px;color:var(--muted)">· the signup popup</span></h1>
+  <p class="kicker">The capture layer, live since October 2025.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">2,500-2,700</div><div class="l">signups in June (reward claims agree at about 2,400)</div></div>
+    <div class="tile"><div class="v">~23,100</div><div class="l">popup views in June</div></div>
+    <div class="tile hot"><div class="v">0</div><div class="l">phone numbers collected in June</div></div>
+    <div class="tile hot"><div class="v">362</div><div class="l">entered the WhatsApp welcome (buyers, not signups)</div></div>
+  </div>
+  <div class="flag"><b>The phone step died on 31 May.</b> Phone submits ran 10 to 16% of views all year, then 0% from the week of 31 May. Every signup since is email-only and can never enter a WhatsApp flow. Fixing this is Plan Priority 1.</div>
+  <div class="flag"><b>The capture mismatch.</b> Kwikpass collects window shoppers; Alia collects people genuinely interested in buying, and we are not collecting WhatsApp numbers through Alia. The entire WhatsApp list growth is being left on the table, and the current list quality is diluted by window-shopper collection.</div>
+  <div class="card">
+    <div class="cardhead"><h2>The Alia funnel</h2><span class="kicker">full funnel shape, popup launch to date</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Stage</th><th class="num">Count</th><th class="num">Rate</th></tr></thead>
+      <tbody>
+        <tr><td>Viewed the popup</td><td class="num">266,845</td><td class="num">·</td></tr>
+        <tr><td>Submitted email</td><td class="num">37,590</td><td class="num">14.1%</td></tr>
+        <tr><td>Submitted phone</td><td class="num">27,975</td><td class="num">10.5%</td></tr>
+        <tr><td>Ordered</td><td class="num">1,762</td><td class="num">Alia attribution, labelled inflated in the Report</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">The popup reward switched from WELCOME250 to WELCOME500 around 14 June. No welcome message on either channel mentions any code, deadline or offer.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The quiz answers predict buyers · segment the welcome flow by them</h2><span class="kicker">every popup asks 3 to 4 poll questions; the answers sit on every contact as tags and lists</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>"Have you used barefoot shoes before?"</th><th class="num">Answers (lifetime)</th><th class="num">Purchase rate</th></tr></thead>
+      <tbody>
+        <tr><td>I mostly wear barefoot already</td><td class="num">4,066</td><td class="num good-text">7.0%</td></tr>
+        <tr><td>I use them sometimes</td><td class="num">6,377</td><td class="num">5.5%</td></tr>
+        <tr><td>Never</td><td class="num">46,071</td><td class="num warn">4.4%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tblwrap" style="margin-top:12px"><table>
+      <thead><tr><th>"Where will you use them the most?"</th><th class="num">Answers</th><th>Line it maps to</th></tr></thead>
+      <tbody>
+        <tr><td>Gym or strength training</td><td class="num">19,284</td><td>XANADU, the best-retaining line</td></tr>
+        <tr><td>Everyday casual wear</td><td class="num">13,981</td><td>ZANZIBAR</td></tr>
+        <tr><td>Running or walking</td><td class="num">13,233</td><td>URUK</td></tr>
+        <tr><td>For office</td><td class="num">5,007</td><td>ZANZIBAR</td></tr>
+        <tr><td>For sports</td><td class="num">4,490</td><td>XANADU / URUK</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">"What matters most in your sneakers": all-day comfort 35,394 · strong performance 15,557 · good designs 4,221. "What got you curious": curious about barefoot 32,081 · liked the design 16,316 · knees/back hurt 10,670. Barefoot-familiar people buy at 7.0% vs 4.4% for "Never": the biggest cohort needs education then the offer, the hottest cohort should be sold to immediately.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The funnel fixes, in priority order</h2><span class="kicker">capture feeds the welcome, the welcome carries WhatsApp, WhatsApp carries retention</span></div>
+    <ul class="pts">
+      <li><b>1 · Restore phone capture.</b> Rebuild the popup phone-first (or phone before the code reveal) so signups are WhatsApp-reachable again.</li>
+      <li><b>2 · Deliver the promised offer.</b> WELCOME500 / ₹500 off, with a stated expiry, in the popup reveal AND in every welcome message on both channels.</li>
+      <li><b>3 · Recover impressions.</b> Verify the popup shows on all entry pages and re-test the triggers on the live site.</li>
+      <li><b>4 · Branch by answer.</b> The three lines map one-to-one onto the "where will you use them" answers, and barefoot familiarity splits education from selling. The segments already exist on both platforms.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== VIEW 6 · THE PLAN ========== -->
+<section class="view" id="v8" data-g="g3">
+  <h1>The plan</h1>
+  <p class="kicker">Increase the retention revenue. That is what we will do. Two phases: Phase 1, campaign to each part's segments and measure. Phase 2, automate what performs. Tick boxes as steps complete (saved in this browser).</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">Lifetime target 1 · Retention share</div>
+      <div class="amt">21.6<small>%</small> <span class="arr">→</span> <span class="to">30-35<small>%</small></span></div>
+      <div class="sub">of store revenue from retention. May ran at 39.5%, so this is proven ground.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Lifetime target 2 · Repeat rate</div>
+      <div class="amt">17.2<small>%</small> <span class="arr">→</span> <span class="to">23<small>%</small></span></div>
+      <div class="sub">of customers buy again. RARA UAE runs 23.6%.</div>
+    </div>
+    <div class="tgt">
+      <div class="lab">Lifetime target 3 · Balance the list</div>
+      <div class="amt">12:88 <span class="arr">→</span> <span class="to">60:40</span></div>
+      <div class="sub">customers to prospects on the list. Today only 12 of every 100 have bought.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Quick win · first send</h2><span class="kicker">before anything is built</span></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="q1"><span><b>Campaign to ALL existing subscribers:</b> "you have ₹500 credited in your account" / "you have an offer you have not availed yet." Both channels.</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 1 · Acquisition</h2><span class="kicker">the popup first, then the funnel behind it</span></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="p1a"><span><b>Fix the popup FIRST. Priority: collect PHONE numbers.</b> Phone submits have been 0% since 31 May; build the WhatsApp list, the most reachable channel in India.</span></label></li>
+      <li><label><input type="checkbox" data-k="p1b"><span><b>New signups land in a proper funnel where EVERY message mentions the welcome offer</b>, with the code and an expiry, on both channels. Today zero welcome messages mention it.</span></label></li>
+      <li><label><input type="checkbox" data-k="p1c"><span><b>Fix the WhatsApp welcome trigger:</b> retrigger on popup signup, not Customer Created. Effectively no welcome flow exists on Kwik Engage today.</span></label></li>
+      <li><label><input type="checkbox" data-k="p1d"><span><b>Email welcome: more messages, more informative.</b> Explain why we are worth the price. Move the offer to the top of the email.</span></label></li>
+      <li><label><input type="checkbox" data-k="p1e"><span><b>Branch the funnel by quiz answer</b> (use-case answer picks the line, barefoot familiarity picks education vs selling).</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 2 · Recovery</h2><span class="kicker">fix the email gaps, build the missing WhatsApp flows</span></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="p2a"><span><b>Build the missing WhatsApp flows: collection, browse, cart and checkout abandonment.</b> Kwikpass gives us the traffic; without the flows it is unusable.</span></label></li>
+      <li><label><input type="checkbox" data-k="p2b"><span><b>Split ALL recovery into prospects vs customers.</b> Prospects are reminded every time that the welcome gift is still available.</span></label></li>
+      <li><label><input type="checkbox" data-k="p2c"><span><b>Promote COD</b> in recovery messaging: critical for getting prospects to try a high-ticket product.</span></label></li>
+      <li><label><input type="checkbox" data-k="p2d"><span><b>Every website USP goes into the messaging.</b></span></label></li>
+      <li><label><input type="checkbox" data-k="p2e"><span><b>₹750 offer parity on WhatsApp checkout.</b> Email's checkout series carries ₹750; WhatsApp carries nothing. Add the dynamic product image while at it.</span></label></li>
+      <li><label><input type="checkbox" data-k="p2f"><span><b>Fix the email gaps:</b> the Men cart flow's B arm, the Women cart flow's broken later messages (2 vs 290), and the checkout emails that reuse the cart angle with no checkout personalization.</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 3 · Activation</h2><span class="kicker">after the order</span></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="p3a"><span><b>Educate first-time buyers properly on use and care.</b> High-ticket product: how to transition to barefoot, how to use the product, how to care for it, all those steps. Today the running post purchase only sells.</span></label></li>
+      <li><label><input type="checkbox" data-k="p3b"><span><b>Phase 1 campaign:</b> a transition-education send to recent first-buyers, measured on second-order rate inside 30 days.</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 4 · Cross-sell and upsell</h2><span class="kicker">timed to the 10-day median second-order window</span></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="p4a"><span><b>Time the cross-sell and upsell to the second-order window:</b> half of repeaters return within 10 days, three-quarters within 30. Day 7 to 14, using the SKU they bought.</span></label></li>
+      <li><label><input type="checkbox" data-k="p4b"><span><b>Use the proven paths:</b> same-line colour swap first (XANADU BLACK rebuys 113 times), URUK buyers to XANADU (the top cross path; XANADU retains at 20.7 per 100).</span></label></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="cardhead"><h2>Part 5 · Win-back</h2></div>
+    <ul class="check">
+      <li><label><input type="checkbox" data-k="p5a"><span><b>Win back the 2,090 customers past 90 days</b> (54% of the base, zero touches today). Segment by the line they bought and their quiz answer, on both channels.</span></label></li>
+      <li><label><input type="checkbox" data-k="p5b"><span><b>Restart campaigns at a real cadence with the quiz-answer segments</b>, alternating offer and product sends with the pain-relief and use-case angles.</span></label></li>
+    </ul>
+  </div>
+
+  <div class="flag win"><b>How we execute:</b> Phase 1, send campaigns to each part's segments and measure what performs. Phase 2, automate the winners. No automation gets built before its campaign proves the audience.</div>
+
+  <div class="card">
+    <div class="cardhead"><h2>What success is measured on</h2><span class="kicker">every measure starts from today's verified number</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">21.6% → 30-35%</div><div class="l">retention share of store revenue</div></div>
+      <div class="tile"><div class="v">17.2% → 23%</div><div class="l">lifetime repeat rate (UAE runs 23.6%)</div></div>
+      <div class="tile"><div class="v">12:88 → 60:40</div><div class="l">customers to prospects on the list (4,179 of 35,045 have bought)</div></div>
+      <div class="tile"><div class="v">0% → 10%+</div><div class="l">popup phone-submit rate (it ran 10 to 16% before 31 May)</div></div>
+      <div class="tile"><div class="v">0 → all</div><div class="l">funnel messages carrying the welcome offer, both channels</div></div>
+      <div class="tile"><div class="v">0.00% → set in Phase 1</div><div class="l">checkout recovery rate (each 1% is about ₹69K a month)</div></div>
+      <div class="tile"><div class="v">1 → 6-8 / month</div><div class="l">WhatsApp campaigns</div></div>
+      <div class="tile"><div class="v">2,090 → touched</div><div class="l">lapsed customers receiving their first win-back send</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script>
+  var tabs=document.querySelectorAll('.tab');
+  function go(v){tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.view===v);});
+    document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('active',s.dataset.g===v);});
+    window.scrollTo({top:0});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){go(t.dataset.view);});});
+  go('g1');
+  var tt=document.createElement('div');
+  tt.style.cssText='position:fixed;pointer-events:none;background:#2c2437;color:#fff;padding:6px 11px;border-radius:6px;font-size:12.5px;font-weight:600;z-index:99;display:none;box-shadow:0 2px 10px rgba(0,0,0,.25);max-width:320px;';
+  document.body.appendChild(tt);
+  document.querySelectorAll('#v4 svg path').forEach(function(p){
+    var t=p.querySelector('title'); if(!t) return; var txt=t.textContent;
+    p.addEventListener('mousemove',function(e){ tt.textContent=txt; tt.style.display='block'; tt.style.left=Math.min(e.clientX+14, window.innerWidth-330)+'px'; tt.style.top=(e.clientY+14)+'px'; p.style.opacity='0.85'; });
+    p.addEventListener('mouseleave',function(){ tt.style.display='none'; p.style.opacity=''; });
+  });
+  var KEY='raraIndiaPlanV3';
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){saved={};}
+  document.querySelectorAll('ul.check input[type="checkbox"]').forEach(function(cb){
+    var k=cb.dataset.k;
+    if(saved[k]) cb.checked=true;
+    cb.addEventListener('change',function(){
+      saved[k]=cb.checked;
+      try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}
+    });
+  });
+</script>
+</body>
+</html>

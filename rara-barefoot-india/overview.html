@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RARA Barefoot India · Retention Overview</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c;
+    --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+      --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  }
+  :root[data-theme="dark"]{ --page:#221b2c; --card:#2f2739; --ink:#f4f0fa; --ink2:#c3b9d1; --muted:#948aa3;
+    --ring:rgba(244,240,250,.12); --accent:#f2643b; --accent-ink:#ff8a63; --good-text:#3ecf3e; --seq700:#e4d4ff; --hero:#3a2f4a; }
+  :root[data-theme="light"]{ --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good-text:#006300; --seq700:#3a2e42; --hero:#efe7fb; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:18px 24px;}
+  header .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  header .brandmark em{font-style:normal;color:var(--accent);}
+  header .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .wrap{max-width:940px;margin:0 auto;padding:0 22px 60px;}
+  .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 12px;border-radius:99px;margin:32px 0 10px;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:30px;line-height:1.18;margin:0 0 14px;letter-spacing:-.01em;}
+  .lead{color:var(--ink2);max-width:74ch;font-size:15px;margin:0 0 8px;}
+  .lead b{color:var(--ink);}
+  .hero{background:var(--hero);border:1px solid var(--ring);border-radius:14px;padding:24px;margin:8px 0 6px;display:grid;grid-template-columns:1fr auto 1fr;gap:22px;align-items:center;}
+  .hero .col{text-align:center;}
+  .hero .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .hero .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:34px;line-height:1.05;margin:8px 0 4px;}
+  .hero .col.to .amt{color:var(--good-text);}
+  .hero .sub{font-size:12.5px;color:var(--ink2);line-height:1.4;}
+  .hero .mid{text-align:center;}
+  .hero .mult{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:22px;color:var(--accent);}
+  .hero .arrow{font-size:26px;color:var(--accent);line-height:1;}
+  .herohow{font-size:12.5px;color:var(--ink2);margin:0 0 4px;padding-left:12px;border-left:3px solid var(--accent);line-height:1.55;}
+  .herohow b{color:var(--ink);}
+  .sechead{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;margin:30px 0 4px;}
+  .secsub{color:var(--ink2);font-size:13.5px;margin:0 0 16px;}
+  .levers{display:grid;gap:12px;}
+  .lever{background:var(--card);border:1px solid var(--ring);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:40px 1fr minmax(150px,auto);gap:16px;align-items:center;}
+  .lvn{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:19px;color:#fff;background:var(--accent);border-radius:99px;width:38px;height:38px;display:grid;place-items:center;}
+  .lvbody h3{margin:0 0 4px;font-size:16px;}
+  .lvbody p{margin:0 0 8px;font-size:13px;color:var(--ink2);line-height:1.55;}
+  .lvbody p b{color:var(--ink);}
+  .why{font-size:11.5px;color:var(--muted);margin:0 0 4px;padding-left:10px;border-left:2px solid var(--ring);line-height:1.5;}
+  .why b{color:var(--ink2);font-weight:600;}
+  .lvgain{text-align:right;}
+  .lvg-num{display:block;font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:20px;color:var(--good-text);white-space:nowrap;}
+  .lvg-lab{display:block;font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:20px;max-width:82ch;border-top:1px solid var(--ring);padding-top:16px;}
+  .note b{color:var(--ink2);}
+  .fullbtn{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:600;color:#fff;background:var(--accent);text-decoration:none;border-radius:99px;padding:11px 22px;}
+  @media(max-width:660px){
+    .hero{grid-template-columns:1fr;gap:14px;}
+    .hero .arrow{transform:rotate(90deg);}
+    .lever{grid-template-columns:34px 1fr;}
+    .lvgain{grid-column:2;text-align:left;margin-top:2px;}
+    h1{font-size:24px;} .hero .amt{font-size:30px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Overview</div>
+  <div class="subtitle">RARA Barefoot India · The goal, and how we get there · July 2026</div>
+</header>
+
+<main class="wrap">
+  <p class="eyebrow">The goal</p>
+  <h1>Grow retention revenue 2 to 3x: from ₹11 to 17 lakh a month to ₹30 lakh and beyond</h1>
+  <p class="lead">Three lifetime targets sit behind this. Take retention from <b>21.6% to 30-35%</b> of store revenue. Take the repeat rate from <b>17.2% to 23%</b>, which the brand's own UAE store already runs. And balance the list from <b>12:88 toward 60:40</b> customers to prospects.</p>
+
+  <div class="hero">
+    <div class="col today">
+      <div class="lab">Today</div>
+      <div class="amt">21.6%<span style="font-size:15px;font-weight:600;color:var(--muted)"> share</span></div>
+      <div class="sub">₹11.4L retention in June (May ₹16.7L)<br>17.2% of customers ever repeat · 12:88 list</div>
+    </div>
+    <div class="mid">
+      <div class="mult">2–3x</div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="col to">
+      <div class="lab">Target</div>
+      <div class="amt">30-35% share</div>
+      <div class="sub">23% repeat rate · 60:40 list balance<br>₹30L+ retention a month</div>
+    </div>
+  </div>
+  <p class="herohow"><b>How the math works:</b> May retention was ₹16.7L on a ₹42.2L store (39.5%), June ₹11.4L on ₹52.8L (21.6%). May proves the share is reachable; the plan makes it steady instead of occasional. Share to 30-35% with the store at its June scale is ₹30L+ a month. Source: Retention Report + Shopify orders + OmniSend + Kwik Engage.</p>
+
+  <h2 class="sechead">The moves that get us there</h2>
+  <p class="secsub">Every one comes from a flow-by-flow walkthrough of both accounts. Each has its proof.</p>
+
+  <div class="levers">
+
+    <div class="lever">
+      <span class="lvn">1</span>
+      <div class="lvbody">
+        <h3>Tell every subscriber their gift is waiting</h3>
+        <p>The quick win, before anything is rebuilt: a campaign to the whole existing list saying <b>₹500 is credited to your account</b> and has not been used. No signup has ever been told the offer survives past the popup.</p>
+        <p class="why"><b>Do:</b> one send on WhatsApp and email to all subscribers who never bought, offer-led, with a deadline.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">30,866</span><span class="lvg-lab">people on the list have never bought</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">2</span>
+      <div class="lvbody">
+        <h3>Fix the Alia popup: phone first</h3>
+        <p>Alia collects people genuinely interested in buying, while Kwikpass collects window shoppers. Yet the popup stopped collecting phone numbers on <b>31 May</b>, so every signup since is email-only and unreachable on WhatsApp, the channel Indian customers actually read.</p>
+        <p class="why"><b>Do:</b> phone number before email, reveal the code after, offer and expiry visible at the reveal.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">0%</span><span class="lvg-lab">phone submits since 31 May, on ~2,500 signups a month</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">3</span>
+      <div class="lvbody">
+        <h3>Fix the welcome flow on both channels</h3>
+        <p>The WhatsApp welcome fires on <b>Customer Created</b>, not on signup, so it welcomes buyers while actual signups get nothing. On email the offer sits at the bottom of the message where almost nobody scrolls. In the entire series a new signup is never told about their ₹500.</p>
+        <p class="why"><b>Do:</b> retrigger on signup, put the code and expiry at the top of every message, more emails explaining why the product is worth the price.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">362</span><span class="lvg-lab">entered the WhatsApp welcome in June, against ~2,500 signups</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">4</span>
+      <div class="lvbody">
+        <h3>Rebuild recovery end to end</h3>
+        <p>Collection, browse and cart abandonment <b>do not exist on WhatsApp</b>, while Kwikpass already captures that traffic. The one checkout flow that runs carries no offer, no COD reassurance, no split between prospects and customers, and no product image.</p>
+        <p class="why"><b>Do:</b> build all four recovery flows, split prospect vs customer, remind prospects the gift is still available, promote COD, put every website USP in the messaging, match email's ₹750 offer.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">₹46L</span><span class="lvg-lab">abandoned at checkout in the first half of July, almost none recovered</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">5</span>
+      <div class="lvbody">
+        <h3>Teach the product after purchase</h3>
+        <p>This is a high-ticket product that changes how people walk. First-time buyers need to be taught how to use it, how to break it in, how to care for it. Today post-purchase messages only sell.</p>
+        <p class="why"><b>Do:</b> an education series on both channels: usage, transition, care, then the review ask.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">17.2%</span><span class="lvg-lab">repeat today; the UAE store runs 23.6% on the same playbook</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">6</span>
+      <div class="lvbody">
+        <h3>Cross-sell inside the 10-day window</h3>
+        <p>When a second order happens, half arrive within <b>10 days</b> of the first: a second pair or another colour. Nothing speaks to a buyer in that window today, and the data already shows which line they trade up to.</p>
+        <p class="why"><b>Do:</b> cross-sell and upsell timed to the 10-day window, by line and answer.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">10 days</span><span class="lvg-lab">median time to the second order</span></div>
+    </div>
+
+    <div class="lever">
+      <span class="lvn">7</span>
+      <div class="lvbody">
+        <h3>Win back the quiet customers</h3>
+        <p>More than half the customer base has gone quiet past 90 days, and nothing on either channel speaks to them. Their quiz answers say exactly what they care about.</p>
+        <p class="why"><b>Do:</b> win-back at day 90+, personalised to the answer they gave at signup.</p>
+      </div>
+      <div class="lvgain"><span class="lvg-num">2,090</span><span class="lvg-lab">customers past 90 days quiet, no win-back anywhere</span></div>
+    </div>
+
+  </div>
+
+  <p class="note"><b>How we execute:</b> five stages: Acquisition, Recovery, Activation, Cross-sell and upsell, Win-back. Two phases: first send campaigns to each of these segments and measure, then automate whatever performs. The moves above are the means to the three targets, not separate goals to add up.</p>
+
+  <a class="fullbtn" href="index.html">Open the full audit →</a>
+</main>
+</body>
+</html>
