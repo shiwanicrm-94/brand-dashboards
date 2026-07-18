@@ -118,17 +118,29 @@
         <tr><td>Jul (18 days)</td><td class="num">14,63,750</td><td class="num">3,07,700</td><td class="num">21%</td></tr>
       </tbody>
     </table></div>
-    <p class="note">Channel split of that revenue: the popup has attributed ₹13.4L across its 8 weeks (311 orders). Email flow revenue needs the OmniSend workflow export and WhatsApp revenue needs the Kwik Engage report; both slots fill the moment the exports land.</p>
+    <div class="tblwrap" style="margin-top:14px"><table>
+      <thead><tr><th>Channel (platform attributed)</th><th class="num">May ₹</th><th class="num">June ₹</th></tr></thead>
+      <tbody>
+        <tr><td>Email campaigns</td><td class="num">1,32,100</td><td class="num">1,31,750</td></tr>
+        <tr><td>Email flows</td><td class="num">22,450</td><td class="num good-text">1,66,050</td></tr>
+        <tr><td>WhatsApp campaigns</td><td class="num">61,325</td><td class="num">99,400</td></tr>
+        <tr><td>WhatsApp flows</td><td class="num">4,750</td><td class="num good-text">51,900</td></tr>
+        <tr><td><b>Total retention revenue</b></td><td class="num"><b>2,20,625</b></td><td class="num"><b>4,49,100</b></td></tr>
+        <tr><td>Share of store revenue</td><td class="num">24.1%</td><td class="num">23.8%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Channel split from the Subtle retention tracker (platform attributed; the table above it is behaviour based from the order file, so the two measure differently). Retention revenue doubled May to June and held its share while the store doubled. Flow revenue is the mover: email flows 22K to 1.66L, WhatsApp flows 4.7K to 51.9K. The popup has attributed ₹13.4L across its 8 weeks.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>Sessions to signups to orders</h2><span class="kicker">June, the last full month. Full table in Deep Analysis.</span></div>
     <div class="tiles" style="margin-top:4px">
-      <div class="tile"><div class="v">7,151</div><div class="l">June popup views (session floor; true site sessions run higher)</div></div>
+      <div class="tile"><div class="v">39,465</div><div class="l">June website sessions (retention tracker)</div></div>
+      <div class="tile warn"><div class="v">7,151</div><div class="l">June popup views: the popup appears in roughly 1 in 5 sessions</div></div>
       <div class="tile warn"><div class="v">17.9%</div><div class="l">of June viewers joined the list (1,279)</div></div>
       <div class="tile good"><div class="v">33.8%</div><div class="l">of June joiners have ordered (432)</div></div>
       <div class="tile"><div class="v">6.0%</div><div class="l">June views to order</div></div>
     </div>
-    <p class="lede" style="margin-top:12px"><b>Target: the signup step to 27-30% of views.</b> At June traffic that is 1,931 to 2,145 signups a month.</p>
+    <p class="lede" style="margin-top:12px"><b>Target: the signup step to 27-30% of views.</b> At June traffic that is 1,931 to 2,145 signups a month. Of all June sessions, 3.2% joined the list; showing the popup in more sessions is a second lever on the same goal.</p>
   </div>
   <div class="card">
     <div class="cardhead"><h2>First purchase to second purchase, month on month</h2></div>
@@ -232,6 +244,21 @@
     <p class="note">The rebuy lands inside two weeks. The window for the care-and-second-pair story is the first days of ownership, not month two.</p>
   </div>
   <div class="card">
+    <div class="cardhead"><h2>Colours: what sells, and what the second order really is</h2><span class="kicker">from the order file line items</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Cloud Tee (2,973 units)</th><th class="num">Share</th><th>Flow Tee (835 units)</th><th class="num">Share</th></tr></thead>
+      <tbody>
+        <tr><td>Moonwash</td><td class="num">17%</td><td>Winefall</td><td class="num">18%</td></tr>
+        <tr><td>Hintergreen</td><td class="num">16%</td><td>Oat Creme</td><td class="num">15%</td></tr>
+        <tr><td>Deep Water</td><td class="num">15%</td><td>Deep Water</td><td class="num">13%</td></tr>
+        <tr><td>Dark Matter</td><td class="num">13%</td><td>Seabound</td><td class="num">13%</td></tr>
+        <tr><td>Olive Dust</td><td class="num">11%</td><td>Deep Pine</td><td class="num">10%</td></tr>
+        <tr><td>Dust Rose · Tidal Blue · Mulberry · Espresso · Undyed · Coral</td><td class="num">26%</td><td>Mocha Ash · Dark Matter · Ember</td><td class="num">27%</td></tr>
+      </tbody>
+    </table></div>
+    <div class="flag win"><b>The cross-sell IS the colour: 76% of same-product rebuys are a new colour</b> (426 of 558). People collect colours of the tee they love. Top paths: Dark Matter → Deep Water, Moonwash → Deep Water, Dark Matter → Hintergreen, Hintergreen → Moonwash. So the post purchase pitch is "your tee, in the next colour", named, based on what they bought.</div>
+  </div>
+  <div class="card">
     <div class="cardhead"><h2>Cross-sell / up-sell map: what repeat buyers buy next</h2><span class="kicker">1st order → 2nd order (417 repeat customers; 4 excluded as test rows). Hover a ribbon.</span></div>
     <div style="color:var(--ink);overflow-x:auto">
 <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" style="min-width:640px;width:100%;height:auto;font-family:Poppins,sans-serif">
@@ -283,6 +310,7 @@
     <div class="tile"><div class="v">5 flows</div><div class="l">live, correct entry triggers</div></div>
     <div class="tile warn"><div class="v">2 convert</div><div class="l">Welcome and Abandoned Checkout</div></div>
     <div class="tile"><div class="v">23 campaigns</div><div class="l">18,449 emails · 49.5% open · 2.9% click</div></div>
+    <div class="tile good"><div class="v">₹1.66L</div><div class="l">June email flow revenue, up from 22K in May (tracker)</div></div>
     <div class="tile hot"><div class="v">No offer</div><div class="l">the welcome offer is not explicit anywhere</div></div>
   </div>
   <div class="card">
@@ -333,7 +361,7 @@
   </div>
   <div class="card">
     <div class="cardhead"><h2>Personalisation is easy here</h2></div>
-    <p class="lede">Two products only, and the quiz already collects the data. Personalise automations and campaigns by product: Cloud Tee care and Flow Tee care are different stories. Start now, it costs little.</p>
+    <p class="lede">Two products only, and the quiz already collects the data. Personalise automations and campaigns by product: Cloud Tee care and Flow Tee care are different stories. Start now, it costs little. All existing email and WhatsApp content lives in the Subtle Master Tracker and the copywriting bible; write against those, not from scratch.</p>
   </div>
 </section>
 
@@ -345,6 +373,8 @@
     <div class="tile"><div class="v">415</div><div class="l">phone signups via popup, Jul 1 to 18</div></div>
     <div class="tile warn"><div class="v">591</div><div class="l">entered the welcome flow on Kwik Engage in the same days</div></div>
     <div class="tile good"><div class="v">1,314</div><div class="l">prospects on the list are WhatsApp reachable</div></div>
+    <div class="tile good"><div class="v">₹1.51L</div><div class="l">June WhatsApp revenue: 99.4K campaigns + 51.9K flows (tracker)</div></div>
+    <div class="tile"><div class="v">77.8% · 59.2%</div><div class="l">June delivery and read rate · 7.7% click</div></div>
     <div class="tile hot"><div class="v">No offer</div><div class="l">the welcome offer is not visible anywhere on WhatsApp</div></div>
   </div>
   <div class="card">
@@ -370,12 +400,11 @@
     </ul>
   </div>
   <div class="card">
-    <div class="cardhead"><h2>The numbers this tab still needs</h2><span class="kicker">Kwik Engage has no read API; one panel session fills all of these</span></div>
+    <div class="cardhead"><h2>What the tracker already shows</h2><span class="kicker">from the Subtle retention tracker</span></div>
     <ul class="pts">
-      <li>WhatsApp revenue, blended and split campaigns vs automations.</li>
-      <li>Average campaign deliverability and read rates.</li>
-      <li>Flow by flow performance for June: welcome, checkout, the transactional set, with per-message numbers.</li>
-      <li>COD confirmation and delivery message performance.</li>
+      <li><b>WhatsApp flows jumped 4.7K to 51.9K May to June:</b> the abandoned checkout automation started earning the moment volume arrived.</li>
+      <li><b>Reads are healthy (59.2%) and clicks strong (7.7%),</b> so the channel works; it just misses browse, cart, cross-sell and the offer.</li>
+      <li><b>Still needed from the panel:</b> June flow by flow with per-message numbers, and the COD confirmation and delivery message performance.</li>
     </ul>
   </div>
 </section>
@@ -465,7 +494,7 @@
     <div class="cardhead"><h2>Part 4 · Cross-sell and upsell, mandatory</h2><span class="kicker">two collections make this the easiest win</span></div>
     <ul class="pts">
       <li><b>The proof already exists:</b> the two manual cross-sell campaigns in May clicked 5.9 and 6.8%. Automate them into post purchase on email and WhatsApp.</li>
-      <li><b>Lead with the second tee of what they love</b> (89% of second orders are the same product), then introduce the other one.</li>
+      <li><b>Lead with the second tee of what they love, in the next colour, named.</b> 89% of second orders are the same product and 76% of those rebuys are a new colour: Dark Matter buyers get Deep Water, Moonwash buyers get Deep Water or Dust Rose. Then introduce the other tee.</li>
     </ul>
   </div>
   <div class="card">
