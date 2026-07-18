@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subtle · Retention Audit (Internal)</title>
+<link rel="stylesheet" href="porc-fonts.css">
+<style>
+  :root{
+    --page:#f1ecfa; --card:#fdfcff; --ink:#2c2437; --ink2:#645a71; --muted:#8d8399;
+    --ring:rgba(58,46,66,.12); --accent:#f2643b; --accent-ink:#b03e1c; --good:#0ca30c; --good-text:#006300;
+    --warn:#b8860b; --crit:#d03b3b; --seq700:#3a2e42; --hero:#efe7fb; --grid:#e2dbee;
+  }
+  @media (prefers-color-scheme: dark){:root{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}}
+  :root[data-theme="dark"]{--page:#221b2c;--card:#2f2739;--ink:#f4f0fa;--ink2:#c3b9d1;--muted:#948aa3;--ring:rgba(244,240,250,.12);--accent:#f2643b;--accent-ink:#ff8a63;--good-text:#3ecf3e;--warn:#e5b53a;--crit:#ff6b6b;--seq700:#e4d4ff;--hero:#3a2f4a;--grid:#3d3449;}
+  :root[data-theme="light"]{--page:#f1ecfa;--card:#fdfcff;--ink:#2c2437;--ink2:#645a71;--muted:#8d8399;--ring:rgba(58,46,66,.12);--accent:#f2643b;--accent-ink:#b03e1c;--good-text:#006300;--warn:#b8860b;--crit:#d03b3b;--seq700:#3a2e42;--hero:#efe7fb;--grid:#e2dbee;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--page);color:var(--ink);font:14.5px/1.6 'Poppins',system-ui,-apple-system,"Segoe UI",sans-serif;}
+  header.top{background:var(--seq700);color:#fff;padding:16px 24px;}
+  .brandmark{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:21px;color:#fff;}
+  .brandmark em{font-style:normal;color:var(--accent);}
+  .subtitle{color:#d7cef0;font-size:12.5px;margin-top:2px;}
+  .intbadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:var(--page);border-bottom:1px solid var(--ring);display:flex;flex-wrap:wrap;gap:2px;padding:6px 16px 0;}
+  .tab{appearance:none;border:0;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:var(--ink2);padding:9px 13px 11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:22px;}
+  .view{display:none;} .view.active{display:block;}
+  h1{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:26px;margin:6px 0 4px;}
+  h2{font-family:'PorcSerif',Georgia,serif;font-weight:700;font-size:18px;margin:0;}
+  .kicker{color:var(--muted);font-size:12.5px;margin:2px 0 0;}
+  .card{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin-top:16px;}
+  .cardhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 14px;margin-bottom:12px;}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px;}
+  .tile{background:var(--card);border:1px solid var(--ring);border-radius:10px;padding:14px 16px;}
+  .tile .v{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:24px;line-height:1.1;}
+  .tile .l{font-size:12px;color:var(--ink2);margin-top:4px;line-height:1.35;}
+  .tile.good .v{color:var(--good-text);} .tile.hot .v{color:var(--crit);} .tile.warn .v{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;font-size:12.8px;margin-top:6px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--ring);}
+  th{color:var(--ink2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tblwrap{overflow-x:auto;}
+  th.grp,td.grp{border-left:2px solid var(--ring);padding-left:12px;}
+  .good-text{color:var(--good-text);font-weight:600;} .crit{color:var(--crit);font-weight:600;} .warn{color:var(--warn);font-weight:600;}
+  .lede{color:var(--ink2);max-width:74ch;}
+  .lede b{color:var(--ink);}
+  ul.pts{margin:8px 0 0;padding-left:0;list-style:none;}
+  ul.pts li{position:relative;padding-left:24px;font-size:13.5px;margin-bottom:8px;color:var(--ink);line-height:1.55;}
+  ul.pts li::before{content:"✦";position:absolute;left:2px;top:2px;color:var(--accent);font-size:11px;}
+  .flag{border-left:5px solid var(--crit);background:var(--card);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:14px;font-size:13px;}
+  .flag.win{border-left-color:var(--good);}
+  .note{font-size:12px;color:var(--muted);margin-top:12px;}
+  .src{font-size:11px;color:var(--muted);font-style:italic;}
+  .targets{display:grid;grid-template-columns:1fr;gap:14px;margin:16px 0 6px;}
+  .tgt{background:var(--hero);border:1px solid var(--ring);border-radius:12px;padding:20px 22px;text-align:center;}
+  .tgt .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700;}
+  .tgt .amt{font-family:'PorcSerif',Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;margin:8px 0 4px;}
+  .tgt .amt .arr{color:var(--accent);font-size:24px;padding:0 6px;}
+  .tgt .amt .to{color:var(--good-text);}
+  .tgt .sub{font-size:12.5px;color:var(--ink2);line-height:1.45;}
+  @media(max-width:640px){.wrap{padding:14px;}h1{font-size:22px;}.targets{grid-template-columns:1fr;}.tgt .amt{font-size:26px;}}
+</style>
+<body>
+<header class="top">
+  <div class="brandmark">Porcellia <em>✦</em> Retention Audit <span class="intbadge">Internal</span></div>
+  <div class="subtitle">Subtle (subtlestore.com) · OmniSend (email) + Kwik Engage (WhatsApp) + Alia (popup) · Store history Apr 2025 to Jul 18, 2026 · Prepared by Shiwani Agrawal</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-view="g1">1 · Retention Overview</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g2">2 · Deep Analysis</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g3">3 · Automation</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g4">4 · Campaign</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g5">5 · Alia</button>
+  <button class="tab" role="tab" aria-selected="false" data-view="g6">6 · The Plan</button>
+</nav>
+
+<main class="wrap">
+
+<!-- ===== 1 RETENTION OVERVIEW ===== -->
+<section class="view active" id="v1" data-g="g1">
+  <h1>Retention overview</h1>
+  <p class="kicker">Small internal audit. Sources: Shopify order export · OmniSend API · Alia analytics. Every number traceable.</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">The one goal · Grow the list</div>
+      <div class="amt">11.1<small>%</small><span class="arr">→</span><span class="to">27<small>-30%</small></span></div>
+      <div class="sub">popup signup rate. 26.6% of visitors already engage step 2 of the popup, so the intent is there. Everything else follows the list.</div>
+    </div>
+  </div>
+  <div class="card">
+    <p class="lede"><b>The store is scaling and retention is forming behind it.</b> June did 560 orders and ₹19.0L; repeat rate is 20.2% at 15 months on an AOV of ₹3,580. The list is 4,643.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Sessions to signups to orders</h2><span class="kicker">current status, all time since the popup went live (late May). Month table in Deep Analysis.</span></div>
+    <p class="lede"><b>14,263</b> popup views → <b>1,579</b> email signups (<b>11.1%</b>) → <b>311</b> of them ordered (<b>19.7%</b>). Signups convert well; the leak is the 89% of visitors who never sign up. The plan is to grow this.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The backbone</h2></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">4,643</div><div class="l">list size (OmniSend)</div></div>
+      <div class="tile"><div class="v">2,083</div><div class="l">customers · 421 bought twice or more</div></div>
+      <div class="tile good"><div class="v">20.2%</div><div class="l">repeat rate at 15 months</div></div>
+      <div class="tile"><div class="v">10 days</div><div class="l">median time to the 2nd order (75% within 31)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 2 DEEP ANALYSIS ===== -->
+<section class="view" id="v2" data-g="g2">
+  <h1>Deep analysis</h1>
+  <p class="kicker">Full order history, voided excluded, customer key = email.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">2,737</div><div class="l">orders · ₹98.0L · AOV ₹3,580</div></div>
+    <div class="tile"><div class="v">2 products</div><div class="l">Cloud Tee in 2,263 orders, Flow Tee in 663</div></div>
+    <div class="tile good"><div class="v">20.2%</div><div class="l">repeat rate</div></div>
+    <div class="tile hot"><div class="v">10 days</div><div class="l">median to 2nd order: the decision is made in the first month</div></div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Sessions to signups to orders, month on month</h2><span class="kicker">views from Alia · joined = OmniSend contacts created · ordered = matched to the order file by email</span></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Popup views</th><th class="num">Joined the list</th><th class="num">Of them, ordered</th><th class="num">Store orders</th></tr></thead>
+      <tbody>
+        <tr><td>Mar</td><td class="num src">popup not live</td><td class="num">1,705</td><td class="num">946</td><td class="num">320</td></tr>
+        <tr><td>Apr</td><td class="num src">popup not live</td><td class="num">344</td><td class="num">220</td><td class="num">273</td></tr>
+        <tr><td>May (popup from the 24th)</td><td class="num">4,630</td><td class="num">559</td><td class="num">203</td><td class="num">257</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>7,151</b></td><td class="num"><b>1,279</b></td><td class="num"><b>432</b></td><td class="num"><b>560</b></td></tr>
+        <tr><td>Jul (18 days)</td><td class="num">2,482</td><td class="num">756</td><td class="num">306</td><td class="num">426</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">How to read one row: in June the popup was viewed 7,151 times, 1,279 people joined the list, and 432 of them have placed an order. March's 1,705 is the list's starting import. The plan is to move the views-to-joined step.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>Store, month on month</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Month</th><th class="num">Orders</th><th class="num">Revenue ₹</th><th class="num">First orders</th><th class="num">Repeat orders</th></tr></thead>
+      <tbody>
+        <tr><td>Feb</td><td class="num">177</td><td class="num">5,99,866</td><td class="num">134</td><td class="num">43</td></tr>
+        <tr><td>Mar</td><td class="num">320</td><td class="num">12,14,946</td><td class="num">251</td><td class="num">69</td></tr>
+        <tr><td>Apr</td><td class="num">273</td><td class="num">9,92,625</td><td class="num">223</td><td class="num">50</td></tr>
+        <tr><td>May</td><td class="num">257</td><td class="num">9,46,385</td><td class="num">183</td><td class="num">74</td></tr>
+        <tr><td><b>Jun</b></td><td class="num"><b>560</b></td><td class="num"><b>18,95,850</b></td><td class="num"><b>446</b></td><td class="num"><b>114</b></td></tr>
+        <tr><td>Jul (18 days)</td><td class="num">426</td><td class="num">14,63,750</td><td class="num">327</td><td class="num good-text">99</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===== 3 AUTOMATION ===== -->
+<section class="view" id="v3" data-g="g3">
+  <h1>Automation</h1>
+  <p class="kicker">From the OmniSend API.</p>
+  <ul class="pts">
+    <li><b>5 flows live, all with correct entry triggers:</b> Welcome (2 emails), Abandoned Cart (5), Abandoned Checkout (4), Post Purchase (4), Browse Abandonment (2). Old cart and checkout versions properly disabled.</li>
+    <li><b>Welcome runs only 2 emails and Browse only 2.</b> On a ₹3,580 product that is thin; both need more depth once the list grows.</li>
+    <li><b>Per-flow revenue needs the panel's workflow export</b> (the API does not expose it). Pending.</li>
+  </ul>
+</section>
+
+<!-- ===== 4 CAMPAIGN ===== -->
+<section class="view" id="v4" data-g="g4">
+  <h1>Campaign</h1>
+  <p class="kicker">From the OmniSend API.</p>
+  <ul class="pts">
+    <li><b>23 email campaigns sent: 18,449 emails, 49.5% open, 2.9% click.</b> Engagement is healthy for a young list.</li>
+    <li><b>WhatsApp runs on Kwik Engage.</b> Its API is send-only, so campaign numbers need the panel. Pending.</li>
+  </ul>
+</section>
+
+<!-- ===== 5 ALIA ===== -->
+<section class="view" id="v5" data-g="g5">
+  <h1>Alia</h1>
+  <p class="kicker">Popup live since late May. All numbers from the Alia exports.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">14,263</div><div class="l">popup views in 8 weeks</div></div>
+    <div class="tile warn"><div class="v">11.1%</div><div class="l">email signup rate (1,579 people)</div></div>
+    <div class="tile good"><div class="v">26.6%</div><div class="l">engage step 2 of the popup: the intent exists</div></div>
+    <div class="tile good"><div class="v">₹13.4L</div><div class="l">popup-attributed sales · 311 orders</div></div>
+  </div>
+  <ul class="pts">
+    <li><b>The gap is step 2 to submit:</b> 3,777 people engage the quiz but only 1,579 finish with an email. Fewer steps and skip buttons close that gap.</li>
+    <li><b>Submit rate is already climbing on its own:</b> weekly 10.0% in late May to 12-13% in July.</li>
+    <li><b>Phone captures 9.7%</b> and, unlike RARA, is justified here: WhatsApp runs on Kwik Engage.</li>
+    <li><b>The answers sell:</b> "Tired of cheap tees" submits at 58.5%; Work wearers buy at 26%. Useful for targeting once the list is bigger.</li>
+  </ul>
+</section>
+
+<!-- ===== 6 THE PLAN ===== -->
+<section class="view" id="v6" data-g="g6">
+  <h1>The plan</h1>
+  <p class="kicker">One goal. Numbers first.</p>
+  <div class="targets">
+    <div class="tgt">
+      <div class="lab">The one goal · Signup rate</div>
+      <div class="amt">11.1<small>%</small><span class="arr">→</span><span class="to">27<small>-30%</small></span></div>
+      <div class="sub">26.6% already engage step 2, so the target is the audience the popup already has.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>What the goal is worth, on the same traffic</h2></div>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th class="num">Today</th><th class="num">At 27%</th><th class="num">At 30%</th></tr></thead>
+      <tbody>
+        <tr><td>Email signups (per 14,263 views)</td><td class="num">1,579</td><td class="num good-text">3,851</td><td class="num good-text">4,279</td></tr>
+        <tr><td>Orders from signups (at the current 19.7%)</td><td class="num">311</td><td class="num good-text">759</td><td class="num good-text">843</td></tr>
+        <tr><td>Views to order</td><td class="num">2.2%</td><td class="num good-text">5.3%</td><td class="num good-text">5.9%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Same visitors, same conversion behaviour, only the signup step improved.</p>
+  </div>
+  <div class="card">
+    <div class="cardhead"><h2>The moves, one line each</h2></div>
+    <ul class="pts">
+      <li><b>Acquisition:</b> fewer popup steps, skip buttons everywhere, offer visible with a dynamic code and expiry.</li>
+      <li><b>Recovery:</b> split cart, checkout and browse into prospect vs customer versions; the first email carries the offer.</li>
+      <li><b>Activation:</b> deepen Welcome and Post Purchase beyond 2 and 4 emails; ₹3,580 is a considered purchase and the second order decision happens inside 31 days.</li>
+      <li><b>Replenishment and cross-sell:</b> Cloud Tee buyers get the Flow Tee story and colour restocks in the first month.</li>
+      <li><b>Win-back:</b> later, once the list and flows above are earning.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+<script>
+  var tabs=document.querySelectorAll('.tab');
+  function go(v){tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.view===v);});
+    document.querySelectorAll('.view').forEach(function(s){s.classList.toggle('active',s.dataset.g===v);});
+    window.scrollTo({top:0});}
+  tabs.forEach(function(t){t.addEventListener('click',function(){go(t.dataset.view);});});
+  go('g1');
+</script>
+</body>
+</html>
